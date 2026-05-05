@@ -362,19 +362,19 @@
                     <label class="block text-sm font-medium text-gray-300 mb-3">Qual é a situação atual da sua suspensão?</label>
                     <div class="space-y-2">
                         <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
-                            <input type="radio" name="_decorativo_suspensao" value="upgrade_performance" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <input type="radio" name="situacao_suspensao" value="upgrade_performance" required class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
                             <span class="text-sm text-gray-300">Meu amortecedor está ok, mas quero upgrade de performance</span>
                         </label>
                         <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
-                            <input type="radio" name="_decorativo_suspensao" value="vibracao_instabilidade" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <input type="radio" name="situacao_suspensao" value="vibracao_instabilidade" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
                             <span class="text-sm text-gray-300">Sinto vibração excessiva ou instabilidade na direção</span>
                         </label>
                         <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
-                            <input type="radio" name="_decorativo_suspensao" value="durabilidade" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <input type="radio" name="situacao_suspensao" value="durabilidade" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
                             <span class="text-sm text-gray-300">Já troquei o amortecedor antes do prazo e preciso de algo mais durável</span>
                         </label>
                         <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
-                            <input type="radio" name="_decorativo_suspensao" value="carga_pesada" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <input type="radio" name="situacao_suspensao" value="carga_pesada" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
                             <span class="text-sm text-gray-300">Uso minha picape em carga pesada, agro ou estrada e a suspensão não aguenta</span>
                         </label>
                     </div>
@@ -741,9 +741,12 @@
             const video = card.querySelector('video');
             if (!video) return;
 
-            // Log só se houver erro real (não polui o console com warnings esperados)
+            // Logs pra debug (abre F12 → Console pra ver)
             video.addEventListener('error', (e) => {
                 console.error('[BUMP] Erro no vídeo:', video.src, video.error);
+            });
+            video.addEventListener('loadedmetadata', () => {
+                console.log('[BUMP] Vídeo pronto:', video.src);
             });
 
             const playVideo = async () => {
@@ -752,12 +755,12 @@
                 try {
                     await video.play();
                 } catch (err) {
-                    // Navegador bloqueou som — silenciosamente tenta de novo mutado
+                    // Se navegador bloquear autoplay com som, muta e tenta de novo
+                    console.warn('[BUMP] Autoplay com som bloqueado, tocando mutado:', video.src);
                     video.muted = true;
                     try {
                         await video.play();
                     } catch (err2) {
-                        // Só loga se nem mutado funcionar (problema real)
                         console.error('[BUMP] Falha ao tocar:', video.src, err2);
                     }
                 }
@@ -765,7 +768,7 @@
             const pauseVideo = () => {
                 video.pause();
                 video.currentTime = 0;
-                video.muted = true;
+                video.muted = true; // muta ao sair pra não vazar áudio depois
             };
             card.addEventListener('mouseenter', playVideo);
             card.addEventListener('mouseleave', pauseVideo);
@@ -813,26 +816,34 @@
 
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
-                // Remove campos decorativos (que começam com _) — não vão pro webhook
-                Object.keys(data).forEach(key => { if (key.startsWith('_')) delete data[key]; });
                 data.timestamp = new Date().toISOString();
                 data.origem = 'Landing Page BUMP';
                 data.consentimento_lgpd = true;
                 data.consentimento_data = new Date().toISOString();
 
                 try {
+                    console.log('[BUMP FORM] Enviando dados:', data);
+                    console.log('[BUMP FORM] URL do webhook:', form.action);
+
+                    // text/plain evita preflight CORS — o Make recebe e parseia o JSON normal
                     const response = await fetch(form.action, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                         body: JSON.stringify(data)
                     });
-                    if (!response.ok) throw new Error('Resposta não-OK do servidor');
+
+                    console.log('[BUMP FORM] Status:', response.status, '| OK?', response.ok);
+                    const responseText = await response.text();
+                    console.log('[BUMP FORM] Corpo da resposta:', responseText);
+
+                    if (!response.ok) throw new Error(`HTTP ${response.status}: ${responseText}`);
                     formMessage.textContent = 'Informações enviadas com sucesso! Em breve entraremos em contato.';
                     formMessage.classList.remove('hidden', 'bg-red-500');
                     formMessage.classList.add('bg-green-600');
                     form.reset();
                 } catch (error) {
-                    console.error('Erro no envio:', error);
+                    console.error('[BUMP FORM] Erro completo:', error);
+                    console.error('[BUMP FORM] Mensagem:', error.message);
                     formMessage.textContent = 'Erro ao enviar. Tente novamente ou entre em contato pelo Instagram.';
                     formMessage.classList.remove('hidden', 'bg-green-600');
                     formMessage.classList.add('bg-red-500');
