@@ -609,6 +609,13 @@
 
     <script>
     // ================================================================
+    // 🔐 SUPABASE — Backup paralelo de leads
+    // Anon key é PÚBLICA por design (protegida pelo RLS no banco)
+    // ================================================================
+    const SUPABASE_URL = 'https://ibduhunidriaostszvzn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliZHVodW5pZHJpYW9zdHN6dnpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMzIxNzUsImV4cCI6MjA5NDcwODE3NX0.PGCogeQ_fNUcXd-992liGrgwuLlFeHVPih9qaK6i4BQ';
+
+    // ================================================================
     // ⚠️ ASSETS — Cloudinary com f_auto,q_auto entrega o melhor formato
     //    pra cada navegador automaticamente (resolve problema de codec)
     // ================================================================
@@ -842,18 +849,69 @@
                     console.log('[BUMP FORM] Enviando dados:', data);
                     console.log('[BUMP FORM] URL do webhook:', form.action);
 
-                    // text/plain evita preflight CORS — Make recebe e parseia no Parse JSON module
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-                        body: JSON.stringify(data)
-                    });
+                    // ============================================================
+                    // FETCH PARALELO — Make + Supabase rodam ao mesmo tempo
+                    // Se um falhar, o outro continua. Defense in depth.
+                    // ============================================================
+                    const supabasePayload = {
+                        nome: data.nome,
+                        telefone: data.telefone,
+                        modelo: data.modelo,
+                        ano: data.ano,
+                        situacao_suspensao: data.situacao_suspensao,
+                        consentimento_lgpd: data.consentimento_lgpd,
+                        consentimento_data: data.consentimento_data,
+                        origem: data.origem,
+                        status_processamento: 'pendente'
+                    };
 
-                    console.log('[BUMP FORM] Status:', response.status, '| OK?', response.ok);
-                    const responseText = await response.text();
-                    console.log('[BUMP FORM] Corpo da resposta:', responseText);
+                    const [makeResult, supabaseResult] = await Promise.allSettled([
+                        // 1) Make webhook (text/plain evita preflight CORS)
+                        fetch(form.action, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                            body: JSON.stringify(data)
+                        }),
+                        // 2) Supabase REST API
+                        fetch(`${SUPABASE_URL}/rest/v1/leads_bump`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'apikey': SUPABASE_ANON_KEY,
+                                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                                'Prefer': 'return=minimal'
+                            },
+                            body: JSON.stringify(supabasePayload)
+                        })
+                    ]);
 
-                    if (!response.ok) throw new Error(`HTTP ${response.status}: ${responseText}`);
+                    // Log detalhado dos 2 resultados
+                    const makeOk = makeResult.status === 'fulfilled' && makeResult.value.ok;
+                    const supabaseOk = supabaseResult.status === 'fulfilled' && supabaseResult.value.ok;
+
+                    console.log('[BUMP FORM] Make status:', makeResult.status, makeOk ? '✅' : '❌');
+                    if (makeResult.status === 'fulfilled') {
+                        console.log('[BUMP FORM] Make HTTP:', makeResult.value.status);
+                    } else {
+                        console.error('[BUMP FORM] Make falhou:', makeResult.reason);
+                    }
+
+                    console.log('[BUMP FORM] Supabase status:', supabaseResult.status, supabaseOk ? '✅' : '❌');
+                    if (supabaseResult.status === 'fulfilled') {
+                        console.log('[BUMP FORM] Supabase HTTP:', supabaseResult.value.status);
+                        if (!supabaseOk) {
+                            const errText = await supabaseResult.value.text();
+                            console.error('[BUMP FORM] Supabase erro:', errText);
+                        }
+                    } else {
+                        console.error('[BUMP FORM] Supabase falhou:', supabaseResult.reason);
+                    }
+
+                    // Sucesso se PELO MENOS UM dos dois funcionou
+                    if (!makeOk && !supabaseOk) {
+                        throw new Error('Make e Supabase falharam');
+                    }
+
                     formMessage.textContent = 'Informações enviadas com sucesso! Em breve entraremos em contato.';
                     formMessage.classList.remove('hidden', 'bg-red-500');
                     formMessage.classList.add('bg-green-600');
