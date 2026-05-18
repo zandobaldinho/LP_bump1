@@ -825,7 +825,7 @@
                     console.log('[BUMP FORM] Enviando dados:', data);
                     console.log('[BUMP FORM] URL do webhook:', form.action);
 
-                    // text/plain evita preflight CORS — o Make recebe e parseia o JSON normal
+                    // text/plain evita preflight CORS — Make recebe e parseia no Parse JSON module
                     const response = await fetch(form.action, {
                         method: 'POST',
                         headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
