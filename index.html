@@ -821,6 +821,23 @@
                 data.consentimento_lgpd = true;
                 data.consentimento_data = new Date().toISOString();
 
+                // ============================================================
+                // FILTRO: modelo "Outros" NÃO envia pro webhook
+                // (BUMP não atende veículos genéricos, mas mantém UX boa)
+                // ============================================================
+                if (data.modelo === 'Outros') {
+                    console.log('[BUMP FORM] Modelo "Outros" detectado — webhook NÃO chamado');
+                    formMessage.textContent = 'Informações enviadas com sucesso! Em breve entraremos em contato.';
+                    formMessage.classList.remove('hidden', 'bg-red-500');
+                    formMessage.classList.add('bg-green-600');
+                    form.reset();
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                    setTimeout(() => formMessage.classList.add('hidden'), 6000);
+                    return;
+                }
+
                 try {
                     console.log('[BUMP FORM] Enviando dados:', data);
                     console.log('[BUMP FORM] URL do webhook:', form.action);
