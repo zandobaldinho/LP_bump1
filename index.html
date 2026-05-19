@@ -347,19 +347,14 @@
                 <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">Orçamento <span class="text-brand-yellow">Personalizado</span></h2>
                 <p class="text-gray-400 text-lg">Preencha os dados abaixo e descubra a solução perfeita para a sua máquina.</p>
             </div>
-           <form id="orcamentoForm" 
-              action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" 
-              method="POST" 
-              class="bg-white/5 border border-white/10 p-6 md:p-10 rounded-lg shadow-2xl backdrop-blur-sm">
-                  <input type="hidden" id="utm_source"   name="utm_source"   value="">
-                  <input type="hidden" id="utm_medium"   name="utm_medium"   value="">
-                  <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
-                  <input type="hidden" id="utm_content"  name="utm_content"  value="">
-                      <input type="hidden" id="utm_term"     name="utm_term"     value="">
+            <form id="orcamentoForm" action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" method="POST" class="bg-white/5 border border-white/10 p-6 md:p-10 rounded-lg shadow-2xl backdrop-blur-sm">
+                <!-- UTMs (capturados via JS no DOMContentLoaded) -->
+                <input type="hidden" id="utm_source"   name="utm_source"   value="">
+                <input type="hidden" id="utm_medium"   name="utm_medium"   value="">
+                <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+                <input type="hidden" id="utm_content"  name="utm_content"  value="">
+                <input type="hidden" id="utm_term"     name="utm_term"     value="">
 
-              <!-- resto dos campos visíveis do form aqui -->
-
-                </form>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="md:col-span-2">
                         <label for="nome" class="block text-sm font-medium text-gray-300 mb-2">Nome Completo</label>
@@ -722,6 +717,17 @@
     document.addEventListener('DOMContentLoaded', () => {
         checkCookieBanner();
 
+        // ================================================================
+        // 📊 UTMs — captura da URL e preenche campos hidden do form
+        // ================================================================
+        const urlParams = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(utm => {
+            if (urlParams.has(utm)) {
+                const inputField = document.getElementById(utm);
+                if (inputField) inputField.value = urlParams.get(utm);
+            }
+        });
+
         const getAsset = (path) => path.split('.').reduce((obj, key) => obj?.[key], ASSETS);
         document.querySelectorAll('[data-asset]').forEach(el => {
             const url = getAsset(el.dataset.asset);
@@ -874,7 +880,12 @@
                         consentimento_lgpd: data.consentimento_lgpd,
                         consentimento_data: data.consentimento_data,
                         origem: data.origem,
-                        status_processamento: 'pendente'
+                        status_processamento: 'pendente',
+                        utm_source: data.utm_source || null,
+                        utm_medium: data.utm_medium || null,
+                        utm_campaign: data.utm_campaign || null,
+                        utm_content: data.utm_content || null,
+                        utm_term: data.utm_term || null
                     };
 
                     const [makeResult, supabaseResult] = await Promise.allSettled([
@@ -944,26 +955,6 @@
         }
     });
     </script>
-    
-<script>
-  window.addEventListener('DOMContentLoaded', (event) => {
-    // Função para pegar os parâmetros da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    
-    // Lista de UTMs que queremos capturar
-    const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-    
-    // Preenche cada campo oculto se a UTM existir na URL
-    utms.forEach(utm => {
-      if (urlParams.has(utm)) {
-        const inputField = document.getElementById(utm);
-        if (inputField) {
-          inputField.value = urlParams.get(utm);
-        }
-      }
-    });
-  });
-</script>
-    
+
 </body>
 </html>
