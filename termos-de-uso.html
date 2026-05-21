@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termos de Uso — BUMP Amortecedores</title>
+<meta name="robots" content="index, follow">
+<link rel="icon" href="https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403561/logo_kseuvf.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0908;--bg2:#13110f;--bg3:#1a1714;--earth:#26201a;
+  --yellow:#D4FF1A;--ink:#f4f2ec;--mute:#928d83;--dim:#5a554d;
+  --br-green:#2a8a3f;--line:rgba(255,255,255,.09);--line-2:rgba(255,255,255,.16);
+  --ig-1:#f09433;--ig-2:#dc2743;--ig-3:#bc1888;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;position:relative}
+::selection{background:var(--yellow);color:#000}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>")}
+.hazard{height:8px;background:repeating-linear-gradient(-45deg,var(--yellow) 0 18px,#0a0908 18px 36px)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+@media(max-width:700px){.wrap{padding:0 20px}}
+.display{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;line-height:.92}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(10,9,8,.82);backdrop-filter:blur(13px) saturate(160%);border-bottom:1px solid var(--line)}
+.topbar .brand{display:flex;align-items:center;gap:12px}
+.topbar .brand img{height:36px}
+.topbar .back{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.topbar .back:hover{color:var(--yellow)}
+.topbar .back svg{width:15px;height:15px}
+@media(max-width:520px){.topbar{padding:12px 20px}.topbar .back span{display:none}}
+
+/* HERO LEGAL */
+.legal-hero{position:relative;padding:140px 0 50px;border-bottom:1px solid var(--line);overflow:hidden}
+.legal-hero .side{position:absolute;top:0;bottom:0;left:0;width:48px;background:repeating-linear-gradient(-45deg,var(--yellow) 0 18px,#0a0908 18px 36px);opacity:.9}
+@media(max-width:700px){.legal-hero .side{width:22px}}
+.legal-hero .inner{padding-left:80px}
+@media(max-width:700px){.legal-hero .inner{padding-left:46px}}
+.eyebrow{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:18px;display:inline-block}
+.legal-hero h1{font-size:clamp(42px,8vw,104px);margin-bottom:30px}
+.legal-hero h1 em{font-style:normal;color:var(--yellow)}
+.stamps{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);max-width:760px}
+.stamp{flex:1;min-width:160px;padding:16px 22px;border-right:1px solid var(--line)}
+.stamp:last-child{border-right:none}
+.stamp .k{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.stamp .v{font-family:'Oswald',sans-serif;font-weight:600;font-size:17px;color:var(--ink);margin-top:5px}
+@media(max-width:600px){.stamp{min-width:50%;flex:none;border-bottom:1px solid var(--line)}}
+
+/* PREÂMBULO */
+.preamble{padding:48px 0;border-bottom:1px solid var(--line);background:var(--bg2)}
+.preamble .eyebrow{margin-bottom:14px}
+.preamble p{color:var(--mute);font-size:15.5px;line-height:1.7;margin-bottom:14px;max-width:80ch}
+.preamble p strong{color:var(--ink);font-weight:600}
+.callout-warning{background:rgba(212,255,26,.07);border-left:3px solid var(--yellow);padding:18px 22px;margin:18px 0;font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;letter-spacing:.03em;line-height:1.5;color:var(--ink);text-transform:uppercase}
+
+/* ÍNDICE */
+.index{padding:50px 0;border-bottom:1px solid var(--line)}
+.index .section-marker{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:22px}
+.index ol{list-style:none;counter-reset:idx;columns:2;column-gap:40px}
+@media(max-width:700px){.index ol{columns:1}}
+.index li{counter-increment:idx;margin-bottom:12px;break-inside:avoid}
+.index li a{display:flex;gap:12px;align-items:baseline;color:var(--mute);font-size:14.5px;transition:.2s;padding:6px 0;border-bottom:1px solid transparent}
+.index li a:hover{color:var(--yellow)}
+.index li a::before{content:counter(idx,decimal-leading-zero);font-family:'Oswald',sans-serif;font-weight:700;color:var(--dim);font-size:13px;min-width:24px}
+
+/* CLÁUSULAS */
+.clauses{padding:30px 0 60px}
+.clause-block{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:44px 0;border-bottom:1px solid var(--line)}
+@media(max-width:820px){.clause-block{grid-template-columns:1fr;gap:18px}}
+.clause-block .marker-col{position:sticky;top:90px;align-self:start}
+@media(max-width:820px){.clause-block .marker-col{position:static}}
+.section-marker{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow)}
+.clause-block h2{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);text-transform:uppercase;line-height:1.05;color:var(--ink);margin-bottom:20px}
+.clause-block h3{font-family:'Oswald',sans-serif;font-weight:600;font-size:18px;color:var(--ink);margin:24px 0 10px;display:flex;gap:10px;align-items:baseline}
+.clause-num{color:var(--yellow);font-weight:700}
+.clause-block p{color:var(--mute);font-size:15px;line-height:1.7;margin-bottom:14px}
+.clause-block p strong,.clause-block li strong{color:var(--ink);font-weight:600}
+.clause-block ul,.clause-block ol{margin:0 0 14px;padding-left:4px;list-style:none}
+.clause-block ul li,.clause-block ol li{color:var(--mute);font-size:15px;line-height:1.65;margin-bottom:9px;padding-left:22px;position:relative}
+.clause-block ul li::before{content:'';position:absolute;left:0;top:10px;width:8px;height:8px;background:var(--yellow);border-radius:1px}
+.clause-block ol{counter-reset:alpha}
+.clause-block ol li{counter-increment:alpha}
+.clause-block ol li::before{content:counter(alpha,lower-alpha)')';position:absolute;left:0;top:0;color:var(--yellow);font-weight:700;font-family:'Oswald',sans-serif}
+.clause-block a{color:var(--yellow);text-decoration:underline;text-underline-offset:3px}
+.divider-stars{text-align:center;color:var(--dim);letter-spacing:.5em;padding:10px 0}
+
+/* FOOTER */
+footer{background:var(--bg);padding:54px 0 0;border-top:1px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:44px}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr}}
+.foot-brand img{height:42px;margin-bottom:18px}
+.foot-brand p{color:var(--mute);font-size:14px;line-height:1.6;max-width:320px}
+.foot-col h6{font-family:'Oswald',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:16px}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:10px}
+.foot-col a{color:var(--mute);font-size:14px;transition:.2s}
+.foot-col a:hover{color:var(--yellow)}
+.foot-bottom{border-top:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.foot-bottom .legal{display:flex;gap:22px;flex-wrap:wrap}
+.foot-bottom .legal a{font-family:'Oswald',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);transition:.2s}
+.foot-bottom .legal a:hover{color:var(--yellow)}
+.foot-bottom .copy{font-size:12.5px;color:var(--dim)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="brand"><img src="https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403561/logo_kseuvf.png" alt="BUMP"></a>
+  <a href="index.html" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>Voltar ao site</span></a>
+</header>
+
+<section class="legal-hero">
+  <div class="side"></div>
+  <div class="wrap">
+    <div class="inner">
+      <span class="eyebrow">Documento Legal / 02</span>
+      <h1 class="display">Termos <em>de</em> Uso.</h1>
+      <div class="stamps">
+        <div class="stamp"><span class="k">Disponibilização</span><span class="v">18/05/2026</span></div>
+        <div class="stamp"><span class="k">Última atualização</span><span class="v">18/05/2026</span></div>
+        <div class="stamp"><span class="k">Localização</span><span class="v">Gravataí · RS · BR</span></div>
+        <div class="stamp"><span class="k">Versão</span><span class="v">v1.0</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hazard"></div>
+
+<section class="preamble">
+  <div class="wrap">
+    <span class="eyebrow">[ Preâmbulo ]</span>
+    <p class="eyebrow">[ PREÂMBULO ]</p>
+<p>Estes Termos e Condições Gerais de Uso (“Termos”) regulam a relação entre <strong>BUMP AMORTECEDORES LTDA</strong>, pessoa jurídica de direito privado, inscrita no CNPJ sob o nº <strong>18.052.960/0001-60</strong> e Inscrição Estadual nº 057/0314950, com sede na Avenida Ely Correa, nº 945, Lote 6 Quadra 1, bairro Passos dos Ferreiros, CEP 94185-352, no município de Gravataí, Estado do Rio Grande do Sul, <strong>fabricante</strong> dos produtos comercializados sob a marca <strong>BUMP AMORTECEDORES</strong>, doravante denominada <strong>“BUMP”</strong>, e a pessoa física ou jurídica que acessa o site, utiliza o canal de atendimento via WhatsApp e/ou adquire os produtos comercializados, doravante denominada <strong>“USUÁRIO”</strong> ou <strong>“CLIENTE”</strong>.</p>
+<p>O objeto deste instrumento é disciplinar (i) a navegação e utilização do site <strong>https://homepage.bumpamortecedores.workers.dev/</strong> (“Site”), que funciona como catálogo e canal de relacionamento; (ii) o atendimento comercial prestado pela BUMP através da plataforma WhatsApp; e (iii) a comercialização de amortecedores de alta performance e demais produtos automotivos de fabricação própria, destinados a picapes.</p>
+<div class="callout-warning"><strong>AO ACESSAR O SITE, INICIAR UMA CONVERSA NO WHATSAPP COMERCIAL DA BUMP OU REALIZAR QUALQUER COMPRA, O USUÁRIO DECLARA TER LIDO, COMPREENDIDO E ACEITO INTEGRALMENTE ESTES TERMOS.</strong></div>
+  </div>
+</section>
+
+<section class="index">
+  <div class="wrap">
+    <p class="section-marker">[ Índice ]</p>
+    <ol>
+      <li><a href="#sec-01">Conceitos importantes</a></li>
+<li><a href="#sec-02">Aceitação dos Termos</a></li>
+<li><a href="#sec-03">Sobre a BUMP e o funcionamento do Site</a></li>
+<li><a href="#sec-04">Atendimento e compras via WhatsApp</a></li>
+<li><a href="#sec-05">Produtos, preços, disponibilidade e compatibilidade veicular</a></li>
+<li><a href="#sec-06">Processo de compra e formação do contrato</a></li>
+<li><a href="#sec-07">Pagamento</a></li>
+<li><a href="#sec-08">Entrega e frete</a></li>
+<li><a href="#sec-09">Direito de arrependimento, troca e devolução</a></li>
+<li><a href="#sec-10">Garantia dos produtos</a></li>
+<li><a href="#sec-11">Instalação dos amortecedores</a></li>
+<li><a href="#sec-12">Obrigações e responsabilidades do Cliente</a></li>
+<li><a href="#sec-13">Limitações de responsabilidade da BUMP</a></li>
+<li><a href="#sec-14">Propriedade intelectual</a></li>
+<li><a href="#sec-15">Privacidade e proteção de dados (LGPD)</a></li>
+<li><a href="#sec-16">Comunicações, marketing e cookies</a></li>
+<li><a href="#sec-17">Modificação dos Termos</a></li>
+<li><a href="#sec-18">Disposições gerais</a></li>
+<li><a href="#sec-19">Foro e legislação aplicável</a></li>
+    </ol>
+  </div>
+</section>
+<section class="clauses">
+  <div class="wrap">
+<section class="clause-block" id="sec-01">
+<div class="marker-col">
+<p class="section-marker">[ 01 / CONCEITOS IMPORTANTES ]</p>
+</div>
+<div class="content-col">
+<h2>Conceitos Importantes.</h2>
+<p>Para facilitar a leitura, adotam-se as seguintes definições:</p>
+<ul>
+<li><strong>BUMP</strong>: empresa identificada no preâmbulo, <strong>fabricante e responsável pela comercialização</strong> dos amortecedores e produtos correlatos sob a marca BUMP AMORTECEDORES.</li>
+<li><strong>Site</strong>: a página da web operada pela BUMP no endereço <strong>https://homepage.bumpamortecedores.workers.dev/</strong>, que apresenta o catálogo de produtos, conteúdos informativos e canais de contato.</li>
+<li><strong>Usuário</strong>: qualquer pessoa que acesse o Site, independentemente de realizar compra.</li>
+<li><strong>Cliente</strong>: pessoa física ou jurídica que efetiva a aquisição de produtos comercializados pela BUMP.</li>
+<li><strong>Produto</strong>: amortecedores de alta performance <strong>de fabricação própria da BUMP</strong> e demais acessórios automotivos por ela ofertados.</li>
+<li><strong>WhatsApp Comercial</strong>: número de WhatsApp oficial da BUMP, utilizado como canal principal de atendimento, fechamento de pedidos e suporte pós-venda.</li>
+<li><strong>Pedido</strong>: manifestação de vontade do Cliente em adquirir um ou mais produtos, formalizada via WhatsApp Comercial.</li>
+<li><strong>CDC</strong>: Código de Defesa do Consumidor (Lei nº 8.078/1990).</li>
+<li><strong>LGPD</strong>: Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018).</li>
+</ul>
+</div>
+</section>
+<section class="clause-block" id="sec-02">
+<div class="marker-col">
+<p class="section-marker">[ 02 / ACEITAÇÃO DOS TERMOS ]</p>
+</div>
+<div class="content-col">
+<h2>Aceitação dos Termos.</h2>
+<p><span class="clause-num">2.1</span>O simples acesso ao Site, a iniciativa de contato pelo WhatsApp Comercial ou a realização de qualquer compra implicam, para todos os fins de direito, <strong>aceitação plena, inequívoca e irrevogável</strong> destes Termos.</p>
+<p><span class="clause-num">2.2</span>Caso o Usuário não concorde com qualquer disposição aqui contida, deverá imediatamente cessar o uso do Site e abster-se de iniciar contato comercial com a BUMP.</p>
+<p><span class="clause-num">2.3</span>O Usuário declara ser maior de 18 (dezoito) anos ou estar devidamente assistido/representado, e possuir plena capacidade civil para contratar.</p>
+<p><span class="clause-num">2.4</span>Tratando-se de pessoa jurídica, declara-se que o representante que realiza a compra possui poderes para representá-la, aplicando-se a teoria da aparência.</p>
+<p><span class="clause-num">2.5</span>A BUMP poderá alterar estes Termos a qualquer momento, sendo aplicável ao Usuário a versão vigente na data de cada interação ou compra.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-03">
+<div class="marker-col">
+<p class="section-marker">[ 03 / SOBRE A BUMP E O FUNCIONAMENTO DO SITE ]</p>
+</div>
+<div class="content-col">
+<h2>Sobre a BUMP e o Funcionamento do Site.</h2>
+<p><span class="clause-num">3.1</span>A BUMP é uma empresa <strong>fabricante</strong> de <strong>amortecedores de alta performance</strong> e produtos correlatos, com produção e comercialização sob marca própria (BUMP AMORTECEDORES), destinados especialmente a veículos do segmento de <strong>picapes</strong>.</p>
+<h3><span class="clause-num">3.2</span>O Site funciona como:</h3>
+<ul>
+<li><strong>Catálogo digital</strong>, apresentando especificações técnicas, fotos e características dos produtos;</li>
+<li><strong>Funil de relacionamento</strong>, direcionando o Usuário interessado ao WhatsApp Comercial para finalização da compra, esclarecimento de dúvidas técnicas e verificação de compatibilidade veicular.</li>
+</ul>
+<p><span class="clause-num">3.3</span><strong>O Site, por si só, não realiza a finalização da venda.</strong> A formalização do pedido, a confirmação de disponibilidade, o cálculo de frete e o pagamento ocorrem exclusivamente por meio do atendimento pelo WhatsApp Comercial, conforme detalhado na Cláusula 6.</p>
+<p><span class="clause-num">3.4</span>As informações exibidas no Site possuem caráter meramente informativo e referencial. Em caso de eventuais divergências entre o conteúdo apresentado no Site e as informações fornecidas pelo atendimento comercial, prevalecerão as informações fornecidas pelo atendimento comercial, desde que formalizadas por escrito via WhatsApp Comercial.</p>
+<p><span class="clause-num">3.5</span>A BUMP envida seus melhores esforços para manter o Site disponível, contínuo e atualizado, mas não garante a ausência de interrupções, falhas técnicas, manutenções programadas ou eventos de força maior.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-04">
+<div class="marker-col">
+<p class="section-marker">[ 04 / ATENDIMENTO E COMPRAS VIA WHATSAPP ]</p>
+</div>
+<div class="content-col">
+<h2>Atendimento e Compras Via WhatsApp.</h2>
+<p><span class="clause-num">4.1</span><strong>Canal Oficial:</strong> o atendimento comercial, técnico e pós-venda da BUMP ocorre exclusivamente pelo número de WhatsApp Comercial divulgado no Site. A BUMP não se responsabiliza por contatos realizados em quaisquer outros números, perfis ou canais não oficiais.</p>
+<p><span class="clause-num">4.2</span><strong>Horário de Atendimento:</strong> de segunda a sexta-feira, das 08h00 às 18h00 (horário de Brasília), exceto feriados nacionais e estaduais. Mensagens recebidas fora do horário comercial serão respondidas no próximo dia útil.</p>
+<p><span class="clause-num">4.3</span><strong>Plataforma de Terceiros:</strong> o WhatsApp é uma plataforma operada pela WhatsApp LLC / Meta Platforms, Inc., sujeita aos seus próprios termos de uso, disponíveis em https://www.whatsapp.com/legal/. A BUMP não se responsabiliza por indisponibilidades, falhas, atrasos na entrega de mensagens, bloqueios ou banimentos aplicados pela Meta, nem por qualquer alteração unilateral de política da plataforma.</p>
+<p><span class="clause-num">4.4</span><strong>Registro das Conversas:</strong> o Cliente reconhece que as conversas mantidas pelo WhatsApp Comercial poderão ser armazenadas pela BUMP para fins de cumprimento do contrato, comprovação de pedidos, suporte pós-venda e atendimento à legislação aplicável, conforme detalhado na Cláusula 15.</p>
+<p><span class="clause-num">4.5</span><strong>Validade Jurídica:</strong> as manifestações de vontade trocadas pelo WhatsApp possuem validade jurídica entre as partes, servindo como instrumento de prova para fins comerciais e legais.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-05">
+<div class="marker-col">
+<p class="section-marker">[ 05 / PRODUTOS, PREÇOS, DISPONIBILIDADE E COMPATIBILIDADE VEICULAR ]</p>
+</div>
+<div class="content-col">
+<h2>Produtos, Preços, Disponibilidade e Compatibilidade Veicular.</h2>
+<p><span class="clause-num">5.1</span><strong>Especificações dos Produtos:</strong> os amortecedores comercializados pela BUMP são <strong>de fabricação própria</strong>, com especificações técnicas desenvolvidas pela empresa e destinadas a aplicações específicas em determinados modelos, anos e versões de picapes.</p>
+<p><span class="clause-num">5.2</span><strong>Responsabilidade pela Compatibilidade:</strong> é <strong>responsabilidade exclusiva do Cliente</strong> verificar, antes de finalizar a compra, a compatibilidade do produto com seu veículo, observando marca, modelo, ano, motorização e demais características. A BUMP disponibiliza atendimento técnico via WhatsApp Comercial para auxiliar nessa verificação, mas a confirmação final do encaixe e da adequação cabe ao Cliente.</p>
+<p><span class="clause-num">5.3</span><strong>Preços:</strong> os preços exibidos no Site são meramente referenciais. O <strong>preço final, com eventuais descontos, frete e condições especiais, será confirmado pelo atendimento via WhatsApp Comercial</strong> no momento da elaboração do pedido.</p>
+<p><span class="clause-num">5.4</span><strong>Erros de Precificação:</strong> em caso de erro evidente de precificação (valores notoriamente incompatíveis com o mercado por falha sistêmica ou humana), a BUMP reserva-se o direito de cancelar o pedido, devolvendo integralmente eventuais valores pagos, sem que isso configure descumprimento contratual.</p>
+<p><span class="clause-num">5.5</span><strong>Disponibilidade:</strong> a oferta de produtos está sujeita à disponibilidade de estoque. Mesmo que o produto esteja exibido no Site, sua aquisição depende de confirmação de estoque pelo atendimento.</p>
+<p><span class="clause-num">5.6</span><strong>Imagens Ilustrativas:</strong> as fotos exibidas no Site são meramente ilustrativas. Pequenas variações de cor, acabamento ou embalagem podem ocorrer sem comprometer as características funcionais do produto.</p>
+<p><span class="clause-num">5.7</span><strong>Promoções:</strong> ofertas, descontos e condições promocionais possuem prazo de validade e regras próprias, que serão informadas no momento da divulgação. A BUMP reserva-se o direito de encerrar promoções a qualquer tempo.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-06">
+<div class="marker-col">
+<p class="section-marker">[ 06 / PROCESSO DE COMPRA E FORMAÇÃO DO CONTRATO ]</p>
+</div>
+<div class="content-col">
+<h2>Processo de Compra e Formação do Contrato.</h2>
+<p><span class="clause-num">6.1</span>O processo de compra segue, em regra, as seguintes etapas:</p>
+<ul>
+<li>O Usuário navega no Site e identifica o produto de interesse;</li>
+<li>O Usuário inicia o contato pelo WhatsApp Comercial (clicando em botão do Site ou diretamente);</li>
+<li>O atendente confirma compatibilidade veicular, disponibilidade em estoque, preço final, condições de pagamento e prazo de entrega;</li>
+<li>O Cliente fornece os dados necessários (nome completo, CPF/CNPJ, endereço de entrega, dados de contato e do veículo);</li>
+<li>A BUMP envia o resumo do pedido e o link/forma de pagamento;</li>
+<li>Após a confirmação do pagamento, a BUMP emite a nota fiscal e encaminha o produto para expedição.</li>
+</ul>
+<p><span class="clause-num">6.2</span><strong>Formação do Contrato:</strong> o contrato de compra e venda considera-se formado no momento em que a BUMP confirma o pedido após a aprovação do pagamento, com a emissão da respectiva nota fiscal.</p>
+<p><span class="clause-num">6.3</span><strong>Cancelamento por Inadimplência ou Falha no Pagamento:</strong> caso o pagamento não seja confirmado no prazo informado pelo atendimento, o pedido será automaticamente cancelado, sem ônus para qualquer das partes.</p>
+<p><span class="clause-num">6.4</span><strong>Cancelamento pelo Cliente Antes do Envio:</strong> o Cliente poderá solicitar o cancelamento do pedido a qualquer momento antes da emissão do código de rastreio. Após a postagem, aplicam-se as regras do direito de arrependimento (Cláusula 9).</p>
+</div>
+</section>
+<section class="clause-block" id="sec-07">
+<div class="marker-col">
+<p class="section-marker">[ 07 / PAGAMENTO ]</p>
+</div>
+<div class="content-col">
+<h2>Pagamento.</h2>
+<p><span class="clause-num">7.1</span>A BUMP aceita as seguintes formas de pagamento, conforme informado pelo atendimento no momento do pedido: <strong>PIX, cartão de crédito (à vista ou parcelado), cartão de débito e boleto bancário à vista</strong>.</p>
+<p><span class="clause-num">7.1.1</span><strong>Formas de Pagamento NÃO Aceitas:</strong> a BUMP <strong>não aceita pagamento mediante cheque (de qualquer espécie), boleto a prazo, crediário próprio, vale ou qualquer outra modalidade de pagamento futuro não intermediada por instituição financeira ou gateway de pagamento autorizado</strong>.</p>
+<p><span class="clause-num">7.2</span><strong>Pagamento Único:</strong> os produtos da BUMP são comercializados na modalidade de <strong>pagamento único pela aquisição do jogo de amortecedores ou de cada produto avulso</strong>, não havendo qualquer caráter de assinatura, mensalidade ou recorrência.</p>
+<p><span class="clause-num">7.3</span><strong>Processadores de Pagamento:</strong> os pagamentos podem ser processados por intermediadores parceiros (gateways de pagamento), que possuem políticas próprias de privacidade e segurança. A BUMP não armazena dados completos de cartão de crédito do Cliente.</p>
+<p><span class="clause-num">7.4</span><strong>Comprovação:</strong> o pagamento somente será considerado efetivado após a confirmação pela instituição financeira ou pelo gateway de pagamento. Comprovantes enviados pelo Cliente possuem valor referencial, sujeitos à validação efetiva da compensação.</p>
+<p><span class="clause-num">7.5</span><strong>Antifraude:</strong> a BUMP poderá adotar procedimentos antifraude, incluindo a confirmação de dados por contato direto. Pedidos identificados como suspeitos poderão ser cancelados, com devolução integral de eventuais valores pagos.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-08">
+<div class="marker-col">
+<p class="section-marker">[ 08 / ENTREGA E FRETE ]</p>
+</div>
+<div class="content-col">
+<h2>Entrega e Frete.</h2>
+<p><span class="clause-num">8.1</span><strong>Prazo:</strong> o prazo de entrega será informado pelo atendimento via WhatsApp no momento do pedido, variando conforme o endereço de destino, a disponibilidade do produto e a transportadora utilizada.</p>
+<p><span class="clause-num">8.2</span><strong>Início da Contagem:</strong> o prazo de entrega começa a contar a partir da <strong>confirmação do pagamento e da emissão da nota fiscal</strong>, não se confundindo com o prazo de manuseio/expedição.</p>
+<p><span class="clause-num">8.3</span><strong>Frete:</strong> <strong>como regra geral, o valor do frete é de responsabilidade do Cliente</strong> e será calculado e informado previamente pelo atendimento, conforme o endereço de destino, o peso/dimensão do produto e a transportadora utilizada. A BUMP poderá, <strong>a seu exclusivo critério e mediante negociação comercial específica</strong>, oferecer condições promocionais (frete grátis, desconto ou subsídio parcial), as quais não constituem direito adquirido para compras futuras.</p>
+<p><span class="clause-num">8.3.1</span><strong>Exceções Legais:</strong> ressalvam-se, em qualquer hipótese, os casos em que a legislação aplicável determine o custeio do frete pela BUMP, notadamente na devolução por exercício do direito de arrependimento (Cláusula 9.1) e na substituição/troca de produto por defeito de fabricação coberto pela garantia (Cláusula 10).</p>
+<p><span class="clause-num">8.4</span><strong>Endereço de Entrega:</strong> é responsabilidade do Cliente fornecer endereço correto, completo e com pessoa apta a receber. Em caso de endereço errado, ausência de recebedor ou recusa no recebimento, eventuais custos de reenvio poderão ser repassados ao Cliente.</p>
+<p><span class="clause-num">8.5</span><strong>Conferência no Recebimento:</strong> ao receber o produto, o Cliente deve conferir a integridade da embalagem antes de assinar o comprovante. Constatadas avarias visíveis, o Cliente deve recusar o recebimento ou descrever o dano no comprovante, comunicando imediatamente a BUMP pelo WhatsApp Comercial.</p>
+<p><span class="clause-num">8.6</span><strong>Atrasos por Terceiros:</strong> a BUMP não se responsabiliza por atrasos decorrentes de eventos alheios à sua atuação direta, tais como greves, condições climáticas, problemas logísticos da transportadora, fiscalizações ou caso fortuito e força maior. Nesses casos, a BUMP envidará esforços para acompanhar e resolver a situação junto à transportadora.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-09">
+<div class="marker-col">
+<p class="section-marker">[ 09 / DIREITO DE ARREPENDIMENTO, TROCA E DEVOLUÇÃO ]</p>
+</div>
+<div class="content-col">
+<h2>Direito de Arrependimento, Troca e Devolução.</h2>
+<h3><span class="clause-num">9.1</span>Direito de Arrependimento (Compras à Distância)</h3>
+<p><span class="clause-num">9.1.1</span>Nos termos do <strong>art. 49 do Código de Defesa do Consumidor</strong>, o Cliente pessoa física poderá exercer o direito de arrependimento no prazo de <strong>07 (sete) dias corridos</strong>, contados da data de recebimento do produto, desistindo da compra sem necessidade de justificativa.</p>
+<p><span class="clause-num">9.1.2</span><strong>Extinção Antecipada pelo Ato de Instalação:</strong> o Cliente reconhece expressamente que, ainda que dentro do prazo legal de 07 (sete) dias, <strong>a instalação do amortecedor no veículo — total ou parcial — extingue antecipadamente o direito de arrependimento</strong>, por descaracterizar o produto como novo, impossibilitar sua recomercialização nessa condição e configurar uso efetivo do bem. Em outras palavras, o prazo encerra-se com o que ocorrer primeiro: (i) o transcurso de 7 dias corridos do recebimento; ou (ii) a instalação do produto.</p>
+<p><span class="clause-num">9.1.3</span>Para exercer o direito de arrependimento, o Cliente deverá comunicar a BUMP pelo WhatsApp Comercial, dentro do prazo legal e antes da instalação, e devolver o produto nas seguintes condições:</p>
+<ul>
+<li>Em sua embalagem original, sem indícios de uso, instalação, montagem ou tentativa de encaixe;</li>
+<li>Acompanhado de todos os acessórios, do manual de instalação e da nota fiscal;</li>
+<li>Sem avarias decorrentes de manuseio inadequado pelo Cliente.</li>
+</ul>
+<p><span class="clause-num">9.1.4</span><strong>Produto Já Instalado:</strong> uma vez instalado o produto, mesmo dentro dos 7 dias, <strong>não cabe arrependimento</strong>. Eventuais reclamações nessas circunstâncias serão tratadas exclusivamente pelas regras da garantia (Cláusula 10), quando aplicável.</p>
+<p><span class="clause-num">9.1.5</span><strong>Frete da Devolução por Arrependimento:</strong> os custos de envio para devolução decorrente do exercício tempestivo do direito de arrependimento serão arcados pela BUMP, na forma da legislação aplicável.</p>
+<p><span class="clause-num">9.1.6</span><strong>Prazo para Reembolso:</strong> após o recebimento e a conferência do produto devolvido em conformidade com estes Termos, o reembolso integral será processado no prazo de até <strong>10 (dez) dias úteis</strong>, pelo mesmo meio de pagamento utilizado na compra (estorno em cartão de crédito, devolução via PIX, etc.).</p>
+<h3><span class="clause-num">9.2</span>Trocas por Defeito ou Vício</h3>
+<p><span class="clause-num">9.2.1</span>Constatado vício ou defeito no produto, o Cliente deverá comunicar a BUMP pelo WhatsApp Comercial, observando-se os prazos da garantia legal (Cláusula 10).</p>
+<p><span class="clause-num">9.2.2</span>A BUMP poderá, conforme o caso, optar por substituir o produto, reparar o defeito ou restituir o valor pago, na forma do art. 18 do CDC.</p>
+<h3><span class="clause-num">9.3</span>Trocas por Incompatibilidade Veicular Identificada Após a Instalação</h3>
+<p><span class="clause-num">9.3.1</span>Considerando que a verificação de compatibilidade é responsabilidade do Cliente (Cláusula 5.2), eventuais trocas por incompatibilidade identificada após tentativa de instalação serão analisadas caso a caso e poderão estar sujeitas a custos adicionais, sem garantia de aceitação.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-10">
+<div class="marker-col">
+<p class="section-marker">[ 10 / GARANTIA DOS PRODUTOS ]</p>
+</div>
+<div class="content-col">
+<h2>Garantia dos Produtos.</h2>
+<p><span class="clause-num">10.1</span><strong>Garantia Legal:</strong> todos os produtos comercializados pela BUMP possuem garantia legal de <strong>90 (noventa) dias</strong> para bens duráveis, conforme art. 26, II, do Código de Defesa do Consumidor, computada conjuntamente com a garantia contratual.</p>
+<p><span class="clause-num">10.2</span><strong>Garantia Contratual:</strong> como fabricante, a BUMP concede garantia contratual de <strong>02 (dois) anos</strong>, contados da data de emissão da nota fiscal, contra defeitos de fabricação, observadas as condições e exclusões desta cláusula.</p>
+<p><span class="clause-num">10.3</span><strong>Vida Útil do Produto:</strong> os amortecedores BUMP são <strong>projetados para longa vida útil, podendo necessitar de manutenção periódica ao longo do tempo</strong>, sendo que, ao longo do tempo de utilização, podem necessitar de <strong>manutenção periódica</strong> (revisão, recondicionamento e reposição de componentes de desgaste natural). Os serviços de manutenção pós-garantia, quando solicitados, serão orçados separadamente e não estão cobertos pela garantia contratual de 02 (dois) anos.</p>
+<p><span class="clause-num">10.4</span><strong>A garantia cobre:</strong></p>
+<ul>
+<li>Defeitos de fabricação que comprometam o funcionamento normal do produto;</li>
+<li>Falhas decorrentes da construção, do processo produtivo ou dos materiais empregados pela BUMP;</li>
+<li>Vícios ocultos que se manifestem durante o período de garantia, observado o uso normal do produto.</li>
+</ul>
+<p><span class="clause-num">10.5</span><strong>Perda da Garantia — Mau Uso e Má Condução:</strong> a garantia será <strong>integralmente perdida</strong>, mediante análise técnica e <strong>constatação física</strong> pela equipe da BUMP, sempre que se identificar <strong>má condução, mau uso ou utilização do produto em desacordo com sua destinação</strong>, incluindo, sem limitação:</p>
+<ul>
+<li><strong>Manobras de alto impacto</strong>, tais como saltos em dunas, saltos em valetas, “voos” em lombadas, manobras radicais de off-road extremo e similares;</li>
+<li>Quedas em <strong>buracos de grande profundidade ou impactos severos</strong> contra obstáculos rígidos;</li>
+<li><strong>Acidentes de trânsito</strong> de qualquer natureza (colisões, capotamentos, atropelamentos de obstáculos, abalroamentos);</li>
+<li>Trafegar com o veículo em <strong>condições de sobrecarga</strong> acima da capacidade máxima recomendada pelo fabricante do veículo;</li>
+<li>Uso em <strong>competições esportivas, rachas, provas de velocidade ou rali</strong>, salvo se a linha de produto for expressamente indicada pela BUMP para tais aplicações;</li>
+<li>Submersão, alagamentos ou exposição prolongada a agentes corrosivos não previstos no uso normal;</li>
+<li>Reparos, soldas, modificações ou intervenções mecânicas realizadas no produto por terceiros, sem autorização prévia e por escrito da BUMP;</li>
+<li>Violação ou remoção do número de série, lacres ou identificações originais.</li>
+</ul>
+<p><span class="clause-num">10.5.1</span><strong>Análise Técnica:</strong> a constatação das hipóteses acima ocorrerá mediante <strong>análise física e técnica do produto</strong> pela equipe da BUMP, que emitirá laudo descritivo das evidências de mau uso (deformações estruturais, marcas de impacto, vazamentos atípicos, vergamentos, etc.). O laudo será disponibilizado ao Cliente.</p>
+<p><span class="clause-num">10.6</span><strong>A garantia NÃO cobre, ainda:</strong></p>
+<ul>
+<li>Desgaste natural decorrente do uso normal do produto, sujeito a manutenção periódica (item 10.3);</li>
+<li>Danos decorrentes de <strong>instalação inadequada</strong> realizada por terceiros, conforme detalhado na Cláusula 11;</li>
+<li>Danos resultantes de <strong>manutenção inadequada do veículo</strong> (alinhamento, balanceamento, geometria, condição de outros componentes da suspensão, pneus, etc.);</li>
+<li>Despesas com remoção, transporte, instalação e reinstalação do produto;</li>
+<li>Lucros cessantes, indisponibilidade do veículo e demais danos indiretos.</li>
+</ul>
+<p><span class="clause-num">10.7</span><strong>Como acionar a garantia:</strong> o Cliente deverá entrar em contato pelo WhatsApp Comercial da BUMP, apresentando:</p>
+<ul>
+<li>Nota fiscal de compra;</li>
+<li>Descrição detalhada do problema;</li>
+<li>Fotos e/ou vídeos do produto e do defeito;</li>
+<li>Histórico de utilização do produto, quando solicitado.</li>
+</ul>
+<p><span class="clause-num">10.8</span><strong>Análise:</strong> a BUMP analisará a solicitação de garantia no prazo de <strong>até 30 (trinta) dias corridos</strong>, contados a partir da <strong>postagem do produto pelo Cliente</strong>. Este prazo único abrange o trânsito do produto até a sede da BUMP (em condições normais, aproximadamente 15 dias), a análise técnica e a comunicação do parecer ao Cliente, com eventual reenvio do produto reparado/substituído ou expedição de novo item. Atrasos da transportadora alheios à atuação direta da BUMP poderão estender este prazo, hipótese em que o Cliente será informado.</p>
+<p><span class="clause-num">10.8.1</span><strong>Frete da Análise:</strong> quando o envio do produto for necessário, o <strong>frete de envio para análise é, em regra, de responsabilidade do Cliente</strong>. Confirmado o defeito de fabricação coberto pela garantia, <strong>a BUMP reembolsará o valor do frete de envio e </strong><strong>arcará integralmente com o frete de retorno</strong>. Caso a análise técnica conclua pela hipótese de mau uso (item 10.5) ou por exclusão de cobertura (item 10.6), tanto o frete de envio quanto o eventual frete de retorno do produto serão de responsabilidade do Cliente.</p>
+<p><span class="clause-num">10.9</span><strong>Solução em Caso de Procedência:</strong> confirmado o defeito coberto pela garantia, a BUMP poderá, a seu critério, <strong>(i)</strong> substituir o produto por outro de mesma especificação; <strong>(ii)</strong> reparar o produto; ou <strong>(iii)</strong> restituir o valor pago, na forma do art. 18 do CDC.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-11">
+<div class="marker-col">
+<p class="section-marker">[ 11 / INSTALAÇÃO DOS AMORTECEDORES ]</p>
+</div>
+<div class="content-col">
+<h2>Instalação dos Amortecedores.</h2>
+<p><span class="clause-num">11.1</span><strong>AVISO IMPORTANTE DE SEGURANÇA:</strong> os amortecedores são componentes diretamente relacionados à segurança veicular. Sua instalação inadequada pode comprometer a dirigibilidade, a estabilidade e a segurança do veículo, com risco de acidentes graves.</p>
+<p><span class="clause-num">11.2</span><strong>Manual de Instalação:</strong> todo produto BUMP é acompanhado de <strong>manual de instalação elaborado pela própria fabricante</strong>, contendo as orientações técnicas necessárias para a correta aplicação do amortecedor no veículo. O manual pode também ser enviado em formato digital ao Cliente.</p>
+<p><span class="clause-num">11.2.1</span>É <strong>responsabilidade exclusiva do Cliente</strong> entregar o manual de instalação ao profissional que realizará a montagem e exigir que as orientações sejam integralmente seguidas.</p>
+<p><span class="clause-num">11.3</span><strong>Liberdade de Escolha do Mecânico:</strong> os amortecedores BUMP <strong>podem ser instalados por qualquer mecânico</strong> que possua conhecimento técnico em sistemas de suspensão, <strong>não havendo necessidade de instalação por rede credenciada ou oficina autorizada pela BUMP</strong>. A escolha do profissional instalador é livre e de inteira responsabilidade do Cliente.</p>
+<p><span class="clause-num">11.4</span><strong>Não Prestação de Serviço de Instalação:</strong> salvo se expressamente acordado em contrário e formalizado por escrito, a BUMP <strong>não presta serviço de instalação</strong> dos produtos comercializados. A venda compreende apenas o fornecimento do produto e do respectivo manual.</p>
+<p><span class="clause-num">11.5</span><strong>Ausência de Jurisdição sobre Terceiros Instaladores:</strong> os profissionais e oficinas escolhidos pelo Cliente para realizar a instalação <strong>não possuem qualquer vínculo societário, empregatício, de representação ou de parceria comercial com a BUMP</strong>, não estando submetidos à sua jurisdição, fiscalização ou controle.</p>
+<p><span class="clause-num">11.6</span><strong>Isenção de Responsabilidade por Instalação Inadequada:</strong> a BUMP <strong>não se responsabiliza, em nenhuma hipótese</strong>, por:</p>
+<ul>
+<li>Danos ao veículo, ao próprio amortecedor ou a terceiros decorrentes de instalação executada em desacordo com o manual de instalação;</li>
+<li>Acidentes, falhas mecânicas ou ocorrências de qualquer natureza resultantes de erros, omissões ou negligência do mecânico/oficina escolhidos pelo Cliente;</li>
+<li>Desgaste prematuro ou ruptura do produto causados por má instalação, alinhamento ou balanceamento incorretos, aperto inadequado de fixações ou montagem em desacordo com o manual;</li>
+<li>Eventuais discussões, controvérsias ou litígios entre o Cliente e o profissional/oficina instaladora, os quais deverão ser resolvidos diretamente entre as partes envolvidas, sem participação da BUMP.</li>
+</ul>
+<p><span class="clause-num">11.7</span><strong>Manutenção Preventiva do Veículo:</strong> o Cliente é responsável por realizar a manutenção preventiva do sistema de suspensão e dos componentes correlatos (molas, batentes, buchas, pivôs, terminais, alinhamento, balanceamento, geometria), observando os intervalos recomendados pelo fabricante do veículo. A falta dessa manutenção pode comprometer a vida útil do amortecedor e implicar perda da garantia.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-12">
+<div class="marker-col">
+<p class="section-marker">[ 12 / OBRIGAÇÕES E RESPONSABILIDADES DO CLIENTE ]</p>
+</div>
+<div class="content-col">
+<h2>Obrigações e Responsabilidades do Cliente.</h2>
+<h3><span class="clause-num">12.1</span>O Cliente compromete-se a:</h3>
+<ul>
+<li>Fornecer dados verdadeiros, completos e atualizados durante o atendimento e a compra;</li>
+<li>Conferir a compatibilidade do produto com seu veículo antes da compra;</li>
+<li>Realizar o pagamento conforme as condições acordadas;</li>
+<li>Receber o produto no endereço informado, ou comunicar previamente eventual indisponibilidade;</li>
+<li>Conferir a integridade do produto no recebimento;</li>
+<li>Entregar ao mecânico/oficina escolhidos o manual de instalação fornecido pela BUMP e exigir o seu cumprimento;</li>
+<li>Não utilizar o Site, o WhatsApp Comercial ou qualquer canal da BUMP para fins ilícitos, fraudulentos ou contrários a estes Termos;</li>
+<li>Tratar a equipe de atendimento da BUMP com respeito e cordialidade.</li>
+</ul>
+<p><span class="clause-num">12.2</span><strong>Conduta Inadequada:</strong> a BUMP reserva-se o direito de suspender o atendimento, recusar pedidos futuros ou cancelar pedidos em andamento de Clientes que adotem condutas agressivas, ofensivas, discriminatórias, abusivas ou fraudulentas.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-13">
+<div class="marker-col">
+<p class="section-marker">[ 13 / LIMITAÇÕES DE RESPONSABILIDADE DA BUMP ]</p>
+</div>
+<div class="content-col">
+<h2>Limitações de Responsabilidade da BUMP.</h2>
+<p><span class="clause-num">13.1</span>A BUMP envida seus melhores esforços para garantir a qualidade dos produtos, a precisão das informações e a eficiência do atendimento, mas não se responsabiliza por:</p>
+<ul>
+<li>Indisponibilidade temporária do Site, do WhatsApp Comercial ou de canais de pagamento;</li>
+<li>Decisões de compra tomadas com base em informações fornecidas por terceiros não autorizados;</li>
+<li>Uso indevido, instalação inadequada ou manutenção precária do produto pelo Cliente ou por terceiros por ele contratados;</li>
+<li>Danos indiretos, lucros cessantes, perda de uma chance ou prejuízos imateriais decorrentes do uso ou da impossibilidade de uso do produto, salvo nos casos de responsabilidade objetiva prevista em lei;</li>
+<li>Eventos de caso fortuito, força maior ou fato exclusivo de terceiro;</li>
+<li>Conteúdos ou políticas de plataformas de terceiros (WhatsApp, gateways de pagamento, transportadoras, etc.).</li>
+</ul>
+<p><span class="clause-num">13.2</span>Nenhuma cláusula destes Termos exclui ou limita responsabilidades que, por força de lei (notadamente o CDC), não possam ser excluídas ou limitadas.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-14">
+<div class="marker-col">
+<p class="section-marker">[ 14 / PROPRIEDADE INTELECTUAL ]</p>
+</div>
+<div class="content-col">
+<h2>Propriedade Intelectual.</h2>
+<p><span class="clause-num">14.1</span><strong>Titularidade:</strong> todo o conteúdo do Site — incluindo, sem limitação, marca <strong>BUMP</strong>, logotipo, layout, textos, fotos, vídeos, ícones, ilustrações, descrições técnicas, código-fonte e demais elementos visuais — é de propriedade exclusiva da BUMP ou de seus licenciantes, sendo protegido pela legislação brasileira de direitos autorais, propriedade industrial e demais normas aplicáveis.</p>
+<p><span class="clause-num">14.2</span><strong>Uso Permitido:</strong> o Usuário recebe uma licença limitada, não exclusiva, intransferível e revogável para acessar e visualizar o conteúdo do Site para fins pessoais e não comerciais.</p>
+<p><span class="clause-num">14.3</span><strong>Usos Vedados:</strong> é expressamente vedado, sem autorização prévia e por escrito da BUMP:</p>
+<ul>
+<li>Reproduzir, copiar, distribuir, comercializar ou modificar qualquer conteúdo do Site;</li>
+<li>Utilizar a marca BUMP, seu logotipo ou identidade visual em outros sites, redes sociais ou materiais sem autorização;</li>
+<li>Realizar engenharia reversa, raspagem de dados (scraping), mineração automatizada ou qualquer tentativa de extrair, de forma sistemática, dados do Site;</li>
+<li>Criar perfis falsos, páginas ou canais que se apresentem como representantes oficiais da BUMP;</li>
+<li>Utilizar o conteúdo da BUMP para treinamento de modelos de inteligência artificial sem autorização expressa.</li>
+</ul>
+<p><span class="clause-num">14.4</span>A violação dos direitos de propriedade intelectual sujeitará o infrator às sanções civis e criminais aplicáveis, sem prejuízo de eventuais perdas e danos.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-15">
+<div class="marker-col">
+<p class="section-marker">[ 15 / PRIVACIDADE E PROTEÇÃO DE DADOS (LGPD) ]</p>
+</div>
+<div class="content-col">
+<h2>Privacidade e Proteção de Dados (LGPD).</h2>
+<p><span class="clause-num">15.1</span>A BUMP atua como <strong>Controladora</strong> dos dados pessoais coletados pelo Site e pelo WhatsApp Comercial, nos termos da LGPD.</p>
+<p><span class="clause-num">15.2</span><strong>Dados Coletados:</strong> a BUMP poderá coletar, entre outros:</p>
+<ul>
+<li>Dados cadastrais (nome, CPF/CNPJ, e-mail, telefone, endereço);</li>
+<li>Dados do veículo (marca, modelo, ano, motorização);</li>
+<li>Dados de pagamento (processados por intermediadores parceiros);</li>
+<li>Histórico de conversas no WhatsApp Comercial;</li>
+<li>Dados de navegação no Site (IP, dispositivo, páginas visitadas, cookies);</li>
+<li>Demais informações fornecidas voluntariamente pelo Cliente.</li>
+</ul>
+<p><span class="clause-num">15.3</span><strong>Finalidades:</strong> os dados são tratados para:</p>
+<ul>
+<li>Execução do contrato de compra e venda e procedimentos preliminares (art. 7º, V, LGPD);</li>
+<li>Cumprimento de obrigação legal ou regulatória (art. 7º, II), incluindo emissão fiscal e Marco Civil da Internet;</li>
+<li>Atendimento ao Cliente e pós-venda;</li>
+<li>Análise antifraude e segurança;</li>
+<li>Marketing e comunicações comerciais, mediante consentimento ou legítimo interesse (art. 7º, I e IX);</li>
+<li>Melhoria contínua dos produtos e serviços.</li>
+</ul>
+<p><span class="clause-num">15.4</span><strong>Compartilhamento:</strong> a BUMP poderá compartilhar dados pessoais, na medida estritamente necessária, com:</p>
+<ul>
+<li>Transportadoras e logística;</li>
+<li>Gateways de pagamento e instituições financeiras;</li>
+<li>Plataformas de comunicação (WhatsApp/Meta);</li>
+<li>Plataformas de hospedagem e análise (servidores cloud, ferramentas de analytics, etc.);</li>
+<li>Autoridades públicas, quando exigido por lei ou ordem judicial.</li>
+</ul>
+<p><span class="clause-num">15.5</span><strong>Transferência Internacional:</strong> alguns serviços contratados pela BUMP (hospedagem em nuvem, plataformas de comunicação, etc.) podem implicar transferência internacional de dados, sempre com a adoção de medidas adequadas conforme a LGPD.</p>
+<p><span class="clause-num">15.6</span><strong>Direitos do Titular:</strong> o Titular dos dados poderá, a qualquer momento, exercer os direitos previstos no art. 18 da LGPD, incluindo:</p>
+<ul>
+<li>Confirmação da existência de tratamento;</li>
+<li>Acesso aos dados;</li>
+<li>Correção de dados incompletos, inexatos ou desatualizados;</li>
+<li>Anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a LGPD;</li>
+<li>Portabilidade;</li>
+<li>Eliminação dos dados tratados com consentimento;</li>
+<li>Informação sobre compartilhamentos;</li>
+<li>Revogação do consentimento.</li>
+</ul>
+<p><span class="clause-num">15.7</span><strong>Canal para Exercício de Direitos:</strong> as solicitações relativas a dados pessoais devem ser encaminhadas ao e-mail <strong>bumpamortecedores@gmail.com</strong> ou pelo WhatsApp Comercial.</p>
+<p><span class="clause-num">15.8</span><strong>Retenção:</strong> os dados pessoais serão mantidos pelo tempo necessário ao cumprimento das finalidades de tratamento e às obrigações legais (notadamente prazos fiscais, prescricionais e do Marco Civil da Internet — art. 15).</p>
+<p><span class="clause-num">15.9</span><strong>Segurança:</strong> a BUMP adota medidas técnicas e administrativas razoáveis para proteger os dados pessoais contra acessos não autorizados, vazamentos, perdas ou alterações indevidas, observando os padrões de mercado e a legislação aplicável.</p>
+<p><span class="clause-num">15.10</span>Caso a BUMP venha a publicar uma Política de Privacidade autônoma, esta integrará e detalhará as disposições deste capítulo.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-16">
+<div class="marker-col">
+<p class="section-marker">[ 16 / COMUNICAÇÕES, MARKETING E COOKIES ]</p>
+</div>
+<div class="content-col">
+<h2>Comunicações, Marketing e Cookies.</h2>
+<p><span class="clause-num">16.1</span><strong>Comunicações Operacionais:</strong> ao realizar um pedido, o Cliente concorda em receber comunicações relacionadas ao seu pedido, entrega, pós-venda e garantia, por e-mail, SMS, WhatsApp ou demais canais informados.</p>
+<p><span class="clause-num">16.2</span><strong>Marketing:</strong> com o consentimento do Cliente, a BUMP poderá enviar comunicações de marketing, ofertas promocionais, lançamentos de produtos e conteúdos relacionados. O Cliente poderá, a qualquer momento, solicitar o descadastramento dessas comunicações.</p>
+<p><span class="clause-num">16.3</span><strong>Cookies:</strong> o Site utiliza cookies e tecnologias similares para melhorar a experiência do Usuário, personalizar conteúdos e analisar o tráfego. Detalhes sobre tipos de cookies utilizados e como gerenciá-los poderão constar em Política de Cookies específica ou no banner de cookies do Site.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-17">
+<div class="marker-col">
+<p class="section-marker">[ 17 / MODIFICAÇÃO DOS TERMOS ]</p>
+</div>
+<div class="content-col">
+<h2>Modificação dos Termos.</h2>
+<p><span class="clause-num">17.1</span>A BUMP poderá, a qualquer momento, modificar unilateralmente estes Termos, sendo as alterações publicadas no Site, com indicação da data da última atualização.</p>
+<p><span class="clause-num">17.2</span>O uso continuado do Site, do WhatsApp Comercial ou a realização de novas compras após a publicação das alterações configurará aceitação dos novos Termos.</p>
+<p><span class="clause-num">17.3</span>Eventuais pedidos já formalizados antes da alteração permanecerão regidos pela versão dos Termos vigente na data da contratação.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-18">
+<div class="marker-col">
+<p class="section-marker">[ 18 / DISPOSIÇÕES GERAIS ]</p>
+</div>
+<div class="content-col">
+<h2>Disposições Gerais.</h2>
+<p><span class="clause-num">18.1</span><strong>Comunicações:</strong> todas as comunicações entre as partes serão consideradas válidas quando enviadas para os contatos cadastrados pelo Cliente (e-mail, WhatsApp, endereço) ou para os canais oficiais da BUMP divulgados no Site.</p>
+<p><span class="clause-num">18.2</span><strong>Tolerância:</strong> a eventual tolerância da BUMP quanto ao descumprimento de qualquer cláusula não configurará novação, renúncia ou perdão de direitos, podendo a cláusula ser exigida a qualquer tempo.</p>
+<p><span class="clause-num">18.3</span><strong>Independência das Cláusulas:</strong> caso qualquer disposição destes Termos seja considerada inválida ou inexequível, as demais permanecerão em pleno vigor.</p>
+<p><span class="clause-num">18.4</span><strong>Cessão:</strong> o Cliente não poderá ceder direitos e obrigações decorrentes destes Termos sem prévia autorização escrita da BUMP. A BUMP poderá ceder este contrato em casos de reorganização societária, fusão, aquisição ou venda de ativos.</p>
+<p><span class="clause-num">18.5</span><strong>Caso Fortuito e Força Maior:</strong> nenhuma das partes será responsabilizada pelo descumprimento de obrigações decorrentes de caso fortuito ou força maior, nos termos do art. 393 do Código Civil.</p>
+</div>
+</section>
+<section class="clause-block" id="sec-19">
+<div class="marker-col">
+<p class="section-marker">[ 19 / FORO E LEGISLAÇÃO APLICÁVEL ]</p>
+</div>
+<div class="content-col">
+<h2>Foro e Legislação Aplicável.</h2>
+<p><span class="clause-num">19.1</span>Estes Termos são regidos pelas leis da República Federativa do Brasil, em especial pelo Código Civil, pelo Código de Defesa do Consumidor e pela Lei Geral de Proteção de Dados.</p>
+<p><span class="clause-num">19.2</span>Para dirimir quaisquer controvérsias decorrentes destes Termos, fica eleito o foro da Comarca de <strong>Gravataí, Estado do Rio Grande do Sul</strong>, ressalvada, em relações de consumo, a faculdade do consumidor pessoa física de propor a ação no foro de seu domicílio (art. 101, I, do CDC).</p>
+<p><strong>BUMP AMORTECEDORES LTDA</strong> <strong>CNPJ:</strong> 18.052.960/0001-60 <strong>Inscrição Estadual (RS):</strong> 057/0314950 <strong>Endereço:</strong> Avenida Ely Correa, nº 945, Lote 6 Quadra 1, Bairro Passos dos Ferreiros, CEP 94185-352, Gravataí/RS <strong>E-mail:</strong> bumpamortecedores@gmail.com <strong>WhatsApp Comercial:</strong> (51) 98580-6370 <strong>Horário de Atendimento:</strong> Segunda a sexta-feira, das 08h00 às 18h00</p>
+</div>
+</section>
+  </div>
+</section>
+
+<div class="hazard"></div>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403561/logo_kseuvf.png" alt="BUMP Amortecedores">
+        <p>Performance premium pra picapes e utilitários. Sob medida, monotubo, feito no Brasil. Est. 2013.</p>
+      </div>
+      <div class="foot-col">
+        <h6>Navegar</h6>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#linha">A Linha</a></li>
+          <li><a href="index.html#configurador">Configurador</a></li>
+          <li><a href="index.html#comprar">Como comprar</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h6>Legal</h6>
+        <ul>
+          <li><a href="politica-de-privacidade.html">Política de Privacidade</a></li>
+          <li><a href="termos-de-uso.html">Termos de Uso</a></li>
+          <li><a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener">@bumpamortecedores</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="legal">
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+      </div>
+      <span class="copy">© BUMP Amortecedores · 2013—2026 · CNPJ 18.052.960/0001-60</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
