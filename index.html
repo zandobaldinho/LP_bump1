@@ -51,7 +51,7 @@
             "postalCode": "94185-352",
             "addressCountry": "BR"
         },
-        "openingHours": "Mo-Sa 08:00-22:00",
+        "openingHours": "Mo-Fr 08:00-18:00",
         "sameAs": [
             "https://www.instagram.com/bumpamortecedores/"
         ],
@@ -348,13 +348,6 @@
                 <p class="text-gray-400 text-lg">Preencha os dados abaixo e descubra a solução perfeita para a sua máquina.</p>
             </div>
             <form id="orcamentoForm" action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" method="POST" class="bg-white/5 border border-white/10 p-6 md:p-10 rounded-lg shadow-2xl backdrop-blur-sm">
-                <!-- UTMs (capturados via JS no DOMContentLoaded) -->
-                <input type="hidden" id="utm_source"   name="utm_source"   value="">
-                <input type="hidden" id="utm_medium"   name="utm_medium"   value="">
-                <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
-                <input type="hidden" id="utm_content"  name="utm_content"  value="">
-                <input type="hidden" id="utm_term"     name="utm_term"     value="">
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="md:col-span-2">
                         <label for="nome" class="block text-sm font-medium text-gray-300 mb-2">Nome Completo</label>
@@ -448,7 +441,7 @@
                     <label class="flex items-start gap-3 cursor-pointer text-sm text-gray-300">
                         <input type="checkbox" id="consentimento" name="consentimento" required class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
                         <span>
-                            Concordo com o tratamento dos meus dados pessoais (nome e telefone) pela <strong class="text-white">Bump Amortecedores LTDA</strong> para fins de contato comercial e elaboração do orçamento solicitado, conforme a <a href="#" onclick="openLegalModal('privacidade'); return false;" class="text-brand-yellow hover:underline">Política de Privacidade</a>. *
+                            Concordo com o tratamento dos meus dados pessoais (nome e telefone) pela <strong class="text-white">Bump Amortecedores LTDA</strong> para fins de contato comercial e elaboração do orçamento solicitado, conforme a <a href="politica-de-privacidade.html" target="_blank" rel="noopener" class="text-brand-yellow hover:underline">Política de Privacidade</a>. *
                         </span>
                     </label>
                 </div>
@@ -480,7 +473,7 @@
                 <ul class="space-y-3 text-gray-400 text-sm">
                     <li class="flex items-center gap-2 justify-center md:justify-start">
                         <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                        Segunda a Sábado: 8h às 22h
+                        Segunda a Sexta: 8h às 18h
                     </li>
                     <li>
                         <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="hover:text-brand-yellow transition-colors flex items-center justify-center md:justify-start gap-2">
@@ -516,8 +509,8 @@
                 </a>
                 <h4 class="font-oswald text-white text-sm uppercase tracking-wider mb-3 font-bold">Informações Legais</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" onclick="openLegalModal('privacidade'); return false;" class="text-gray-400 hover:text-brand-yellow transition-colors">Política de Privacidade</a></li>
-                    <li><a href="#" onclick="openLegalModal('termos'); return false;" class="text-gray-400 hover:text-brand-yellow transition-colors">Termos de Uso</a></li>
+                    <li><a href="politica-de-privacidade.html" class="text-gray-400 hover:text-brand-yellow transition-colors">Política de Privacidade</a></li>
+                    <li><a href="termos-de-uso.html" class="text-gray-400 hover:text-brand-yellow transition-colors">Termos de Uso</a></li>
                 </ul>
             </div>
         </div>
@@ -532,84 +525,11 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-4">
             <div class="flex-1 text-sm text-gray-300">
                 <p class="font-medium text-white mb-1">🍪 Este site utiliza cookies</p>
-                <p class="text-gray-400">Utilizamos cookies essenciais para o funcionamento do site e cookies de análise para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="#" onclick="openLegalModal('privacidade'); return false;" class="text-brand-yellow hover:underline">Política de Privacidade</a>.</p>
+                <p class="text-gray-400">Utilizamos cookies essenciais para o funcionamento do site e cookies de análise para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="politica-de-privacidade.html" target="_blank" rel="noopener" class="text-brand-yellow hover:underline">Política de Privacidade</a>.</p>
             </div>
             <div class="flex gap-2 w-full md:w-auto flex-shrink-0">
                 <button onclick="cookieResponse('reject')" class="flex-1 md:flex-none bg-white/10 hover:bg-white/20 text-white text-sm font-semibold py-2 px-4 rounded-sm transition-all">Recusar</button>
                 <button onclick="cookieResponse('accept')" class="flex-1 md:flex-none bg-brand-yellow hover:bg-yellow-600 text-brand-dark text-sm font-bold py-2 px-6 rounded-sm transition-all">Aceitar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL POLÍTICA -->
-    <div id="modalPrivacidade" class="legal-modal" onclick="if(event.target===this) closeLegalModal('privacidade')">
-        <div class="legal-modal-content">
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
-                <h2 class="font-oswald text-2xl md:text-3xl font-bold text-white uppercase">Política de Privacidade</h2>
-                <button onclick="closeLegalModal('privacidade')" class="text-gray-400 hover:text-white text-2xl leading-none">×</button>
-            </div>
-            <p class="text-xs text-gray-500 mb-4">Última atualização: Abril de 2026</p>
-            <p>A <strong>Bump Amortecedores LTDA</strong>, inscrita no CNPJ sob o nº 18.052.960/0001-60, com sede na Av. Ely Corrêa, 945 - Girassol, Gravataí - RS, 94185-352 ("BUMP", "nós"), respeita sua privacidade e está comprometida com a proteção dos seus dados pessoais, em conformidade com a <strong>Lei nº 13.709/2018 (LGPD)</strong>.</p>
-            <h3>1. Quais dados coletamos</h3>
-            <p>Coletamos os seguintes dados pessoais quando você preenche o formulário de orçamento:</p>
-            <ul><li>Nome completo</li><li>Telefone / WhatsApp</li><li>Modelo e ano do veículo (dados não pessoais)</li></ul>
-            <h3>2. Para que utilizamos seus dados</h3>
-            <p>Os dados coletados são utilizados exclusivamente para:</p>
-            <ul><li>Entrar em contato para elaboração de orçamento personalizado</li><li>Esclarecer dúvidas sobre nossos produtos e serviços</li><li>Cumprir obrigações legais e contratuais</li></ul>
-            <h3>3. Base legal</h3>
-            <p>O tratamento dos seus dados é realizado com base no <strong>consentimento</strong> fornecido por você ao marcar a caixa de aceite no formulário, conforme art. 7º, inciso I da LGPD.</p>
-            <h3>4. Compartilhamento de dados</h3>
-            <p>Não vendemos, alugamos ou compartilhamos seus dados com terceiros para fins comerciais. Utilizamos a plataforma <strong>Make (Integromat)</strong> para automação do recebimento dos formulários, que processa os dados conforme suas próprias políticas de segurança e privacidade.</p>
-            <h3>5. Tempo de armazenamento</h3>
-            <p>Os dados são armazenados pelo tempo necessário para atender à finalidade do contato comercial, ou conforme exigido por lei. Você pode solicitar a exclusão dos seus dados a qualquer momento.</p>
-            <h3>6. Seus direitos (LGPD)</h3>
-            <p>Como titular dos dados, você tem direito a:</p>
-            <ul><li>Confirmar a existência de tratamento dos seus dados</li><li>Acessar os dados que possuímos sobre você</li><li>Corrigir dados incompletos, inexatos ou desatualizados</li><li>Solicitar anonimização, bloqueio ou eliminação de dados</li><li>Solicitar a portabilidade dos dados</li><li>Revogar o consentimento a qualquer momento</li></ul>
-            <h3>7. Cookies</h3>
-            <p>Este site utiliza cookies essenciais para seu funcionamento. Cookies de análise podem ser utilizados para entender como os visitantes interagem com o site, sempre de forma anonimizada. Você pode aceitar ou recusar o uso de cookies através do banner exibido na sua primeira visita.</p>
-            <h3>8. Segurança</h3>
-            <p>Adotamos medidas técnicas e organizacionais para proteger seus dados contra acesso não autorizado, perda, alteração ou divulgação indevida.</p>
-            <h3>9. Como exercer seus direitos</h3>
-            <p>Para exercer qualquer um dos seus direitos como titular de dados, ou tirar dúvidas sobre esta política, entre em contato:</p>
-            <ul><li><strong>Instagram (Direct):</strong> @bumpamortecedores</li><li><strong>Endereço:</strong> Av. Ely Corrêa, 945 - Girassol, Gravataí - RS</li></ul>
-            <h3>10. Alterações desta política</h3>
-            <p>Esta Política de Privacidade pode ser atualizada periodicamente. A data da última atualização estará sempre indicada no início deste documento.</p>
-            <div class="mt-8 pt-4 border-t border-white/10 text-center">
-                <button onclick="closeLegalModal('privacidade')" class="bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-8 rounded-sm transition-all">Entendi</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL TERMOS -->
-    <div id="modalTermos" class="legal-modal" onclick="if(event.target===this) closeLegalModal('termos')">
-        <div class="legal-modal-content">
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
-                <h2 class="font-oswald text-2xl md:text-3xl font-bold text-white uppercase">Termos de Uso</h2>
-                <button onclick="closeLegalModal('termos')" class="text-gray-400 hover:text-white text-2xl leading-none">×</button>
-            </div>
-            <p class="text-xs text-gray-500 mb-4">Última atualização: Abril de 2026</p>
-            <p>Bem-vindo ao site da <strong>Bump Amortecedores LTDA</strong> (CNPJ 18.052.960/0001-60). Ao acessar ou utilizar este site, você concorda com os termos descritos abaixo.</p>
-            <h3>1. Aceitação dos termos</h3>
-            <p>O uso deste site implica a aceitação integral destes Termos de Uso. Caso não concorde com qualquer das cláusulas, recomendamos não utilizar o site.</p>
-            <h3>2. Objeto</h3>
-            <p>Este site tem por finalidade apresentar produtos e serviços da BUMP Amortecedores e permitir solicitações de orçamento. Não realiza vendas online diretas.</p>
-            <h3>3. Propriedade intelectual</h3>
-            <p>Todo o conteúdo deste site (textos, imagens, vídeos, marcas, logotipos, layout) é de propriedade exclusiva da <strong>Bump Amortecedores LTDA</strong> e protegido pelas leis de propriedade intelectual brasileiras. É proibida a reprodução total ou parcial sem autorização prévia e por escrito.</p>
-            <h3>4. Veracidade das informações</h3>
-            <p>As informações apresentadas neste site são fornecidas de boa-fé e com base nas melhores referências disponíveis. Especificações técnicas, prazos e condições de produtos podem ser atualizados sem aviso prévio.</p>
-            <h3>5. Limitação de responsabilidade</h3>
-            <p>A BUMP não se responsabiliza por:</p>
-            <ul><li>Eventuais erros de digitação ou divergências de informações</li><li>Danos decorrentes do mau uso do site</li><li>Indisponibilidades técnicas eventuais ou interrupções de serviço</li><li>Conteúdos de sites de terceiros eventualmente linkados</li></ul>
-            <h3>6. Conduta do usuário</h3>
-            <p>O usuário se compromete a utilizar o site de forma ética e legal, não realizando atividades que possam comprometer seu funcionamento ou a integridade de outros usuários.</p>
-            <h3>7. Privacidade</h3>
-            <p>O tratamento de dados pessoais segue nossa <a href="#" onclick="closeLegalModal('termos'); openLegalModal('privacidade'); return false;" class="text-brand-yellow hover:underline">Política de Privacidade</a>, em conformidade com a LGPD.</p>
-            <h3>8. Alterações dos termos</h3>
-            <p>Estes Termos podem ser modificados a qualquer momento, sendo a versão vigente sempre a publicada nesta página.</p>
-            <h3>9. Foro</h3>
-            <p>Fica eleito o foro da comarca de Gravataí - RS para dirimir quaisquer questões oriundas destes Termos, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
-            <div class="mt-8 pt-4 border-t border-white/10 text-center">
-                <button onclick="closeLegalModal('termos')" class="bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-8 rounded-sm transition-all">Entendi</button>
             </div>
         </div>
     </div>
@@ -683,21 +603,6 @@
     };
     // ================================================================
 
-    function openLegalModal(tipo) {
-        const modal = document.getElementById('modal' + (tipo === 'privacidade' ? 'Privacidade' : 'Termos'));
-        if (modal) { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
-    }
-    function closeLegalModal(tipo) {
-        const modal = document.getElementById('modal' + (tipo === 'privacidade' ? 'Privacidade' : 'Termos'));
-        if (modal) { modal.classList.remove('open'); document.body.style.overflow = ''; }
-    }
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            document.querySelectorAll('.legal-modal.open').forEach(m => m.classList.remove('open'));
-            document.body.style.overflow = '';
-        }
-    });
-
     function cookieResponse(action) {
         try {
             localStorage.setItem('bump_cookie_consent', action);
@@ -716,17 +621,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         checkCookieBanner();
-
-        // ================================================================
-        // 📊 UTMs — captura da URL e preenche campos hidden do form
-        // ================================================================
-        const urlParams = new URLSearchParams(window.location.search);
-        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(utm => {
-            if (urlParams.has(utm)) {
-                const inputField = document.getElementById(utm);
-                if (inputField) inputField.value = urlParams.get(utm);
-            }
-        });
 
         const getAsset = (path) => path.split('.').reduce((obj, key) => obj?.[key], ASSETS);
         document.querySelectorAll('[data-asset]').forEach(el => {
@@ -880,12 +774,7 @@
                         consentimento_lgpd: data.consentimento_lgpd,
                         consentimento_data: data.consentimento_data,
                         origem: data.origem,
-                        status_processamento: 'pendente',
-                        utm_source: data.utm_source || null,
-                        utm_medium: data.utm_medium || null,
-                        utm_campaign: data.utm_campaign || null,
-                        utm_content: data.utm_content || null,
-                        utm_term: data.utm_term || null
+                        status_processamento: 'pendente'
                     };
 
                     const [makeResult, supabaseResult] = await Promise.allSettled([
@@ -958,3 +847,4 @@
 
 </body>
 </html>
+
