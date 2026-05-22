@@ -408,7 +408,6 @@
                                 </optgroup>
                                 <optgroup label="Outros" class="bg-[#171717] text-white">
                                     <option value="Fiat Strada" class="bg-[#171717] text-white">Fiat Strada</option>
-                                    <option value="Nissan X-Terra" class="bg-[#171717] text-white">Nissan X-Terra</option>
                                     <option value="F150" class="bg-[#171717] text-white">F150</option>
                                     <option value="F250" class="bg-[#171717] text-white">F250</option>
                                     <option value="F350" class="bg-[#171717] text-white">F350</option>
@@ -417,7 +416,6 @@
                                     <option value="Pajero Sport" class="bg-[#171717] text-white">Pajero Sport</option>
                                     <option value="Suzuki Jimny" class="bg-[#171717] text-white">Suzuki Jimny</option>
                                     <option value="Toyota Bandeirante" class="bg-[#171717] text-white">Toyota Bandeirante</option>
-                                    <option value="Saveiro" class="bg-[#171717] text-white">Saveiro</option>
                                     <option value="Outros" class="bg-[#171717] text-white">Outros</option>
                                 </optgroup>
                             </select>
@@ -553,19 +551,27 @@
     }
 
     // ================================================================
-    // CATEGORIA "OUTROS" — esses modelos vão SÓ pro banco (Supabase),
-    // nunca pro Make/funil. Manter igual aos values do <optgroup "Outros">.
+    // SÓ BANCO — vão sempre só pro Supabase, nunca pro Make (independe do ano).
+    // Hoje só a opção genérica "Outros" (veículo não listado → revisão manual).
     // ================================================================
     const MODELOS_SOMENTE_BANCO = [
-        'Fiat Strada', 'Nissan X-Terra', 'F150', 'F250', 'F350', 'F1000',
-        'Pajero Full', 'Pajero Sport', 'Suzuki Jimny', 'Toyota Bandeirante',
-        'Saveiro', 'Outros'
+        'Outros'
     ];
 
-    // Modelos atendidos só a partir de um ano. Abaixo disso → só banco (sem Make).
-    // Ex.: Dakota só é atendida de 2025 em diante.
+    // Modelos atendidos só a partir de um ano. Abaixo do ano → só banco (sem Make).
+    //  - Dakota: 2025+
+    //  - Linha "Outros" (Fiat Strada, F150/250/350/1000, Pajeros, Jimny, Bandeirante): 2022+
     const ANO_MINIMO_ATENDIDO = {
-        'Dakota': 2025
+        'Dakota': 2025,
+        'Fiat Strada': 2022,
+        'F150': 2022,
+        'F250': 2022,
+        'F350': 2022,
+        'F1000': 2022,
+        'Pajero Full': 2022,
+        'Pajero Sport': 2022,
+        'Suzuki Jimny': 2022,
+        'Toyota Bandeirante': 2022
     };
 
     // ================================================================
