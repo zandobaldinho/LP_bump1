@@ -389,6 +389,7 @@
                                 <optgroup label="Modelos atendidos" class="bg-[#171717] text-white">
                                     <option value="RAM" class="bg-[#171717] text-white">RAM</option>
                                     <option value="Rampage" class="bg-[#171717] text-white">Rampage</option>
+                                    <option value="Dakota" class="bg-[#171717] text-white">Dakota</option>
                                     <option value="Hilux" class="bg-[#171717] text-white">Hilux</option>
                                     <option value="SW4" class="bg-[#171717] text-white">SW4</option>
                                     <option value="Triton" class="bg-[#171717] text-white">Triton</option>
@@ -480,16 +481,6 @@
                         <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                         Segunda a Sexta: 8h às 18h
                     </li>
-                    <li>
-                        <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="hover:text-brand-yellow transition-colors flex items-center justify-center md:justify-start gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                            </svg>
-                            Direct: @bumpamortecedores
-                        </a>
-                    </li>
                 </ul>
                 <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="mt-6 inline-flex items-center justify-center gap-2 text-white font-inter font-semibold py-2 px-6 rounded-sm transition-all w-full md:w-auto hover:scale-[1.02]" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -560,6 +551,22 @@
             'Telefone: ' + (data.telefone || '-');
         return 'https://wa.me/' + RAM_WHATSAPP + '?text=' + encodeURIComponent(msg);
     }
+
+    // ================================================================
+    // CATEGORIA "OUTROS" — esses modelos vão SÓ pro banco (Supabase),
+    // nunca pro Make/funil. Manter igual aos values do <optgroup "Outros">.
+    // ================================================================
+    const MODELOS_SOMENTE_BANCO = [
+        'Fiat Strada', 'Nissan X-Terra', 'F150', 'F250', 'F350', 'F1000',
+        'Pajero Full', 'Pajero Sport', 'Suzuki Jimny', 'Toyota Bandeirante',
+        'Saveiro', 'Outros'
+    ];
+
+    // Modelos atendidos só a partir de um ano. Abaixo disso → só banco (sem Make).
+    // Ex.: Dakota só é atendida de 2025 em diante.
+    const ANO_MINIMO_ATENDIDO = {
+        'Dakota': 2025
+    };
 
     // ================================================================
     // ⚠️ ASSETS — Cloudinary com f_auto,q_auto entrega o melhor formato
@@ -761,30 +768,19 @@
                 data.consentimento_lgpd = true;
                 data.consentimento_data = new Date().toISOString();
 
-                // ============================================================
-                // FILTRO: modelo "Outros" NÃO envia pro webhook
-                // (BUMP não atende veículos genéricos, mas mantém UX boa)
-                // ============================================================
-                if (data.modelo === 'Outros') {
-                    console.log('[BUMP FORM] Modelo "Outros" detectado — webhook NÃO chamado');
-                    formMessage.textContent = 'Informações enviadas com sucesso! Em breve entraremos em contato.';
-                    formMessage.classList.remove('hidden', 'bg-red-500');
-                    formMessage.classList.add('bg-green-600');
-                    form.reset();
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-                    setTimeout(() => formMessage.classList.add('hidden'), 6000);
-                    return;
-                }
-
                 try {
+                    let enviarMake = !MODELOS_SOMENTE_BANCO.includes(data.modelo);
+                    // Regra de ano: modelo atendido só a partir de um ano (ex.: Dakota 2025+).
+                    const anoMin = ANO_MINIMO_ATENDIDO[data.modelo];
+                    if (anoMin && parseInt(data.ano, 10) < anoMin) {
+                        enviarMake = false;
+                    }
                     console.log('[BUMP FORM] Enviando dados:', data);
-                    console.log('[BUMP FORM] URL do webhook:', form.action);
+                    console.log('[BUMP FORM] Modelo:', data.modelo, '| Ano:', data.ano, '| Vai pro Make?', enviarMake);
 
                     // ============================================================
-                    // FETCH PARALELO — Make + Supabase rodam ao mesmo tempo
-                    // Se um falhar, o outro continua. Defense in depth.
+                    // Supabase SEMPRE roda (todo lead fica no banco).
+                    // Make só para "Modelos atendidos" — categoria "Outros" NÃO vai pro funil.
                     // ============================================================
                     const supabasePayload = {
                         nome: data.nome,
@@ -798,14 +794,8 @@
                         status_processamento: 'pendente'
                     };
 
-                    const [makeResult, supabaseResult] = await Promise.allSettled([
-                        // 1) Make webhook (text/plain evita preflight CORS)
-                        fetch(form.action, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-                            body: JSON.stringify(data)
-                        }),
-                        // 2) Supabase REST API
+                    const tarefas = [
+                        // Supabase REST API (sempre)
                         fetch(`${SUPABASE_URL}/rest/v1/leads_bump`, {
                             method: 'POST',
                             headers: {
@@ -816,18 +806,22 @@
                             },
                             body: JSON.stringify(supabasePayload)
                         })
-                    ]);
-
-                    // Log detalhado dos 2 resultados
-                    const makeOk = makeResult.status === 'fulfilled' && makeResult.value.ok;
-                    const supabaseOk = supabaseResult.status === 'fulfilled' && supabaseResult.value.ok;
-
-                    console.log('[BUMP FORM] Make status:', makeResult.status, makeOk ? '✅' : '❌');
-                    if (makeResult.status === 'fulfilled') {
-                        console.log('[BUMP FORM] Make HTTP:', makeResult.value.status);
-                    } else {
-                        console.error('[BUMP FORM] Make falhou:', makeResult.reason);
+                    ];
+                    if (enviarMake) {
+                        // Make webhook (text/plain evita preflight CORS)
+                        tarefas.push(fetch(form.action, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                            body: JSON.stringify(data)
+                        }));
                     }
+
+                    const resultados = await Promise.allSettled(tarefas);
+                    const supabaseResult = resultados[0];
+                    const makeResult = enviarMake ? resultados[1] : null;
+
+                    const supabaseOk = supabaseResult.status === 'fulfilled' && supabaseResult.value.ok;
+                    const makeOk = makeResult ? (makeResult.status === 'fulfilled' && makeResult.value.ok) : false;
 
                     console.log('[BUMP FORM] Supabase status:', supabaseResult.status, supabaseOk ? '✅' : '❌');
                     if (supabaseResult.status === 'fulfilled') {
@@ -839,10 +833,23 @@
                     } else {
                         console.error('[BUMP FORM] Supabase falhou:', supabaseResult.reason);
                     }
+                    if (enviarMake) {
+                        console.log('[BUMP FORM] Make status:', makeResult.status, makeOk ? '✅' : '❌');
+                        if (makeResult.status === 'fulfilled') {
+                            console.log('[BUMP FORM] Make HTTP:', makeResult.value.status);
+                        } else {
+                            console.error('[BUMP FORM] Make falhou:', makeResult.reason);
+                        }
+                    } else {
+                        console.log('[BUMP FORM] Make: pulado (categoria Outros — só banco)');
+                    }
 
-                    // Sucesso se PELO MENOS UM dos dois funcionou
-                    if (!makeOk && !supabaseOk) {
-                        throw new Error('Make e Supabase falharam');
+                    // Sucesso:
+                    //  - modelos atendidos: basta Make OU Supabase ter funcionado
+                    //  - categoria Outros: precisa do Supabase (único destino)
+                    const sucesso = enviarMake ? (makeOk || supabaseOk) : supabaseOk;
+                    if (!sucesso) {
+                        throw new Error('Falha ao salvar o lead');
                     }
 
                     formMessage.textContent = 'Informações enviadas com sucesso! Em breve entraremos em contato.';
