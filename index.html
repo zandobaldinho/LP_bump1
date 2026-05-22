@@ -423,6 +423,7 @@
                                 <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
                             </div>
                         </div>
+                        <input type="text" id="modeloOutros" placeholder="Qual o modelo do seu veículo?" autocomplete="off" maxlength="60" style="display:none" class="mt-3 w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
                     </div>
                     <div>
                         <label for="ano" class="block text-sm font-medium text-gray-300 mb-2">Ano da Picape</label>
@@ -687,6 +688,23 @@
             }
         }
 
+        // Campo "Outros": aparece ao selecionar a opção Outros, pra digitar o veículo
+        const modeloSelect = document.getElementById('modelo');
+        const modeloOutrosInput = document.getElementById('modeloOutros');
+        if (modeloSelect && modeloOutrosInput) {
+            modeloSelect.addEventListener('change', () => {
+                if (modeloSelect.value === 'Outros') {
+                    modeloOutrosInput.style.display = 'block';
+                    modeloOutrosInput.required = true;
+                    modeloOutrosInput.focus();
+                } else {
+                    modeloOutrosInput.style.display = 'none';
+                    modeloOutrosInput.required = false;
+                    modeloOutrosInput.value = '';
+                }
+            });
+        }
+
         // Hover dos cards de pickup — versão robusta
         document.querySelectorAll('.hover-video-card').forEach(card => {
             const video = card.querySelector('video');
@@ -774,6 +792,13 @@
                 data.consentimento_lgpd = true;
                 data.consentimento_data = new Date().toISOString();
 
+                // "Outros": o que a pessoa digitou é o que vai pro banco no campo modelo.
+                // O roteamento continua usando data.modelo (= "Outros") → só banco.
+                const modeloDigitado = (document.getElementById('modeloOutros')?.value || '').trim();
+                const modeloParaSalvar = (data.modelo === 'Outros' && modeloDigitado)
+                    ? modeloDigitado
+                    : data.modelo;
+
                 try {
                     let enviarMake = !MODELOS_SOMENTE_BANCO.includes(data.modelo);
                     // Regra de ano: modelo atendido só a partir de um ano (ex.: Dakota 2025+).
@@ -782,7 +807,7 @@
                         enviarMake = false;
                     }
                     console.log('[BUMP FORM] Enviando dados:', data);
-                    console.log('[BUMP FORM] Modelo:', data.modelo, '| Ano:', data.ano, '| Vai pro Make?', enviarMake);
+                    console.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Vai pro Make?', enviarMake);
 
                     // ============================================================
                     // Supabase SEMPRE roda (todo lead fica no banco).
@@ -791,7 +816,7 @@
                     const supabasePayload = {
                         nome: data.nome,
                         telefone: data.telefone,
-                        modelo: data.modelo,
+                        modelo: modeloParaSalvar,
                         ano: data.ano,
                         situacao_suspensao: data.situacao_suspensao,
                         consentimento_lgpd: data.consentimento_lgpd,
@@ -863,6 +888,9 @@
                     formMessage.classList.add('bg-green-600');
 
                     form.reset();
+                    // re-esconde o campo "Outros" após limpar o formulário
+                    const moInput = document.getElementById('modeloOutros');
+                    if (moInput) { moInput.style.display = 'none'; moInput.required = false; moInput.value = ''; }
                 } catch (error) {
                     console.error('[BUMP FORM] Erro completo:', error);
                     console.error('[BUMP FORM] Mensagem:', error.message);
