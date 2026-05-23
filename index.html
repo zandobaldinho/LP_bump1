@@ -348,6 +348,13 @@
                 <p class="text-gray-400 text-lg">Preencha os dados abaixo e descubra a solução perfeita para a sua máquina.</p>
             </div>
             <form id="orcamentoForm" action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" method="POST" class="bg-white/5 border border-white/10 p-6 md:p-10 rounded-lg shadow-2xl backdrop-blur-sm">
+                <!-- Campos ocultos: captura de UTMs (Meta Ads, Google Ads, bio do YouTube, etc.) -->
+                <input type="hidden" id="utm_source"   name="utm_source"   value="">
+                <input type="hidden" id="utm_medium"   name="utm_medium"   value="">
+                <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+                <input type="hidden" id="utm_content"  name="utm_content"  value="">
+                <input type="hidden" id="utm_term"     name="utm_term"     value="">
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="md:col-span-2">
                         <label for="nome" class="block text-sm font-medium text-gray-300 mb-2">Nome Completo</label>
@@ -652,8 +659,27 @@
         }
     }
 
+    // ================================================================
+    // 🎯 CAPTURA DE UTMs — lê parâmetros da URL (Meta Ads, Google Ads,
+    // link da bio do YouTube/Instagram etc.) e injeta nos hidden fields
+    // do formulário. Roda assim que o DOM termina de montar.
+    // ================================================================
+    function capturarUTMs() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        utms.forEach(utm => {
+            if (urlParams.has(utm)) {
+                const inputField = document.getElementById(utm);
+                if (inputField) {
+                    inputField.value = urlParams.get(utm);
+                }
+            }
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         checkCookieBanner();
+        capturarUTMs();
 
         const getAsset = (path) => path.split('.').reduce((obj, key) => obj?.[key], ASSETS);
         document.querySelectorAll('[data-asset]').forEach(el => {
@@ -808,6 +834,13 @@
                     }
                     console.log('[BUMP FORM] Enviando dados:', data);
                     console.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Vai pro Make?', enviarMake);
+                    console.log('[BUMP FORM] UTMs:', {
+                        source: data.utm_source || '(vazio)',
+                        medium: data.utm_medium || '(vazio)',
+                        campaign: data.utm_campaign || '(vazio)',
+                        content: data.utm_content || '(vazio)',
+                        term: data.utm_term || '(vazio)'
+                    });
 
                     // ============================================================
                     // Supabase SEMPRE roda (todo lead fica no banco).
@@ -822,6 +855,12 @@
                         consentimento_lgpd: data.consentimento_lgpd,
                         consentimento_data: data.consentimento_data,
                         origem: data.origem,
+                        // UTMs (null quando o lead chegou direto, sem campanha)
+                        utm_source:   data.utm_source   || null,
+                        utm_medium:   data.utm_medium   || null,
+                        utm_campaign: data.utm_campaign || null,
+                        utm_content:  data.utm_content  || null,
+                        utm_term:     data.utm_term     || null,
                         status_processamento: 'pendente'
                     };
 
@@ -840,6 +879,7 @@
                     ];
                     if (enviarMake) {
                         // Make webhook (text/plain evita preflight CORS)
+                        // UTMs já vão dentro do `data` (vieram do FormData via hidden fields)
                         tarefas.push(fetch(form.action, {
                             method: 'POST',
                             headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
@@ -891,6 +931,8 @@
                     // re-esconde o campo "Outros" após limpar o formulário
                     const moInput = document.getElementById('modeloOutros');
                     if (moInput) { moInput.style.display = 'none'; moInput.required = false; moInput.value = ''; }
+                    // re-popula os UTMs no form resetado (form.reset() limpa hidden fields também)
+                    capturarUTMs();
                 } catch (error) {
                     console.error('[BUMP FORM] Erro completo:', error);
                     console.error('[BUMP FORM] Mensagem:', error.message);
