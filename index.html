@@ -26,7 +26,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="BUMP Amortecedores | Performance Premium">
     <meta property="og:description" content="Amortecedores de alta performance para picapes. Domine qualquer terreno com a tecnologia BUMP.">
-    <meta property="og:image" content="https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403560/hero_cpnxiz.jpg">
+    <meta property="og:image" content="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hero.png">
     <meta property="og:locale" content="pt_BR">
 
     <!-- Twitter Card -->
@@ -41,7 +41,7 @@
         "@type": "AutomotiveBusiness",
         "name": "BUMP Amortecedores",
         "legalName": "Bump Amortecedores LTDA",
-        "image": "https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403561/logo_kseuvf.png",
+        "image": "https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/logoenome.png",
         "telephone": "+5551997602026",
         "address": {
             "@type": "PostalAddress",
@@ -583,62 +583,63 @@
     };
 
     // ================================================================
-    // ⚠️ ASSETS — Cloudinary com f_auto,q_auto entrega o melhor formato
-    //    pra cada navegador automaticamente (resolve problema de codec)
+    // 🗂️ ASSETS — hospedados no Cloudflare R2 (egress grátis).
+    //    Pra trocar pra um custom domain depois (ex.: media.bumpamortecedores.com.br),
+    //    mexe SÓ na constante R2_BASE abaixo.
     // ================================================================
+    const R2_BASE = 'https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev';
     const ASSETS = {
         // === LOGO E HERO ===
-        logoHeader:    'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403561/logo_kseuvf.png',
-        logoFooter:    'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403561/logo_kseuvf.png',
-        heroImage:     'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403560/hero_cpnxiz.jpg',
+        logoHeader:    `${R2_BASE}/amortecedores/logoenome.png`,
+        logoFooter:    `${R2_BASE}/amortecedores/logoenome.png`,
+        heroImage:     `${R2_BASE}/amortecedores/hero.png`,
 
         // === RAMs (3 cards) ===
         ram1500: {
-            image: 'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403633/ram1500_gfrmqc.png',
-            video: 'https://res.cloudinary.com/dq3ngzbuz/video/upload/f_auto,q_auto/v1777401657/ram1500_zdwzer.mp4'
+            image: `${R2_BASE}/banco_web_800/ram1500.webp`,
+            video: `${R2_BASE}/amortecedores/ram1500antesedepois.mp4`
         },
         ram2500: {
-            image: 'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403633/ram2500_rw6mte.webp',
-            video: 'https://res.cloudinary.com/dq3ngzbuz/video/upload/f_auto,q_auto/v1777402623/ram2500_omhi7i.mp4'
+            image: `${R2_BASE}/banco_web_800/ram2500.webp`,
+            video: `${R2_BASE}/amortecedores/ram2500antesedepois.mp4`
         },
         ram3500: {
-            image: 'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403633/ram3500_lpbl5l.webp',
-            video: 'https://res.cloudinary.com/dq3ngzbuz/video/upload/f_auto,q_auto/v1777403309/ram3500_my5gza.mp4'
+            image: `${R2_BASE}/banco_web_800/ram3500.webp`,
+            video: `${R2_BASE}/amortecedores/ram3500antesedepois.mp4`
         },
 
         // === PICKUPS (4 cards) ===
         hilux: {
-            image: 'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403632/hilux_c2buo7.webp',
-            video: 'https://res.cloudinary.com/dq3ngzbuz/video/upload/f_auto,q_auto/v1777385747/hilux_hm9h4o.mp4'
+            image: `${R2_BASE}/banco_web_800/hilux.webp`,
+            video: `${R2_BASE}/amortecedores/hiluxantesedepois.mp4`
         },
         triton: {
-            image: 'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403635/triton_bta3ot.webp',
-            video: 'https://res.cloudinary.com/dq3ngzbuz/video/upload/f_auto,q_auto/v1777385858/triton_lw9aqd.mp4'
+            image: `${R2_BASE}/banco_web_800/triton.webp`,
+            video: `${R2_BASE}/amortecedores/tritonantesedepois.mp4`
         },
         ranger: {
-            image: 'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403634/ranger_cggqbu.webp',
-            video: 'https://res.cloudinary.com/dq3ngzbuz/video/upload/f_auto,q_auto/v1777385838/ranger_gdceh5.mp4'
+            image: `${R2_BASE}/banco_web_800/ranger.webp`,
+            video: `${R2_BASE}/amortecedores/rangerantesedepois.mp4`
         },
         s10: {
-            image: 'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403634/s10_jz91ov.avif',
-            video: 'https://res.cloudinary.com/dq3ngzbuz/video/upload/f_auto,q_auto/v1777385851/s10_bojspo.mp4'
+            image: `${R2_BASE}/banco_web_800/s10.webp`,
+            video: `${R2_BASE}/amortecedores/s10antesedepois.mp4`
         },
 
         // === AMORTECEDORES (carrossel) ===
         amortecedores: [
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403379/1_aeun7x.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403380/2_w2ppex.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403380/3_ntzyxk.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403380/4_gdkxkc.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403381/5_i6qqlm.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403381/6_eqohwv.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403382/7_ymlvit.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403382/8_h3s8iw.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403383/9_ar7mko.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403383/10_flzbs1.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403384/11_x1h6qi.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777403384/12_aaqy5l.png',
-            'https://res.cloudinary.com/dq3ngzbuz/image/upload/f_auto,q_auto/v1777405074/13_lpmk8k.png',
+            `${R2_BASE}/amortecedores/amortecedorbypass.png`,
+            `${R2_BASE}/amortecedores/amortecedorcorpoinoxbase.png`,
+            `${R2_BASE}/amortecedores/amortecedordedirecaocatalogo.png`,
+            `${R2_BASE}/amortecedores/amortecedordedirecaopromocional.png`,
+            `${R2_BASE}/amortecedores/amortecedordianteirocorpoliso.png`,
+            `${R2_BASE}/amortecedores/amortecedorinoxcabe%C3%A7aking.png`,
+            `${R2_BASE}/amortecedores/amortecedorpremium.png`,
+            `${R2_BASE}/amortecedores/amortecedorpremiumallblack.png`,
+            `${R2_BASE}/amortecedores/amortecedortraseirocommangueira.png`,
+            `${R2_BASE}/amortecedores/amortecedortraseirofixo.png`,
+            `${R2_BASE}/amortecedores/coilover.png`,
+            `${R2_BASE}/amortecedores/tiposdemangueira.png`,
         ],
     };
     // ================================================================
