@@ -81,8 +81,8 @@
                     colors: {
                         brand: {
                             yellow: '#D4FF1A',
-                            dark: '#0a0a0a',
-                            gray: '#171717',
+                            dark: '#0d0b08',
+                            gray: '#1a1612',
                         }
                     }
                 }
@@ -91,7 +91,7 @@
     </script>
     <style>
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-track { background: #0d0b08; }
         ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #D4FF1A; }
         @keyframes scroll {
@@ -112,6 +112,17 @@
         .group:hover .animate-scroll-fast {
             animation-play-state: paused;
         }
+        /* Grain overlay sutil — quebra a sensação "limpo de fábrica" */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.65'/></svg>");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
         .legal-modal {
             display: none;
             position: fixed;
@@ -125,7 +136,7 @@
         }
         .legal-modal.open { display: flex; }
         .legal-modal-content {
-            background: #171717;
+            background: #1a1612;
             max-width: 800px;
             width: 100%;
             max-height: 85vh;
@@ -160,6 +171,7 @@
     </style>
 </head>
 <body class="bg-brand-dark text-gray-200 font-inter antialiased selection:bg-brand-yellow selection:text-brand-dark">
+    <div class="grain-overlay" aria-hidden="true"></div>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SP4L4BG"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -196,7 +208,7 @@
                 Para quem usa a picape de verdade, o amortecedor original <span class="text-brand-yellow">nunca foi suficiente</span>.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <a href="#provas" class="bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.03] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_0_30px_rgba(212,255,26,0.2)] hover:shadow-[0_0_50px_rgba(212,255,26,0.4)]">Veja na Prática</a>
+                <a href="#provas" class="bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.03] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_24px_rgba(212,255,26,0.1)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.6),0_0_28px_rgba(212,255,26,0.18)]">Veja na Prática</a>
                 <a href="#orcamento" class="bg-transparent border border-gray-500 hover:border-white hover:bg-white/5 text-white font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center">Upgrade na sua Suspensão</a>
             </div>
         </div>
@@ -213,6 +225,14 @@
             </p>
         </div>
     </section>
+
+    <!-- Divisor topográfico sutil entre Manifesto e Provas -->
+    <div aria-hidden="true" class="relative w-full overflow-hidden bg-brand-dark py-4">
+        <svg viewBox="0 0 1200 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" class="block w-full h-3 md:h-4 opacity-[0.14]">
+            <path d="M0,12 C150,4 300,20 450,10 S750,16 900,8 S1050,14 1200,10" stroke="#D4FF1A" stroke-width="0.8" fill="none"/>
+            <path d="M0,18 C150,22 300,14 450,20 S750,12 900,18 S1050,8 1200,14" stroke="#D4FF1A" stroke-width="0.6" fill="none" opacity="0.7"/>
+        </svg>
+    </div>
 
     <!-- PROVAS -->
     <section id="provas" class="py-20 bg-brand-dark scroll-mt-20">
@@ -300,7 +320,7 @@
             <div class="absolute top-0 right-0 w-16 md:w-32 h-full bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
             <div id="carrosselAmortecedores" class="animate-scroll flex items-center"></div>
         </div>
-        <div class="mt-16 py-4 border-y border-white/5 bg-[#0a0a0a]/50 relative w-full flex overflow-hidden">
+        <div class="mt-16 py-4 border-y border-white/5 bg-[#0d0b08]/50 relative w-full flex overflow-hidden">
             <div class="absolute top-0 left-0 w-8 md:w-24 h-full bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
             <div class="absolute top-0 right-0 w-8 md:w-24 h-full bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
             <div class="animate-scroll-fast flex gap-8 items-center whitespace-nowrap font-oswald text-2xl md:text-3xl font-bold text-white/60 tracking-wider">
@@ -346,7 +366,7 @@
     </section>
 
     <!-- ORÇAMENTO -->
-    <section id="orcamento" class="py-24 bg-[#0a0a0a] border-b border-white/5 relative overflow-hidden scroll-mt-20">
+    <section id="orcamento" class="py-24 bg-[#0d0b08] border-b border-white/5 relative overflow-hidden scroll-mt-20">
         <div class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/4 pointer-events-none"></div>
         <div class="max-w-3xl mx-auto px-4 relative z-10">
             <div class="text-center mb-12">
@@ -399,37 +419,37 @@
                         <div class="relative">
                             <select id="modelo" name="modelo" required class="w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors appearance-none cursor-pointer">
                                 <option value="" disabled selected class="text-gray-500">Selecione o modelo...</option>
-                                <optgroup label="Modelos atendidos" class="bg-[#171717] text-white">
-                                    <option value="RAM" class="bg-[#171717] text-white">RAM</option>
-                                    <option value="Rampage" class="bg-[#171717] text-white">Rampage</option>
-                                    <option value="Dakota" class="bg-[#171717] text-white">Dakota</option>
-                                    <option value="Hilux" class="bg-[#171717] text-white">Hilux</option>
-                                    <option value="SW4" class="bg-[#171717] text-white">SW4</option>
-                                    <option value="Triton" class="bg-[#171717] text-white">Triton</option>
-                                    <option value="Ranger" class="bg-[#171717] text-white">Ranger</option>
-                                    <option value="S10" class="bg-[#171717] text-white">S10</option>
-                                    <option value="Frontier" class="bg-[#171717] text-white">Frontier</option>
-                                    <option value="Amarok" class="bg-[#171717] text-white">Amarok</option>
-                                    <option value="Titano" class="bg-[#171717] text-white">Titano</option>
-                                    <option value="Toro" class="bg-[#171717] text-white">Toro</option>
-                                    <option value="Silverado 1500" class="bg-[#171717] text-white">Silverado 1500</option>
-                                    <option value="Troller" class="bg-[#171717] text-white">Troller</option>
-                                    <option value="Pajero Dakar" class="bg-[#171717] text-white">Pajero Dakar</option>
-                                    <option value="Wrangler" class="bg-[#171717] text-white">Wrangler</option>
-                                    <option value="Blazer" class="bg-[#171717] text-white">Blazer</option>
-                                    <option value="Trailblazer" class="bg-[#171717] text-white">Trailblazer</option>
+                                <optgroup label="Modelos atendidos" class="bg-[#1a1612] text-white">
+                                    <option value="RAM" class="bg-[#1a1612] text-white">RAM</option>
+                                    <option value="Rampage" class="bg-[#1a1612] text-white">Rampage</option>
+                                    <option value="Dakota" class="bg-[#1a1612] text-white">Dakota</option>
+                                    <option value="Hilux" class="bg-[#1a1612] text-white">Hilux</option>
+                                    <option value="SW4" class="bg-[#1a1612] text-white">SW4</option>
+                                    <option value="Triton" class="bg-[#1a1612] text-white">Triton</option>
+                                    <option value="Ranger" class="bg-[#1a1612] text-white">Ranger</option>
+                                    <option value="S10" class="bg-[#1a1612] text-white">S10</option>
+                                    <option value="Frontier" class="bg-[#1a1612] text-white">Frontier</option>
+                                    <option value="Amarok" class="bg-[#1a1612] text-white">Amarok</option>
+                                    <option value="Titano" class="bg-[#1a1612] text-white">Titano</option>
+                                    <option value="Toro" class="bg-[#1a1612] text-white">Toro</option>
+                                    <option value="Silverado 1500" class="bg-[#1a1612] text-white">Silverado 1500</option>
+                                    <option value="Troller" class="bg-[#1a1612] text-white">Troller</option>
+                                    <option value="Pajero Dakar" class="bg-[#1a1612] text-white">Pajero Dakar</option>
+                                    <option value="Wrangler" class="bg-[#1a1612] text-white">Wrangler</option>
+                                    <option value="Blazer" class="bg-[#1a1612] text-white">Blazer</option>
+                                    <option value="Trailblazer" class="bg-[#1a1612] text-white">Trailblazer</option>
                                 </optgroup>
-                                <optgroup label="Outros" class="bg-[#171717] text-white">
-                                    <option value="Fiat Strada" class="bg-[#171717] text-white">Fiat Strada</option>
-                                    <option value="F150" class="bg-[#171717] text-white">F150</option>
-                                    <option value="F250" class="bg-[#171717] text-white">F250</option>
-                                    <option value="F350" class="bg-[#171717] text-white">F350</option>
-                                    <option value="F1000" class="bg-[#171717] text-white">F1000</option>
-                                    <option value="Pajero Full" class="bg-[#171717] text-white">Pajero Full</option>
-                                    <option value="Pajero Sport" class="bg-[#171717] text-white">Pajero Sport</option>
-                                    <option value="Suzuki Jimny" class="bg-[#171717] text-white">Suzuki Jimny</option>
-                                    <option value="Toyota Bandeirante" class="bg-[#171717] text-white">Toyota Bandeirante</option>
-                                    <option value="Outros" class="bg-[#171717] text-white">Outros</option>
+                                <optgroup label="Outros" class="bg-[#1a1612] text-white">
+                                    <option value="Fiat Strada" class="bg-[#1a1612] text-white">Fiat Strada</option>
+                                    <option value="F150" class="bg-[#1a1612] text-white">F150</option>
+                                    <option value="F250" class="bg-[#1a1612] text-white">F250</option>
+                                    <option value="F350" class="bg-[#1a1612] text-white">F350</option>
+                                    <option value="F1000" class="bg-[#1a1612] text-white">F1000</option>
+                                    <option value="Pajero Full" class="bg-[#1a1612] text-white">Pajero Full</option>
+                                    <option value="Pajero Sport" class="bg-[#1a1612] text-white">Pajero Sport</option>
+                                    <option value="Suzuki Jimny" class="bg-[#1a1612] text-white">Suzuki Jimny</option>
+                                    <option value="Toyota Bandeirante" class="bg-[#1a1612] text-white">Toyota Bandeirante</option>
+                                    <option value="Outros" class="bg-[#1a1612] text-white">Outros</option>
                                 </optgroup>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-yellow">
@@ -458,7 +478,7 @@
                         </span>
                     </label>
                 </div>
-                <button type="submit" class="w-full bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.02] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_0_30px_rgba(212,255,26,0.15)] hover:shadow-[0_0_50px_rgba(212,255,26,0.35)]">
+                <button type="submit" class="w-full bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.02] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_6px_20px_rgba(0,0,0,0.5),0_0_20px_rgba(212,255,26,0.08)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.6),0_0_24px_rgba(212,255,26,0.16)]">
                     Quero Meu Orçamento Personalizado
                 </button>
                 <p class="text-xs text-gray-500 text-center mt-4">Seus dados estão protegidos pela LGPD. Não compartilhamos com terceiros.</p>
@@ -716,7 +736,7 @@
                 const opt = document.createElement('option');
                 opt.value = ano;
                 opt.textContent = ano;
-                opt.className = 'bg-[#171717] text-white';
+                opt.className = 'bg-[#1a1612] text-white';
                 anoSelect.appendChild(opt);
             }
         }
