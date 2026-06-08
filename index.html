@@ -612,6 +612,46 @@
     };
 
     // ================================================================
+    // ☎️ VALIDAÇÃO DE TELEFONE
+    // Problema: muita gente digita o código do país (55) junto e/ou erra
+    // o DDD, gerando "número errado" no funil. As funções abaixo limpam e
+    // validam antes de salvar/enviar o lead.
+    // ================================================================
+
+    // DDDs válidos no Brasil (Anatel). Atenção: 55 É um DDD real (região de
+    // Santa Maria/RS), por isso não dá pra simplesmente bloquear o 55 — a
+    // remoção do código do país é feita por tamanho (ver removerCodigoPais).
+    const DDDS_VALIDOS = new Set([
+        11,12,13,14,15,16,17,18,19,
+        21,22,24,27,28,
+        31,32,33,34,35,37,38,
+        41,42,43,44,45,46,47,48,49,
+        51,53,54,55,
+        61,62,63,64,65,66,67,68,69,
+        71,73,74,75,77,79,
+        81,82,83,84,85,86,87,88,89,
+        91,92,93,94,95,96,97,98,99
+    ]);
+
+    // Número BR tem 10 (fixo) ou 11 (celular) dígitos. Se vier 12-13 dígitos
+    // começando com 55, é o código do país colado junto → remove os 2 primeiros.
+    function removerCodigoPais(digits) {
+        if (digits.length > 11 && digits.startsWith('55')) {
+            return digits.slice(2);
+        }
+        return digits;
+    }
+
+    // Valida celular brasileiro: 11 dígitos, DDD válido e 9 como primeiro dígito.
+    function validarTelefoneBR(valor) {
+        const d = removerCodigoPais((valor || '').replace(/\D/g, ''));
+        if (d.length !== 11) return false;
+        if (!DDDS_VALIDOS.has(parseInt(d.slice(0, 2), 10))) return false;
+        if (d[2] !== '9') return false;
+        return true;
+    }
+
+    // ================================================================
     // 🗂️ ASSETS — hospedados no Cloudflare R2 (egress grátis).
     //    Pra trocar pra um custom domain depois (ex.: media.bumpamortecedores.com.br),
     //    mexe SÓ na constante R2_BASE abaixo.
@@ -803,7 +843,9 @@
         const telInput = document.getElementById('telefone');
         if (telInput) {
             const formatBR = (digits) => {
-                digits = digits.slice(0, 11);
+                // Remove o código do país (55) ANTES de cortar, senão o "55"
+                // vira DDD e os últimos dígitos do número real se perdem.
+                digits = removerCodigoPais(digits).slice(0, 11);
                 if (digits.length > 10) return digits.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
                 if (digits.length > 6)  return digits.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
                 if (digits.length > 2)  return digits.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
@@ -831,6 +873,14 @@
                     formMessage.classList.remove('hidden', 'bg-green-600');
                     formMessage.classList.add('bg-red-500');
                     consentimento.focus();
+                    return;
+                }
+                const telInput = document.getElementById('telefone');
+                if (!validarTelefoneBR(telInput.value)) {
+                    formMessage.textContent = 'Telefone inválido. Confira o DDD e digite o celular com 11 dígitos (DDD + número), sem o código do país (55).';
+                    formMessage.classList.remove('hidden', 'bg-green-600');
+                    formMessage.classList.add('bg-red-500');
+                    telInput.focus();
                     return;
                 }
                 const originalBtnText = submitBtn.innerHTML;
