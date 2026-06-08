@@ -562,6 +562,19 @@
         </div>
     </div>
 
+    <!-- MODAL CONFIRMAÇÃO DE TELEFONE -->
+    <div id="telConfirmModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="telConfirmTitulo">
+        <div class="legal-modal-content" style="max-width:420px; text-align:center;">
+            <h3 id="telConfirmTitulo" style="margin-top:0;">Confirme seu número</h3>
+            <p>Vamos te chamar no <strong>WhatsApp</strong> neste número. Está correto?</p>
+            <p id="telConfirmNumero" style="font-family:'Oswald',sans-serif; font-size:1.6rem; color:#fff; letter-spacing:0.04em; margin:0.5rem 0 1.25rem;"></p>
+            <div style="display:flex; gap:0.75rem; flex-direction:column;">
+                <button type="button" id="telConfirmOk" class="bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Sim, está correto</button>
+                <button type="button" id="telConfirmEdit" class="bg-transparent border border-gray-500 hover:border-white text-white font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Corrigir número</button>
+            </div>
+        </div>
+    </div>
+
     <script>
     // ================================================================
     // 🔐 SUPABASE — Backup paralelo de leads
@@ -845,7 +858,13 @@
             const formatBR = (digits) => {
                 // Remove o código do país (55) ANTES de cortar, senão o "55"
                 // vira DDD e os últimos dígitos do número real se perdem.
-                digits = removerCodigoPais(digits).slice(0, 11);
+                digits = removerCodigoPais(digits);
+                // Força o 9 do celular: tendo DDD (2 dígitos) e o próximo não
+                // sendo 9, insere automaticamente (formulário é só WhatsApp/celular).
+                if (digits.length > 2 && digits[2] !== '9') {
+                    digits = digits.slice(0, 2) + '9' + digits.slice(2);
+                }
+                digits = digits.slice(0, 11);
                 if (digits.length > 10) return digits.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
                 if (digits.length > 6)  return digits.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
                 if (digits.length > 2)  return digits.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
@@ -865,24 +884,21 @@
         const formMessage = document.getElementById('formMessage');
         if (form) {
             const submitBtn = form.querySelector('button[type="submit"]');
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const consentimento = document.getElementById('consentimento');
-                if (!consentimento.checked) {
-                    formMessage.textContent = 'Você precisa aceitar a Política de Privacidade para continuar.';
-                    formMessage.classList.remove('hidden', 'bg-green-600');
-                    formMessage.classList.add('bg-red-500');
-                    consentimento.focus();
-                    return;
-                }
-                const telInput = document.getElementById('telefone');
-                if (!validarTelefoneBR(telInput.value)) {
-                    formMessage.textContent = 'Telefone inválido. Confira o DDD e digite o celular com 11 dígitos (DDD + número), sem o código do país (55).';
-                    formMessage.classList.remove('hidden', 'bg-green-600');
-                    formMessage.classList.add('bg-red-500');
-                    telInput.focus();
-                    return;
-                }
+
+            // Modal de confirmação do telefone (rede de segurança contra número errado)
+            const telModal = document.getElementById('telConfirmModal');
+            const telConfirmNumero = document.getElementById('telConfirmNumero');
+            const telConfirmOk = document.getElementById('telConfirmOk');
+            const telConfirmEdit = document.getElementById('telConfirmEdit');
+            const fecharTelModal = () => telModal && telModal.classList.remove('open');
+            if (telConfirmEdit) telConfirmEdit.addEventListener('click', () => {
+                fecharTelModal();
+                document.getElementById('telefone').focus();
+            });
+            if (telModal) telModal.addEventListener('click', (e) => { if (e.target === telModal) fecharTelModal(); });
+            if (telConfirmOk) telConfirmOk.addEventListener('click', () => { fecharTelModal(); enviarLead(); });
+
+            async function enviarLead() {
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.innerHTML = 'Enviando...';
                 submitBtn.disabled = true;
@@ -1033,6 +1049,31 @@
                         console.log('[BUMP FORM] Botão WhatsApp RAM exibido →', ramBtn.href);
                     }
                 }
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const consentimento = document.getElementById('consentimento');
+                if (!consentimento.checked) {
+                    formMessage.textContent = 'Você precisa aceitar a Política de Privacidade para continuar.';
+                    formMessage.classList.remove('hidden', 'bg-green-600');
+                    formMessage.classList.add('bg-red-500');
+                    consentimento.focus();
+                    return;
+                }
+                const telInput = document.getElementById('telefone');
+                if (!validarTelefoneBR(telInput.value)) {
+                    formMessage.textContent = 'Telefone inválido. Confira o DDD e digite o celular com 11 dígitos (DDD + número), sem o código do país (55).';
+                    formMessage.classList.remove('hidden', 'bg-green-600');
+                    formMessage.classList.add('bg-red-500');
+                    telInput.focus();
+                    return;
+                }
+                // Passou na validação → confirma o número com a pessoa antes de enviar.
+                formMessage.classList.add('hidden');
+                telConfirmNumero.textContent = telInput.value;
+                if (telModal) telModal.classList.add('open');
+                else enviarLead();
             });
         }
     });
