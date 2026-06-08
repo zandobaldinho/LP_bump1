@@ -387,8 +387,27 @@
                         <input type="text" id="nome" name="nome" required class="w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600" placeholder="Digite seu nome">
                     </div>
                     <div class="md:col-span-2">
-                        <label for="telefone" class="block text-sm font-medium text-gray-300 mb-2">Telefone / WhatsApp</label>
-                        <input type="tel" id="telefone" name="telefone" required inputmode="numeric" autocomplete="tel" maxlength="15" class="w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600" placeholder="(51) 99999-9999">
+                        <label for="ddd" class="block text-sm font-medium text-gray-300 mb-2">Telefone / WhatsApp</label>
+                        <div class="flex gap-2 items-stretch">
+                            <!-- País: já preenchido (cliente não digita o 55) -->
+                            <div class="flex flex-col items-center justify-center px-3 bg-black/30 border border-white/10 rounded-sm select-none leading-none" title="Código do país — já incluído">
+                                <span class="text-lg">🇧🇷</span>
+                                <span class="text-white font-semibold text-sm mt-1">+55</span>
+                            </div>
+                            <!-- DDD -->
+                            <input type="tel" id="ddd" inputmode="numeric" autocomplete="off" maxlength="2" placeholder="DDD"
+                                class="w-16 text-center bg-black/50 border border-white/10 rounded-sm px-2 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
+                            <!-- 9 do celular: automático -->
+                            <div class="flex items-center justify-center w-10 bg-brand-yellow/10 border border-brand-yellow/40 rounded-sm text-brand-yellow font-bold text-lg select-none" title="O 9 do celular é automático">9</div>
+                            <!-- restante do número -->
+                            <input type="tel" id="celular" inputmode="numeric" autocomplete="off" maxlength="9" placeholder="XXXX-XXXX"
+                                class="flex-1 min-w-0 bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
+                        </div>
+                        <p class="mt-2 text-xs text-gray-400 flex items-start gap-1.5">
+                            <span aria-hidden="true">📱</span>
+                            <span>Você <strong class="text-gray-300">não precisa</strong> digitar o <strong class="text-gray-300">55</strong> nem o <strong class="text-gray-300">9</strong> — já preenchemos pra você. Informe só o <strong class="text-gray-300">DDD</strong> e o número.</span>
+                        </p>
+                        <input type="hidden" id="telefone" name="telefone">
                     </div>
                 </div>
                 <div class="mb-8">
@@ -853,31 +872,56 @@
             card.addEventListener('touchstart', playVideo, { passive: true });
         });
 
-        const telInput = document.getElementById('telefone');
-        if (telInput) {
-            const formatBR = (digits) => {
-                // Remove o código do país (55) ANTES de cortar, senão o "55"
-                // vira DDD e os últimos dígitos do número real se perdem.
-                digits = removerCodigoPais(digits);
-                // Força o 9 do celular: tendo DDD (2 dígitos) e o próximo não
-                // sendo 9, insere automaticamente (formulário é só WhatsApp/celular).
-                if (digits.length > 2 && digits[2] !== '9') {
-                    digits = digits.slice(0, 2) + '9' + digits.slice(2);
-                }
-                digits = digits.slice(0, 11);
-                if (digits.length > 10) return digits.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
-                if (digits.length > 6)  return digits.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
-                if (digits.length > 2)  return digits.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
-                if (digits.length > 0)  return digits.replace(/^(\d{0,2}).*/, '($1');
-                return '';
+        // ── Telefone em partes: país (+55 fixo) | DDD | 9 fixo | número ──
+        // O cliente só digita DDD + número. O hidden #telefone é montado no
+        // formato (DD) 9XXXX-XXXX, igual ao que já ia pro Supabase/Make.
+        const dddInput = document.getElementById('ddd');
+        const celInput = document.getElementById('celular');
+        const telHidden = document.getElementById('telefone');
+        if (dddInput && celInput && telHidden) {
+            const formatCel = (digits) => {
+                digits = digits.slice(0, 8);
+                if (digits.length > 4) return digits.replace(/^(\d{4})(\d{0,4}).*/, '$1-$2');
+                return digits;
             };
-            telInput.addEventListener('input', (e) => { e.target.value = formatBR(e.target.value.replace(/\D/g, '')); });
-            telInput.addEventListener('keypress', (e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
-            telInput.addEventListener('paste', (e) => {
-                e.preventDefault();
-                const text = (e.clipboardData || window.clipboardData).getData('text');
-                telInput.value = formatBR(text.replace(/\D/g, ''));
+            const montarTelefone = () => {
+                const d = dddInput.value.replace(/\D/g, '');
+                const c = celInput.value.replace(/\D/g, '');
+                telHidden.value = (d.length === 2 && c.length === 8)
+                    ? `(${d}) 9${c.slice(0, 4)}-${c.slice(4)}`
+                    : '';
+            };
+            // Número completo colado → distribui sozinho, removendo o 55 e o 9 inicial.
+            const distribuir = (raw) => {
+                const d = removerCodigoPais(raw.replace(/\D/g, ''));
+                if (d.length < 10) return false;
+                dddInput.value = d.slice(0, 2);
+                let resto = d.slice(2);
+                if (resto.length >= 9 && resto[0] === '9') resto = resto.slice(1);
+                celInput.value = formatCel(resto);
+                montarTelefone();
+                return true;
+            };
+
+            dddInput.addEventListener('input', () => {
+                dddInput.value = dddInput.value.replace(/\D/g, '').slice(0, 2);
+                montarTelefone();
+                if (dddInput.value.length === 2) celInput.focus();
             });
+            dddInput.addEventListener('keypress', (e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
+
+            celInput.addEventListener('input', () => {
+                celInput.value = formatCel(celInput.value.replace(/\D/g, ''));
+                montarTelefone();
+            });
+            celInput.addEventListener('keypress', (e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
+
+            const onPaste = (e) => {
+                const txt = (e.clipboardData || window.clipboardData).getData('text') || '';
+                if (distribuir(txt)) e.preventDefault();
+            };
+            dddInput.addEventListener('paste', onPaste);
+            celInput.addEventListener('paste', onPaste);
         }
 
         const form = document.getElementById('orcamentoForm');
@@ -893,7 +937,7 @@
             const fecharTelModal = () => telModal && telModal.classList.remove('open');
             if (telConfirmEdit) telConfirmEdit.addEventListener('click', () => {
                 fecharTelModal();
-                document.getElementById('telefone').focus();
+                document.getElementById('celular').focus();
             });
             if (telModal) telModal.addEventListener('click', (e) => { if (e.target === telModal) fecharTelModal(); });
             if (telConfirmOk) telConfirmOk.addEventListener('click', () => { fecharTelModal(); enviarLead(); });
@@ -1063,15 +1107,16 @@
                 }
                 const telInput = document.getElementById('telefone');
                 if (!validarTelefoneBR(telInput.value)) {
-                    formMessage.textContent = 'Telefone inválido. Confira o DDD e digite o celular com 11 dígitos (DDD + número), sem o código do país (55).';
+                    formMessage.textContent = 'Confira seu telefone: preencha o DDD (2 dígitos) e o número do celular.';
                     formMessage.classList.remove('hidden', 'bg-green-600');
                     formMessage.classList.add('bg-red-500');
-                    telInput.focus();
+                    const dddV = document.getElementById('ddd').value.replace(/\D/g, '');
+                    document.getElementById(dddV.length === 2 ? 'celular' : 'ddd').focus();
                     return;
                 }
                 // Passou na validação → confirma o número com a pessoa antes de enviar.
                 formMessage.classList.add('hidden');
-                telConfirmNumero.textContent = telInput.value;
+                telConfirmNumero.textContent = '🇧🇷 +55 ' + telInput.value;
                 if (telModal) telModal.classList.add('open');
                 else enviarLead();
             });
