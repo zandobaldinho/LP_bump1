@@ -1024,25 +1024,22 @@
                     : data.modelo;
 
                 try {
-                    // Roteamento. O popup de qualificação (picapes <= 2012) pode forçar:
-                    //   'make'  → "Eu quero!"       → Make (+ Supabase)
-                    //   'banco' → "Não é o momento" → só Supabase
-                    // Sem forçar, vale a regra normal de modelo/ano.
-                    let enviarMake;
-                    if (rotaForcada === 'make') {
-                        enviarMake = true;
-                    } else if (rotaForcada === 'banco') {
+                    // Roteamento base (regra normal de modelo/ano).
+                    let enviarMake = !MODELOS_SOMENTE_BANCO.includes(data.modelo);
+                    // Regra de ano: modelo atendido só a partir de um ano (ex.: Dakota 2025+).
+                    const anoMin = ANO_MINIMO_ATENDIDO[data.modelo];
+                    if (anoMin && parseInt(data.ano, 10) < anoMin) {
                         enviarMake = false;
-                    } else {
-                        enviarMake = !MODELOS_SOMENTE_BANCO.includes(data.modelo);
-                        // Regra de ano: modelo atendido só a partir de um ano (ex.: Dakota 2025+).
-                        const anoMin = ANO_MINIMO_ATENDIDO[data.modelo];
-                        if (anoMin && parseInt(data.ano, 10) < anoMin) {
-                            enviarMake = false;
-                        }
+                    }
+                    // Popup de qualificação (picapes <= 2012): só pode REBAIXAR pra banco.
+                    //   "Não é o momento" (rotaForcada='banco') → força só Supabase.
+                    //   "Eu quero" (rotaForcada='make') mantém a regra normal — modelos
+                    //   só-banco e abaixo do ano mínimo continuam só no banco.
+                    if (rotaForcada === 'banco') {
+                        enviarMake = false;
                     }
                     console.log('[BUMP FORM] Enviando dados:', data);
-                    console.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Vai pro Make?', enviarMake);
+                    console.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Qualificação <=2012:', rotaForcada || '(n/a)', '| Vai pro Make?', enviarMake);
                     console.log('[BUMP FORM] UTMs:', {
                         source: data.utm_source || '(vazio)',
                         medium: data.utm_medium || '(vazio)',
