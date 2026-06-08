@@ -605,6 +605,17 @@
         </div>
     </div>
 
+    <!-- MODAL DE ERRO (validação) -->
+    <div id="erroModal" class="legal-modal" role="alertdialog" aria-modal="true" aria-labelledby="erroModalTitulo">
+        <div class="legal-modal-content" style="max-width:420px; text-align:center;">
+            <h3 id="erroModalTitulo" style="margin-top:0;">Ops! ⚠️</h3>
+            <p id="erroModalMsg"></p>
+            <div style="margin-top:1.25rem;">
+                <button type="button" id="erroModalOk" class="w-full bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Entendi</button>
+            </div>
+        </div>
+    </div>
+
     <script>
     // ================================================================
     // 🔐 SUPABASE — Backup paralelo de leads
@@ -962,6 +973,24 @@
             if (telModal) telModal.addEventListener('click', (e) => { if (e.target === telModal) fecharTelModal(); });
             if (telConfirmOk) telConfirmOk.addEventListener('click', () => { fecharTelModal(); prosseguirAposConfirmacao(); });
 
+            // ── Popup de erro (validação) ──
+            const erroModal = document.getElementById('erroModal');
+            const erroModalMsg = document.getElementById('erroModalMsg');
+            const erroModalOk = document.getElementById('erroModalOk');
+            let erroFocoId = null;
+            const fecharErroModal = () => {
+                if (erroModal) erroModal.classList.remove('open');
+                if (erroFocoId) document.getElementById(erroFocoId)?.focus();
+            };
+            function mostrarErro(msg, focoId) {
+                erroFocoId = focoId || null;
+                if (!erroModal) { alert(msg); return; } // fallback
+                erroModalMsg.textContent = msg;
+                erroModal.classList.add('open');
+            }
+            if (erroModalOk) erroModalOk.addEventListener('click', fecharErroModal);
+            if (erroModal) erroModal.addEventListener('click', (e) => { if (e.target === erroModal) fecharErroModal(); });
+
             // ── Popup de qualificação para picapes de ano <= 2012 ──
             const yearModal = document.getElementById('yearGateModal');
             const yearYes = document.getElementById('yearGateYes');
@@ -969,22 +998,23 @@
             const yearTimer = document.getElementById('yearGateTimer');
             const fecharYearModal = () => yearModal && yearModal.classList.remove('open');
 
-            // Após confirmar o telefone: picape <= 2012 abre a qualificação;
-            // senão, segue direto pro envio com a regra normal de modelo/ano.
+            // Após confirmar o telefone: picape <= 2012 (exceto RAM) abre a
+            // qualificação; senão, segue direto pro envio com a regra normal.
             function prosseguirAposConfirmacao() {
                 const ano = parseInt((document.getElementById('ano')?.value || ''), 10);
-                if (yearModal && ano && ano <= 2012) {
+                const modelo = document.getElementById('modelo')?.value;
+                if (yearModal && modelo !== 'RAM' && ano && ano <= 2012) {
                     abrirYearGate();
                 } else {
                     enviarLead();
                 }
             }
 
-            // Timer de 5s: os botões só liberam depois da contagem (a pessoa lê a mensagem).
+            // Timer de 10s: os botões só liberam depois da contagem (a pessoa lê a mensagem).
             function abrirYearGate() {
                 yearYes.disabled = true;
                 yearNo.disabled = true;
-                let restante = 5;
+                let restante = 10;
                 const pintar = () => { if (yearTimer) yearTimer.textContent = `Aguarde ${restante}s para escolher...`; };
                 pintar();
                 yearModal.classList.add('open');
@@ -1165,20 +1195,14 @@
                 e.preventDefault();
                 const consentimento = document.getElementById('consentimento');
                 if (!consentimento.checked) {
-                    formMessage.textContent = 'Você precisa aceitar a Política de Privacidade para continuar.';
-                    formMessage.classList.remove('hidden', 'bg-green-600');
-                    formMessage.classList.add('bg-red-500');
-                    consentimento.focus();
+                    mostrarErro('Você precisa aceitar a Política de Privacidade para continuar.', 'consentimento');
                     return;
                 }
                 const telInput = document.getElementById('telefone');
                 const tel = analisarTelefone();
                 if (!tel.ok) {
-                    formMessage.textContent = tel.erro;
-                    formMessage.classList.remove('hidden', 'bg-green-600');
-                    formMessage.classList.add('bg-red-500');
                     const dddV = document.getElementById('ddd').value.replace(/\D/g, '');
-                    document.getElementById(dddV.length === 2 ? 'celular' : 'ddd').focus();
+                    mostrarErro(tel.erro, dddV.length === 2 ? 'celular' : 'ddd');
                     return;
                 }
                 telInput.value = tel.telefone; // garante o hidden com o 9 forçado
