@@ -397,15 +397,13 @@
                             <!-- DDD -->
                             <input type="tel" id="ddd" inputmode="numeric" autocomplete="off" maxlength="2" placeholder="DDD"
                                 class="w-16 text-center bg-black/50 border border-white/10 rounded-sm px-2 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
-                            <!-- 9 do celular: automático -->
-                            <div class="flex items-center justify-center w-10 bg-brand-yellow/10 border border-brand-yellow/40 rounded-sm text-brand-yellow font-bold text-lg select-none" title="O 9 do celular é automático">9</div>
-                            <!-- restante do número -->
-                            <input type="tel" id="celular" inputmode="numeric" autocomplete="off" maxlength="9" placeholder="XXXX-XXXX"
+                            <!-- número do celular (começa com 9) -->
+                            <input type="tel" id="celular" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="9XXXX-XXXX"
                                 class="flex-1 min-w-0 bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
                         </div>
                         <p class="mt-2 text-xs text-gray-400 flex items-start gap-1.5">
                             <span aria-hidden="true">📱</span>
-                            <span>Você <strong class="text-gray-300">não precisa</strong> digitar o <strong class="text-gray-300">55</strong> nem o <strong class="text-gray-300">9</strong> — já preenchemos pra você. Informe só o <strong class="text-gray-300">DDD</strong> e o número.</span>
+                            <span>Você <strong class="text-gray-300">não precisa</strong> digitar o <strong class="text-gray-300">55</strong> — já incluímos pra você. Informe o <strong class="text-gray-300">DDD</strong> e o celular (que começa com <strong class="text-gray-300">9</strong>).</span>
                         </p>
                         <input type="hidden" id="telefone" name="telefone">
                     </div>
@@ -594,6 +592,19 @@
         </div>
     </div>
 
+    <!-- MODAL QUALIFICAÇÃO — picapes ano <= 2012 -->
+    <div id="yearGateModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="yearGateTitulo">
+        <div class="legal-modal-content" style="max-width:480px;">
+            <h3 id="yearGateTitulo" style="margin-top:0;">Um instante 👇</h3>
+            <p>Pra ser direto com você: a solução Bump é <strong class="text-white">premium, a partir de R$ 6 mil</strong>. Se investir esse valor pra ter a melhor suspensão do mercado na sua picape faz sentido, seguimos daqui. Se não for o momento, sem problema. Nos vemos na próxima!</p>
+            <div style="display:flex; gap:0.75rem; flex-direction:column; margin-top:1.5rem;">
+                <button type="button" id="yearGateYes" disabled class="bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">Eu quero!</button>
+                <button type="button" id="yearGateNo" disabled class="bg-transparent border border-gray-500 hover:border-white text-white font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">Não é o momento...</button>
+            </div>
+            <p id="yearGateTimer" class="text-center text-xs text-gray-500" style="margin-top:0.9rem; margin-bottom:0;"></p>
+        </div>
+    </div>
+
     <script>
     // ================================================================
     // 🔐 SUPABASE — Backup paralelo de leads
@@ -674,13 +685,21 @@
         return digits;
     }
 
-    // Valida celular brasileiro: 11 dígitos, DDD válido e 9 como primeiro dígito.
-    function validarTelefoneBR(valor) {
-        const d = removerCodigoPais((valor || '').replace(/\D/g, ''));
-        if (d.length !== 11) return false;
-        if (!DDDS_VALIDOS.has(parseInt(d.slice(0, 2), 10))) return false;
-        if (d[2] !== '9') return false;
-        return true;
+    // Analisa DDD (#ddd) + número (#celular) e devolve { ok, telefone, erro }.
+    //  - 8 dígitos no número → força o 9 na frente (vira 9XXXXXXXX).
+    //  - 9 dígitos sem começar com 9 → erro pedindo que comece com 9.
+    //  - DDD precisa ter 2 dígitos e estar na lista da Anatel.
+    function analisarTelefone() {
+        const ddd = (document.getElementById('ddd')?.value || '').replace(/\D/g, '');
+        let num = (document.getElementById('celular')?.value || '').replace(/\D/g, '');
+        if (num.length === 8) num = '9' + num; // força o 9
+        if (ddd.length !== 2 || !DDDS_VALIDOS.has(parseInt(ddd, 10))) {
+            return { ok: false, erro: 'Confira o DDD: informe 2 dígitos válidos.' };
+        }
+        if (num.length !== 9 || num[0] !== '9') {
+            return { ok: false, erro: 'O número do celular deve começar com 9 e ter mais 8 dígitos.' };
+        }
+        return { ok: true, telefone: `(${ddd}) ${num.slice(0, 5)}-${num.slice(5)}` };
     }
 
     // ================================================================
@@ -872,33 +891,29 @@
             card.addEventListener('touchstart', playVideo, { passive: true });
         });
 
-        // ── Telefone em partes: país (+55 fixo) | DDD | 9 fixo | número ──
-        // O cliente só digita DDD + número. O hidden #telefone é montado no
-        // formato (DD) 9XXXX-XXXX, igual ao que já ia pro Supabase/Make.
+        // ── Telefone em partes: país (+55 fixo) | DDD | número do celular ──
+        // O cliente digita DDD + número. Se o número vier com 8 dígitos, o 9 é
+        // forçado na frente (no envio). O hidden #telefone vira (DD) 9XXXX-XXXX.
         const dddInput = document.getElementById('ddd');
         const celInput = document.getElementById('celular');
         const telHidden = document.getElementById('telefone');
         if (dddInput && celInput && telHidden) {
+            // Formata o número (até 9 dígitos) com traço antes dos 4 últimos.
             const formatCel = (digits) => {
-                digits = digits.slice(0, 8);
-                if (digits.length > 4) return digits.replace(/^(\d{4})(\d{0,4}).*/, '$1-$2');
+                digits = digits.slice(0, 9);
+                if (digits.length > 5) return digits.slice(0, digits.length - 4) + '-' + digits.slice(-4);
                 return digits;
             };
             const montarTelefone = () => {
-                const d = dddInput.value.replace(/\D/g, '');
-                const c = celInput.value.replace(/\D/g, '');
-                telHidden.value = (d.length === 2 && c.length === 8)
-                    ? `(${d}) 9${c.slice(0, 4)}-${c.slice(4)}`
-                    : '';
+                const r = analisarTelefone();
+                telHidden.value = r.ok ? r.telefone : '';
             };
-            // Número completo colado → distribui sozinho, removendo o 55 e o 9 inicial.
+            // Número completo colado → distribui sozinho, removendo só o 55 (mantém o 9).
             const distribuir = (raw) => {
                 const d = removerCodigoPais(raw.replace(/\D/g, ''));
                 if (d.length < 10) return false;
                 dddInput.value = d.slice(0, 2);
-                let resto = d.slice(2);
-                if (resto.length >= 9 && resto[0] === '9') resto = resto.slice(1);
-                celInput.value = formatCel(resto);
+                celInput.value = formatCel(d.slice(2, 11));
                 montarTelefone();
                 return true;
             };
@@ -915,6 +930,11 @@
                 montarTelefone();
             });
             celInput.addEventListener('keypress', (e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
+            // Ao sair do campo: se digitou 8 dígitos, mostra o 9 forçado na frente.
+            celInput.addEventListener('blur', () => {
+                const d = celInput.value.replace(/\D/g, '');
+                if (d.length === 8) { celInput.value = formatCel('9' + d); montarTelefone(); }
+            });
 
             const onPaste = (e) => {
                 const txt = (e.clipboardData || window.clipboardData).getData('text') || '';
@@ -940,9 +960,47 @@
                 document.getElementById('celular').focus();
             });
             if (telModal) telModal.addEventListener('click', (e) => { if (e.target === telModal) fecharTelModal(); });
-            if (telConfirmOk) telConfirmOk.addEventListener('click', () => { fecharTelModal(); enviarLead(); });
+            if (telConfirmOk) telConfirmOk.addEventListener('click', () => { fecharTelModal(); prosseguirAposConfirmacao(); });
 
-            async function enviarLead() {
+            // ── Popup de qualificação para picapes de ano <= 2012 ──
+            const yearModal = document.getElementById('yearGateModal');
+            const yearYes = document.getElementById('yearGateYes');
+            const yearNo = document.getElementById('yearGateNo');
+            const yearTimer = document.getElementById('yearGateTimer');
+            const fecharYearModal = () => yearModal && yearModal.classList.remove('open');
+
+            // Após confirmar o telefone: picape <= 2012 abre a qualificação;
+            // senão, segue direto pro envio com a regra normal de modelo/ano.
+            function prosseguirAposConfirmacao() {
+                const ano = parseInt((document.getElementById('ano')?.value || ''), 10);
+                if (yearModal && ano && ano <= 2012) {
+                    abrirYearGate();
+                } else {
+                    enviarLead();
+                }
+            }
+
+            // Timer de 5s: os botões só liberam depois da contagem (a pessoa lê a mensagem).
+            function abrirYearGate() {
+                yearYes.disabled = true;
+                yearNo.disabled = true;
+                let restante = 5;
+                const pintar = () => { if (yearTimer) yearTimer.textContent = `Aguarde ${restante}s para escolher...`; };
+                pintar();
+                yearModal.classList.add('open');
+                const intervalo = setInterval(() => {
+                    restante--;
+                    if (restante > 0) { pintar(); return; }
+                    clearInterval(intervalo);
+                    yearYes.disabled = false;
+                    yearNo.disabled = false;
+                    if (yearTimer) yearTimer.textContent = 'E aí, faz sentido pra você?';
+                }, 1000);
+            }
+            if (yearYes) yearYes.addEventListener('click', () => { fecharYearModal(); enviarLead('make'); });
+            if (yearNo)  yearNo.addEventListener('click',  () => { fecharYearModal(); enviarLead('banco'); });
+
+            async function enviarLead(rotaForcada) {
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.innerHTML = 'Enviando...';
                 submitBtn.disabled = true;
@@ -966,11 +1024,22 @@
                     : data.modelo;
 
                 try {
-                    let enviarMake = !MODELOS_SOMENTE_BANCO.includes(data.modelo);
-                    // Regra de ano: modelo atendido só a partir de um ano (ex.: Dakota 2025+).
-                    const anoMin = ANO_MINIMO_ATENDIDO[data.modelo];
-                    if (anoMin && parseInt(data.ano, 10) < anoMin) {
+                    // Roteamento. O popup de qualificação (picapes <= 2012) pode forçar:
+                    //   'make'  → "Eu quero!"       → Make (+ Supabase)
+                    //   'banco' → "Não é o momento" → só Supabase
+                    // Sem forçar, vale a regra normal de modelo/ano.
+                    let enviarMake;
+                    if (rotaForcada === 'make') {
+                        enviarMake = true;
+                    } else if (rotaForcada === 'banco') {
                         enviarMake = false;
+                    } else {
+                        enviarMake = !MODELOS_SOMENTE_BANCO.includes(data.modelo);
+                        // Regra de ano: modelo atendido só a partir de um ano (ex.: Dakota 2025+).
+                        const anoMin = ANO_MINIMO_ATENDIDO[data.modelo];
+                        if (anoMin && parseInt(data.ano, 10) < anoMin) {
+                            enviarMake = false;
+                        }
                     }
                     console.log('[BUMP FORM] Enviando dados:', data);
                     console.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Vai pro Make?', enviarMake);
@@ -1106,19 +1175,21 @@
                     return;
                 }
                 const telInput = document.getElementById('telefone');
-                if (!validarTelefoneBR(telInput.value)) {
-                    formMessage.textContent = 'Confira seu telefone: preencha o DDD (2 dígitos) e o número do celular.';
+                const tel = analisarTelefone();
+                if (!tel.ok) {
+                    formMessage.textContent = tel.erro;
                     formMessage.classList.remove('hidden', 'bg-green-600');
                     formMessage.classList.add('bg-red-500');
                     const dddV = document.getElementById('ddd').value.replace(/\D/g, '');
                     document.getElementById(dddV.length === 2 ? 'celular' : 'ddd').focus();
                     return;
                 }
+                telInput.value = tel.telefone; // garante o hidden com o 9 forçado
                 // Passou na validação → confirma o número com a pessoa antes de enviar.
                 formMessage.classList.add('hidden');
-                telConfirmNumero.textContent = '🇧🇷 +55 ' + telInput.value;
+                telConfirmNumero.textContent = '🇧🇷 +55 ' + tel.telefone;
                 if (telModal) telModal.classList.add('open');
-                else enviarLead();
+                else prosseguirAposConfirmacao();
             });
         }
     });
