@@ -562,6 +562,19 @@
         </div>
     </div>
 
+    <!-- MODAL CONFIRMAÇÃO DE TELEFONE -->
+    <div id="telConfirmModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="telConfirmTitulo">
+        <div class="legal-modal-content" style="max-width:420px; text-align:center;">
+            <h3 id="telConfirmTitulo" style="margin-top:0;">Confirme seu número</h3>
+            <p>Vamos te chamar no <strong>WhatsApp</strong> neste número. Está correto?</p>
+            <p id="telConfirmNumero" style="font-family:'Oswald',sans-serif; font-size:1.6rem; color:#fff; letter-spacing:0.04em; margin:0.5rem 0 1.25rem;"></p>
+            <div style="display:flex; gap:0.75rem; flex-direction:column;">
+                <button type="button" id="telConfirmOk" class="bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Sim, está correto</button>
+                <button type="button" id="telConfirmEdit" class="bg-transparent border border-gray-500 hover:border-white text-white font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Corrigir número</button>
+            </div>
+        </div>
+    </div>
+
     <script>
     // ================================================================
     // 🔐 SUPABASE — Backup paralelo de leads
@@ -610,6 +623,46 @@
         'Suzuki Jimny': 2022,
         'Toyota Bandeirante': 2022
     };
+
+    // ================================================================
+    // ☎️ VALIDAÇÃO DE TELEFONE
+    // Problema: muita gente digita o código do país (55) junto e/ou erra
+    // o DDD, gerando "número errado" no funil. As funções abaixo limpam e
+    // validam antes de salvar/enviar o lead.
+    // ================================================================
+
+    // DDDs válidos no Brasil (Anatel). Atenção: 55 É um DDD real (região de
+    // Santa Maria/RS), por isso não dá pra simplesmente bloquear o 55 — a
+    // remoção do código do país é feita por tamanho (ver removerCodigoPais).
+    const DDDS_VALIDOS = new Set([
+        11,12,13,14,15,16,17,18,19,
+        21,22,24,27,28,
+        31,32,33,34,35,37,38,
+        41,42,43,44,45,46,47,48,49,
+        51,53,54,55,
+        61,62,63,64,65,66,67,68,69,
+        71,73,74,75,77,79,
+        81,82,83,84,85,86,87,88,89,
+        91,92,93,94,95,96,97,98,99
+    ]);
+
+    // Número BR tem 10 (fixo) ou 11 (celular) dígitos. Se vier 12-13 dígitos
+    // começando com 55, é o código do país colado junto → remove os 2 primeiros.
+    function removerCodigoPais(digits) {
+        if (digits.length > 11 && digits.startsWith('55')) {
+            return digits.slice(2);
+        }
+        return digits;
+    }
+
+    // Valida celular brasileiro: 11 dígitos, DDD válido e 9 como primeiro dígito.
+    function validarTelefoneBR(valor) {
+        const d = removerCodigoPais((valor || '').replace(/\D/g, ''));
+        if (d.length !== 11) return false;
+        if (!DDDS_VALIDOS.has(parseInt(d.slice(0, 2), 10))) return false;
+        if (d[2] !== '9') return false;
+        return true;
+    }
 
     // ================================================================
     // 🗂️ ASSETS — hospedados no Cloudflare R2 (egress grátis).
@@ -803,6 +856,14 @@
         const telInput = document.getElementById('telefone');
         if (telInput) {
             const formatBR = (digits) => {
+                // Remove o código do país (55) ANTES de cortar, senão o "55"
+                // vira DDD e os últimos dígitos do número real se perdem.
+                digits = removerCodigoPais(digits);
+                // Força o 9 do celular: tendo DDD (2 dígitos) e o próximo não
+                // sendo 9, insere automaticamente (formulário é só WhatsApp/celular).
+                if (digits.length > 2 && digits[2] !== '9') {
+                    digits = digits.slice(0, 2) + '9' + digits.slice(2);
+                }
                 digits = digits.slice(0, 11);
                 if (digits.length > 10) return digits.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
                 if (digits.length > 6)  return digits.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
@@ -823,16 +884,21 @@
         const formMessage = document.getElementById('formMessage');
         if (form) {
             const submitBtn = form.querySelector('button[type="submit"]');
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const consentimento = document.getElementById('consentimento');
-                if (!consentimento.checked) {
-                    formMessage.textContent = 'Você precisa aceitar a Política de Privacidade para continuar.';
-                    formMessage.classList.remove('hidden', 'bg-green-600');
-                    formMessage.classList.add('bg-red-500');
-                    consentimento.focus();
-                    return;
-                }
+
+            // Modal de confirmação do telefone (rede de segurança contra número errado)
+            const telModal = document.getElementById('telConfirmModal');
+            const telConfirmNumero = document.getElementById('telConfirmNumero');
+            const telConfirmOk = document.getElementById('telConfirmOk');
+            const telConfirmEdit = document.getElementById('telConfirmEdit');
+            const fecharTelModal = () => telModal && telModal.classList.remove('open');
+            if (telConfirmEdit) telConfirmEdit.addEventListener('click', () => {
+                fecharTelModal();
+                document.getElementById('telefone').focus();
+            });
+            if (telModal) telModal.addEventListener('click', (e) => { if (e.target === telModal) fecharTelModal(); });
+            if (telConfirmOk) telConfirmOk.addEventListener('click', () => { fecharTelModal(); enviarLead(); });
+
+            async function enviarLead() {
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.innerHTML = 'Enviando...';
                 submitBtn.disabled = true;
@@ -983,6 +1049,31 @@
                         console.log('[BUMP FORM] Botão WhatsApp RAM exibido →', ramBtn.href);
                     }
                 }
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const consentimento = document.getElementById('consentimento');
+                if (!consentimento.checked) {
+                    formMessage.textContent = 'Você precisa aceitar a Política de Privacidade para continuar.';
+                    formMessage.classList.remove('hidden', 'bg-green-600');
+                    formMessage.classList.add('bg-red-500');
+                    consentimento.focus();
+                    return;
+                }
+                const telInput = document.getElementById('telefone');
+                if (!validarTelefoneBR(telInput.value)) {
+                    formMessage.textContent = 'Telefone inválido. Confira o DDD e digite o celular com 11 dígitos (DDD + número), sem o código do país (55).';
+                    formMessage.classList.remove('hidden', 'bg-green-600');
+                    formMessage.classList.add('bg-red-500');
+                    telInput.focus();
+                    return;
+                }
+                // Passou na validação → confirma o número com a pessoa antes de enviar.
+                formMessage.classList.add('hidden');
+                telConfirmNumero.textContent = telInput.value;
+                if (telModal) telModal.classList.add('open');
+                else enviarLead();
             });
         }
     });
