@@ -1,9 +1,11 @@
 {
-  // Worker de assets estáticos (landing page BUMP) — sem código de Worker,
-  // só serve os arquivos HTML da raiz. Nome precisa bater com o projeto na
-  // Cloudflare (Workers & Pages → bump-lp).
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "bump-lp",
   "compatibility_date": "2026-06-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
   "assets": {
     "directory": "./"
   }
