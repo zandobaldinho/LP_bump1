@@ -1,3 +1,10 @@
 .git
 .gitignore
 *.patch
+
+# fontes de build (não fazem parte do site servido)
+node_modules
+package.json
+package-lock.json
+tailwind.config.js
+src

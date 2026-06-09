@@ -68,27 +68,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        oswald: ['Oswald', 'sans-serif'],
-                        inter: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            yellow: '#D4FF1A',
-                            dark: '#0d0b08',
-                            gray: '#1a1612',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS compilado e purgado (gerado via `npm run build:css`).
+         Config de cores/fontes da marca em tailwind.config.js -->
+    <link rel="stylesheet" href="styles.css">
     <style>
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0d0b08; }
