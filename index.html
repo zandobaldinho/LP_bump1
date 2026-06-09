@@ -618,6 +618,18 @@
 
     <script>
     // ================================================================
+    // 🐞 DEBUG — logs só aparecem com DEBUG = true (produção fica limpa,
+    // sem expor dados de lead no console). Vire pra true para depurar.
+    // ================================================================
+    const DEBUG = false;
+    const _c = console;
+    const dbg = {
+        log:   (...a) => { if (DEBUG) _c.log(...a); },
+        error: (...a) => { if (DEBUG) _c.error(...a); },
+        warn:  (...a) => { if (DEBUG) _c.warn(...a); },
+    };
+
+    // ================================================================
     // 🔐 SUPABASE — Backup paralelo de leads
     // Anon key é PÚBLICA por design (protegida pelo RLS no banco)
     // ================================================================
@@ -664,6 +676,14 @@
         'Suzuki Jimny': 2022,
         'Toyota Bandeirante': 2022
     };
+
+    // ================================================================
+    // ⚙️ PARÂMETROS DE NEGÓCIO / UI (evita magic numbers espalhados)
+    // ================================================================
+    const ANO_CORTE_QUALIFICACAO = 2012; // picapes <= este ano abrem o popup de qualificação
+    const TIMER_QUALIFICACAO_S   = 10;   // segundos até liberar os botões do popup
+    const MSG_AUTO_HIDE_MS       = 6000; // tempo até esconder a mensagem de status
+    const ANO_MIN = 1960, ANO_MAX = 2026; // range do <select> de ano
 
     // ================================================================
     // ☎️ VALIDAÇÃO DE TELEFONE
@@ -779,14 +799,14 @@
         try {
             localStorage.setItem('bump_cookie_consent', action);
             localStorage.setItem('bump_cookie_consent_date', new Date().toISOString());
-        } catch (e) {}
+        } catch { /* localStorage indisponível (modo privado/bloqueado) — segue sem persistir */ }
         document.getElementById('cookieBanner').classList.add('hidden');
     }
     function checkCookieBanner() {
         try {
             const consent = localStorage.getItem('bump_cookie_consent');
             if (!consent) document.getElementById('cookieBanner').classList.remove('hidden');
-        } catch (e) {
+        } catch {
             document.getElementById('cookieBanner').classList.remove('hidden');
         }
     }
@@ -837,7 +857,7 @@
 
         const anoSelect = document.getElementById('ano');
         if (anoSelect) {
-            for (let ano = 2026; ano >= 1960; ano--) {
+            for (let ano = ANO_MAX; ano >= ANO_MIN; ano--) {
                 const opt = document.createElement('option');
                 opt.value = ano;
                 opt.textContent = ano;
@@ -869,11 +889,11 @@
             if (!video) return;
 
             // Logs pra debug (abre F12 → Console pra ver)
-            video.addEventListener('error', (e) => {
-                console.error('[BUMP] Erro no vídeo:', video.src, video.error);
+            video.addEventListener('error', () => {
+                dbg.error('[BUMP] Erro no vídeo:', video.src, video.error);
             });
             video.addEventListener('loadedmetadata', () => {
-                console.log('[BUMP] Vídeo pronto:', video.src);
+                dbg.log('[BUMP] Vídeo pronto:', video.src);
             });
 
             const playVideo = async () => {
@@ -883,12 +903,12 @@
                     await video.play();
                 } catch (err) {
                     // Se navegador bloquear autoplay com som, muta e tenta de novo
-                    console.warn('[BUMP] Autoplay com som bloqueado, tocando mutado:', video.src);
+                    dbg.warn('[BUMP] Autoplay com som bloqueado, tocando mutado:', video.src);
                     video.muted = true;
                     try {
                         await video.play();
                     } catch (err2) {
-                        console.error('[BUMP] Falha ao tocar:', video.src, err2);
+                        dbg.error('[BUMP] Falha ao tocar:', video.src, err2);
                     }
                 }
             };
@@ -1003,7 +1023,7 @@
             function prosseguirAposConfirmacao() {
                 const ano = parseInt((document.getElementById('ano')?.value || ''), 10);
                 const modelo = document.getElementById('modelo')?.value;
-                if (yearModal && modelo !== 'RAM' && ano && ano <= 2012) {
+                if (yearModal && modelo !== 'RAM' && ano && ano <= ANO_CORTE_QUALIFICACAO) {
                     abrirYearGate();
                 } else {
                     enviarLead();
@@ -1014,7 +1034,7 @@
             function abrirYearGate() {
                 yearYes.disabled = true;
                 yearNo.disabled = true;
-                let restante = 10;
+                let restante = TIMER_QUALIFICACAO_S;
                 const pintar = () => { if (yearTimer) yearTimer.textContent = `Aguarde ${restante}s para escolher...`; };
                 pintar();
                 yearModal.classList.add('open');
@@ -1068,9 +1088,9 @@
                     if (rotaForcada === 'banco') {
                         enviarMake = false;
                     }
-                    console.log('[BUMP FORM] Enviando dados:', data);
-                    console.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Qualificação <=2012:', rotaForcada || '(n/a)', '| Vai pro Make?', enviarMake);
-                    console.log('[BUMP FORM] UTMs:', {
+                    dbg.log('[BUMP FORM] Enviando dados:', data);
+                    dbg.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Qualificação <=2012:', rotaForcada || '(n/a)', '| Vai pro Make?', enviarMake);
+                    dbg.log('[BUMP FORM] UTMs:', {
                         source: data.utm_source || '(vazio)',
                         medium: data.utm_medium || '(vazio)',
                         campaign: data.utm_campaign || '(vazio)',
@@ -1130,25 +1150,25 @@
                     const supabaseOk = supabaseResult.status === 'fulfilled' && supabaseResult.value.ok;
                     const makeOk = makeResult ? (makeResult.status === 'fulfilled' && makeResult.value.ok) : false;
 
-                    console.log('[BUMP FORM] Supabase status:', supabaseResult.status, supabaseOk ? '✅' : '❌');
+                    dbg.log('[BUMP FORM] Supabase status:', supabaseResult.status, supabaseOk ? '✅' : '❌');
                     if (supabaseResult.status === 'fulfilled') {
-                        console.log('[BUMP FORM] Supabase HTTP:', supabaseResult.value.status);
+                        dbg.log('[BUMP FORM] Supabase HTTP:', supabaseResult.value.status);
                         if (!supabaseOk) {
                             const errText = await supabaseResult.value.text();
-                            console.error('[BUMP FORM] Supabase erro:', errText);
+                            dbg.error('[BUMP FORM] Supabase erro:', errText);
                         }
                     } else {
-                        console.error('[BUMP FORM] Supabase falhou:', supabaseResult.reason);
+                        dbg.error('[BUMP FORM] Supabase falhou:', supabaseResult.reason);
                     }
                     if (enviarMake) {
-                        console.log('[BUMP FORM] Make status:', makeResult.status, makeOk ? '✅' : '❌');
+                        dbg.log('[BUMP FORM] Make status:', makeResult.status, makeOk ? '✅' : '❌');
                         if (makeResult.status === 'fulfilled') {
-                            console.log('[BUMP FORM] Make HTTP:', makeResult.value.status);
+                            dbg.log('[BUMP FORM] Make HTTP:', makeResult.value.status);
                         } else {
-                            console.error('[BUMP FORM] Make falhou:', makeResult.reason);
+                            dbg.error('[BUMP FORM] Make falhou:', makeResult.reason);
                         }
                     } else {
-                        console.log('[BUMP FORM] Make: pulado (categoria Outros — só banco)');
+                        dbg.log('[BUMP FORM] Make: pulado (categoria Outros — só banco)');
                     }
 
                     // Sucesso:
@@ -1170,8 +1190,8 @@
                     // re-popula os UTMs no form resetado (form.reset() limpa hidden fields também)
                     capturarUTMs();
                 } catch (error) {
-                    console.error('[BUMP FORM] Erro completo:', error);
-                    console.error('[BUMP FORM] Mensagem:', error.message);
+                    dbg.error('[BUMP FORM] Erro completo:', error);
+                    dbg.error('[BUMP FORM] Mensagem:', error.message);
                     formMessage.textContent = 'Erro ao enviar. Tente novamente ou entre em contato pelo Instagram.';
                     formMessage.classList.remove('hidden', 'bg-green-600');
                     formMessage.classList.add('bg-red-500');
@@ -1179,14 +1199,14 @@
                     submitBtn.innerHTML = originalBtnText;
                     submitBtn.disabled = false;
                     submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-                    setTimeout(() => formMessage.classList.add('hidden'), 6000);
+                    setTimeout(() => formMessage.classList.add('hidden'), MSG_AUTO_HIDE_MS);
 
                     // Lead RAM: revela o botão de WhatsApp com a mensagem pré-preenchida.
                     // Fica no finally pra garantir que aparece mesmo se Make/Supabase falharem.
                     if (data.modelo === 'RAM' && ramBtn) {
                         ramBtn.href = montarLinkRamWhatsapp(data);
                         ramBtn.style.display = 'flex';
-                        console.log('[BUMP FORM] Botão WhatsApp RAM exibido →', ramBtn.href);
+                        dbg.log('[BUMP FORM] Botão WhatsApp RAM exibido →', ramBtn.href);
                     }
                 }
             }
