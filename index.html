@@ -173,6 +173,7 @@
         .vcap .vtag { font-family:'Oswald',sans-serif; font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; background:var(--yellow); color:#000; padding:6px 10px; border-radius:6px; white-space:nowrap; }
         @media(max-width:760px){ .vcap{padding:12px 12px} .vcap .vname{font-size:17px} }
         /* ===== SISTEMA COURO (adaptação gradual do visual) ===== */
+        :root { --yellow:#D4FF1A; --yellow-deep:#b8e000; --ink:#f4ead2; --cream:#f4ead2; --mute:#c7b288; --dim:#a3906a; --bg:#cdba90; --bg2:#e7dcc1; --bg3:#dccaa2; --wood:#241a0f; --line:rgba(212,255,26,.22); --line-2:rgba(212,255,26,.42); --br-green:#2a8a3f; }
         :root { --leather: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20fill%3D%27%23181109%27%2F%3E%3Cfilter%20id%3D%27lg%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.7%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.17%200%200%200%200%200.14%200%200%200%200%200.09%200%200%200%200.6%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23lg%29%27%20opacity%3D%270.55%27%2F%3E%3C%2Fsvg%3E"); }
         /* HERO dentro de um painel de couro com foto de fundo (sem costura) */
         .hero-leather { position: relative; margin: 0 auto; max-width: 1760px; background-color: #181109; background-image: var(--leather); background-size: 220px; background-position: center; border: 1px solid rgba(212,255,26,0.30); border-radius: 14px; overflow: hidden; }
@@ -222,7 +223,7 @@
             <div class="hero-leather-inner text-center max-w-4xl mx-auto flex flex-col items-center">
                 <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm md:text-base mb-4 block">Domine Qualquer Terreno</span>
                 <h1 class="display font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
-                    A Força Bruta Encontra o <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">Conforto Premium</span>
+                    A Força Bruta Encontra o <span class="text-brand-yellow">Conforto Premium</span>
                 </h1>
                 <p class="text-gray-200 text-lg md:text-2xl max-w-3xl mb-10 font-medium leading-relaxed">
                     Para quem usa a picape de verdade, o amortecedor original <span class="text-brand-yellow">nunca foi suficiente</span>.
@@ -240,7 +241,7 @@
         <div class="couro-panel text-center" style="overflow:hidden">
             <span class="text-brand-yellow font-oswald uppercase tracking-[0.3em] font-bold text-xs md:text-sm mb-6 block">Sob medida · Sob encomenda</span>
             <p class="display font-oswald text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase leading-tight">
-                Amortecedor feito <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">sob medida</span> pro seu veículo, seu piloto e o seu terreno.
+                Amortecedor feito <span class="text-brand-yellow">sob medida</span> pro seu veículo, seu piloto e o seu terreno.
             </p>
         </div>
     </section>
@@ -278,7 +279,7 @@
                             <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="vcap"><span class="vname">RAM 1500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
+                    <div class="vcap"><span class="vname">RAM 1500<span class="vbr">RAM</span></span></div>
                 </div>
                 <div class="vcard">
                     <div class="vmedia">
@@ -290,7 +291,7 @@
                             <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="vcap"><span class="vname">RAM 2500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
+                    <div class="vcap"><span class="vname">RAM 2500<span class="vbr">RAM</span></span></div>
                 </div>
                 <div class="vcard">
                     <div class="vmedia">
@@ -302,7 +303,7 @@
                             <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="vcap"><span class="vname">RAM 3500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
+                    <div class="vcap"><span class="vname">RAM 3500<span class="vbr">RAM</span></span></div>
                 </div>
             </div>
 
@@ -322,7 +323,7 @@
                             <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="vcap"><span class="vname">Hilux<span class="vbr">Toyota</span></span><span class="vtag">Antes · Depois</span></div>
+                    <div class="vcap"><span class="vname">Hilux<span class="vbr">Toyota</span></span></div>
                 </div>
                 <div class="vcard">
                     <div class="vmedia">
@@ -334,7 +335,7 @@
                             <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="vcap"><span class="vname">Triton<span class="vbr">Mitsubishi</span></span><span class="vtag">Antes · Depois</span></div>
+                    <div class="vcap"><span class="vname">Triton<span class="vbr">Mitsubishi</span></span></div>
                 </div>
                 <div class="vcard">
                     <div class="vmedia">
@@ -346,7 +347,7 @@
                             <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="vcap"><span class="vname">Ranger<span class="vbr">Ford</span></span><span class="vtag">Antes · Depois</span></div>
+                    <div class="vcap"><span class="vname">Ranger<span class="vbr">Ford</span></span></div>
                 </div>
                 <div class="vcard">
                     <div class="vmedia">
@@ -358,7 +359,7 @@
                             <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="vcap"><span class="vname">S10<span class="vbr">Chevrolet</span></span><span class="vtag">Antes · Depois</span></div>
+                    <div class="vcap"><span class="vname">S10<span class="vbr">Chevrolet</span></span></div>
                 </div>
             </div>
             <p class="text-center text-sm text-gray-400 mt-8">Toque no vídeo pra assistir com som.</p>
