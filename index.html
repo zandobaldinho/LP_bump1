@@ -154,6 +154,13 @@
         .vsound .ic-off { display: none; }
         .vsound.muted .ic-on { display: none; }
         .vsound.muted .ic-off { display: block; }
+        /* ===== SISTEMA COURO (adaptação gradual do visual) ===== */
+        :root { --leather: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20fill%3D%27%23181109%27%2F%3E%3Cfilter%20id%3D%27lg%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.7%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.17%200%200%200%200%200.14%200%200%200%200%200.09%200%200%200%200.6%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23lg%29%27%20opacity%3D%270.55%27%2F%3E%3C%2Fsvg%3E"); }
+        /* HERO dentro de um painel de couro com foto de fundo (sem costura) */
+        .hero-leather { position: relative; margin: 0 auto; max-width: 1180px; background-color: #181109; background-image: var(--leather); background-size: 220px; background-position: center; border: 1px solid rgba(212,255,26,0.42); border-radius: 16px; overflow: hidden; }
+        .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; pointer-events: none; }
+        .hero-leather::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0d0b08 0%, rgba(13,11,8,0.55) 45%, rgba(13,11,8,0.25) 100%); pointer-events: none; }
+        .hero-leather-inner { position: relative; z-index: 2; padding: clamp(48px,7vw,90px) clamp(20px,5vw,60px); }
     </style>
 </head>
 <body class="bg-brand-dark text-gray-200 font-inter antialiased selection:bg-brand-yellow selection:text-brand-dark">
@@ -180,22 +187,21 @@
     </header>
 
     <!-- HERO -->
-    <section class="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center pt-28 md:pt-20">
-        <div class="absolute inset-0 w-full h-full overflow-hidden">
-            <img data-asset="heroImage" alt="" class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent"></div>
-        </div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-0">
-            <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm md:text-base mb-4 block">Domine Qualquer Terreno</span>
-            <h1 class="font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
-                A Força Bruta Encontra o <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">Conforto Premium</span>
-            </h1>
-            <p class="text-gray-200 text-lg md:text-2xl max-w-3xl mb-10 font-medium leading-relaxed">
-                Para quem usa a picape de verdade, o amortecedor original <span class="text-brand-yellow">nunca foi suficiente</span>.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <a href="#orcamento" class="bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.03] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_24px_rgba(212,255,26,0.1)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.6),0_0_28px_rgba(212,255,26,0.18)]">Upgrade na sua Suspensão</a>
-                <a href="#provas" class="bg-transparent border border-gray-500 hover:border-white hover:bg-white/5 text-white font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center">Veja na Prática</a>
+    <section class="pt-28 md:pt-32 pb-10 px-4">
+        <div class="hero-leather">
+            <img class="hero-photo" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hero.png" alt="" aria-hidden="true">
+            <div class="hero-leather-inner text-center max-w-4xl mx-auto flex flex-col items-center">
+                <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm md:text-base mb-4 block">Domine Qualquer Terreno</span>
+                <h1 class="font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
+                    A Força Bruta Encontra o <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">Conforto Premium</span>
+                </h1>
+                <p class="text-gray-200 text-lg md:text-2xl max-w-3xl mb-10 font-medium leading-relaxed">
+                    Para quem usa a picape de verdade, o amortecedor original <span class="text-brand-yellow">nunca foi suficiente</span>.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="#orcamento" class="bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.03] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_24px_rgba(212,255,26,0.1)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.6),0_0_28px_rgba(212,255,26,0.18)]">Upgrade na sua Suspensão</a>
+                    <a href="#provas" class="bg-transparent border border-gray-500 hover:border-white hover:bg-white/5 text-white font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center">Veja na Prática</a>
+                </div>
             </div>
         </div>
     </section>
