@@ -66,7 +66,7 @@
     <!-- Fontes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS compilado e purgado (gerado via `npm run build:css`).
          Config de cores/fontes da marca em tailwind.config.js -->
@@ -184,6 +184,12 @@
         body { background-color:#c7b487; background-image:radial-gradient(150% 120% at 16% -5%,rgba(255,250,235,.5),rgba(255,250,235,0) 52%),radial-gradient(150% 130% at 100% 105%,rgba(116,84,42,.3),rgba(116,84,42,0) 55%); background-attachment:fixed; color:#2a2014; }
         .couro-panel { position:relative; max-width:1180px; margin:0 auto; background-color:#181109; background-image:var(--leather); background-size:220px; background-position:center; border:1px solid rgba(212,255,26,0.30); border-radius:14px; padding:clamp(30px,4vw,54px) clamp(18px,4vw,44px); }
         @media(max-width:600px){ .couro-panel { border-radius:10px; padding:26px 16px; } }
+        /* Títulos no display do site (Zilla Slab) */
+        .display { font-family:'Zilla Slab', serif !important; letter-spacing:-0.01em; }
+        /* Botão Instagram na identidade couro (substitui o degradê rosa) */
+        .couro-ig { background-color:#181109; background-image:var(--leather); background-size:220px; background-position:center; color:var(--yellow); border:1px solid rgba(212,255,26,0.5); }
+        .couro-ig:hover { background-image:none; background-color:var(--brand-yellow,#D4FF1A); color:#0d0b08; border-color:#D4FF1A; }
+        .couro-ig svg { color:currentColor; }
     </style>
 </head>
 <body class="font-inter antialiased selection:bg-brand-yellow selection:text-brand-dark">
@@ -198,7 +204,7 @@
             <a href="#" class="block w-32 md:w-40">
                 <img data-asset="logoHeader" alt="Logo Bump Amortecedores" class="w-full h-auto object-contain">
             </a>
-            <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="hidden md:flex items-center gap-2 transition-all hover:scale-[1.03] text-white px-6 py-2 rounded-sm font-oswald tracking-wide uppercase text-sm font-bold" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+            <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="couro-ig hidden md:flex items-center gap-2 transition-all hover:scale-[1.03] px-6 py-2 rounded-sm font-oswald tracking-wide uppercase text-sm font-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -215,7 +221,7 @@
             <img class="hero-photo" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hero.png" alt="" aria-hidden="true">
             <div class="hero-leather-inner text-center max-w-4xl mx-auto flex flex-col items-center">
                 <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm md:text-base mb-4 block">Domine Qualquer Terreno</span>
-                <h1 class="font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
+                <h1 class="display font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
                     A Força Bruta Encontra o <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">Conforto Premium</span>
                 </h1>
                 <p class="text-gray-200 text-lg md:text-2xl max-w-3xl mb-10 font-medium leading-relaxed">
@@ -233,7 +239,7 @@
     <section class="relative py-10 md:py-14 px-2 overflow-hidden">
         <div class="couro-panel text-center" style="overflow:hidden">
             <span class="text-brand-yellow font-oswald uppercase tracking-[0.3em] font-bold text-xs md:text-sm mb-6 block">Sob medida · Sob encomenda</span>
-            <p class="font-oswald text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase leading-tight">
+            <p class="display font-oswald text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase leading-tight">
                 Amortecedor feito <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">sob medida</span> pro seu veículo, seu piloto e o seu terreno.
             </p>
         </div>
@@ -252,7 +258,7 @@
         <div class="couro-panel">
             <div class="text-center mb-14">
                 <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm mb-4 block">Antes e Depois</span>
-                <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">A diferença <span class="text-brand-yellow">BUMP</span> no terreno</h2>
+                <h2 class="display font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">A diferença <span class="text-brand-yellow">BUMP</span> no terreno</h2>
                 <p class="text-gray-400 max-w-2xl mx-auto">A picape já é excelente de fábrica. O amortecedor BUMP, feito sob medida, deixa ela <span class="text-brand-yellow">do seu jeito</span> — com o conforto, a estabilidade e o controle que o seu terreno exige. Toque no vídeo pra assistir com som.</p>
             </div>
 
@@ -363,7 +369,7 @@
     <section id="galeria-amortecedores" class="py-10 md:py-14 px-2 overflow-hidden">
         <div class="couro-panel" style="overflow:hidden">
         <div class="max-w-7xl mx-auto px-4 mb-12 text-center">
-            <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase">Nossa Linha de <span class="text-brand-yellow">Amortecedores</span></h2>
+            <h2 class="display font-oswald text-3xl md:text-5xl font-bold text-white uppercase">Nossa Linha de <span class="text-brand-yellow">Amortecedores</span></h2>
             <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Projetados com engenharia de ponta para suportar as condições mais extremas.</p>
         </div>
         <div class="relative w-full flex overflow-hidden group">
@@ -421,7 +427,7 @@
     <section id="orcamento" class="py-10 md:py-14 px-2 relative overflow-hidden scroll-mt-20">
         <div class="couro-panel" style="max-width:760px;overflow:hidden">
             <div class="text-center mb-12">
-                <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">Orçamento <span class="text-brand-yellow">Personalizado</span></h2>
+                <h2 class="display font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">Orçamento <span class="text-brand-yellow">Personalizado</span></h2>
                 <p class="text-gray-400 text-lg">Preencha os dados abaixo e descubra a solução perfeita para a sua máquina.</p>
             </div>
             <form id="orcamentoForm" action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" method="POST" class="bg-black/20 border border-white/10 p-6 md:p-8 rounded-lg">
@@ -561,7 +567,8 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-brand-dark pt-16 pb-8 border-t border-white/5">
+    <footer class="pt-10 pb-10 px-2">
+        <div class="couro-panel">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center md:text-left mb-12">
             <div class="flex flex-col items-center md:items-start">
                 <img data-asset="logoFooter" alt="Logo Bump" loading="lazy" class="w-32 mb-6 opacity-70 grayscale hover:grayscale-0 transition-all">
@@ -582,7 +589,7 @@
                         Segunda a Sexta: 8h às 18h
                     </li>
                 </ul>
-                <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="mt-6 inline-flex items-center justify-center gap-2 text-white font-inter font-semibold py-2 px-6 rounded-sm transition-all w-full md:w-auto hover:scale-[1.02]" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="couro-ig mt-6 inline-flex items-center justify-center gap-2 font-inter font-semibold py-2 px-6 rounded-sm transition-all w-full md:w-auto hover:scale-[1.02]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -613,6 +620,7 @@
         <div class="max-w-7xl mx-auto px-4 border-t border-white/5 pt-8 text-center text-xs text-gray-600 space-y-2">
             <p class="text-gray-500">Bump Amortecedores LTDA &nbsp;·&nbsp; CNPJ 18.052.960/0001-60</p>
             <p>© 2026 BUMP Amortecedores. Todos os direitos reservados.</p>
+        </div>
         </div>
     </footer>
 
