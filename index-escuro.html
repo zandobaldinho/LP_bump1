@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUMP Amortecedores | Performance Premium para Picapes e Utilitários</title>
+
+    <!-- Favicon (logo na aba do navegador) -->
+    <link rel="icon" type="image/png" href="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/bumplogodistintivo.png">
+    <link rel="apple-touch-icon" href="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/bumplogodistintivo.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5SP4L4BG');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- ============================================================ -->
+    <!-- META TAGS SEO + GOOGLE ADS                                    -->
+    <!-- ============================================================ -->
+    <meta name="description" content="Amortecedores de alta performance para picapes e utilitários. Customização sob medida, garantia de 2 anos, fabricação brasileira. RAM, Hilux, S10, SW4, Triton, Ranger, Titano e mais.">
+    <meta name="keywords" content="amortecedor, picape, off-road, 4x4, RAM, Hilux, S10, SW4, Triton, Ranger, Titano, suspensão, BUMP">
+    <meta name="author" content="Bump Amortecedores LTDA">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://bumpamortecedores.com.br/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BUMP Amortecedores | Performance Premium">
+    <meta property="og:description" content="Amortecedores de alta performance para picapes. Domine qualquer terreno com a tecnologia BUMP.">
+    <meta property="og:image" content="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hero.png">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BUMP Amortecedores | Performance Premium">
+    <meta name="twitter:description" content="Amortecedores de alta performance para picapes e utilitários.">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AutomotiveBusiness",
+        "name": "BUMP Amortecedores",
+        "legalName": "Bump Amortecedores LTDA",
+        "image": "https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/logoenome.png",
+        "telephone": "+5551997602026",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Ely Corrêa, 945 - Girassol",
+            "addressLocality": "Gravataí",
+            "addressRegion": "RS",
+            "postalCode": "94185-352",
+            "addressCountry": "BR"
+        },
+        "openingHours": "Mo-Fr 08:00-18:00",
+        "sameAs": [
+            "https://www.instagram.com/bumpamortecedores/"
+        ],
+        "taxID": "18.052.960/0001-60"
+    }
+    </script>
+
+    <!-- Fontes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS compilado e purgado (gerado via `npm run build:css`).
+         Config de cores/fontes da marca em tailwind.config.js -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0b08; }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4FF1A; }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            animation: scroll 16s linear infinite;
+            width: max-content;
+            will-change: transform;
+        }
+        .animate-scroll-fast {
+            animation: scroll 22s linear infinite;
+            width: max-content;
+            will-change: transform;
+        }
+        /* Grain overlay sutil — quebra a sensação "limpo de fábrica" */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.65'/></svg>");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+        .legal-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .legal-modal.open { display: flex; }
+        .legal-modal-content {
+            background: #1a1612;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+        }
+        .legal-modal-content h3 {
+            font-family: 'Oswald', sans-serif;
+            color: #D4FF1A;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: bold;
+            font-size: 1.125rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .legal-modal-content h3:first-of-type { margin-top: 0; }
+        .legal-modal-content p, .legal-modal-content li {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        .legal-modal-content ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .legal-modal-content strong { color: #fff; }
+        /* Player Antes/Depois — estados de capa, play e som */
+        .vmedia .vcover { transition: opacity .3s ease; }
+        .vmedia.playing .vcover { opacity: 0; pointer-events: none; }
+        .vmedia .vplay { transition: opacity .2s ease; }
+        .vmedia.playing .vplay { opacity: 0; }
+        .vsound .ic-off { display: none; }
+        .vsound.muted .ic-on { display: none; }
+        .vsound.muted .ic-off { display: block; }
+        /* Cards de vídeo (Antes e Depois) em couro — legenda separada (estilo prints) */
+        .show-leather { max-width: 1760px; margin: 0 auto; }
+        .vcard { background-color:#181109; background-image:var(--leather); background-size:220px; background-position:center; border:1px solid rgba(212,255,26,.30); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+        .vcard:hover { border-color:rgba(212,255,26,.6); transform:translate(-2px,-2px); box-shadow:5px 5px 0 rgba(212,255,26,.22); }
+        .vcard .vmedia { position:relative; display:block; cursor:pointer; background:#0d0c0b; }
+        .vcard video { display:block; width:100%; aspect-ratio:9/16; object-fit:cover; }
+        .vcard .vcover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; transition:opacity .3s ease; }
+        .vcard .vplay { position:absolute; inset:0; z-index:2; display:flex; align-items:center; justify-content:center; pointer-events:none; background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.5)); transition:opacity .2s ease; }
+        .vcard .vplay svg { width:58px; height:58px; color:#fff; filter:drop-shadow(0 4px 14px rgba(0,0,0,.6)); transition:.2s; }
+        .vcard .vmedia:hover .vplay svg { color:var(--yellow); transform:scale(1.08); }
+        .vcard .vsound { position:absolute; top:12px; right:12px; z-index:3; width:42px; height:42px; border:0; border-radius:50%; background:rgba(0,0,0,.55); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.2s; }
+        .vcard .vsound:hover { background:var(--yellow); color:#000; }
+        .vcard .vsound svg { width:19px; height:19px; }
+        .vcap { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-top:1px solid rgba(212,255,26,.22); }
+        .vcap .vname { font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; text-transform:uppercase; color:#fff; line-height:1; }
+        .vcap .vname .vbr { display:block; font-size:11px; font-weight:600; color:var(--yellow); letter-spacing:.06em; margin-top:6px; }
+        .vcap .vtag { font-family:'Oswald',sans-serif; font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; background:var(--yellow); color:#000; padding:6px 10px; border-radius:6px; white-space:nowrap; }
+        @media(max-width:760px){ .vcap{padding:12px 12px} .vcap .vname{font-size:17px} }
+        /* ===== SISTEMA COURO (adaptação gradual do visual) ===== */
+        :root { --leather: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20fill%3D%27%23181109%27%2F%3E%3Cfilter%20id%3D%27lg%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.7%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.17%200%200%200%200%200.14%200%200%200%200%200.09%200%200%200%200.6%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23lg%29%27%20opacity%3D%270.55%27%2F%3E%3C%2Fsvg%3E"); }
+        /* HERO dentro de um painel de couro com foto de fundo (sem costura) */
+        .hero-leather { position: relative; margin: 0 auto; max-width: 1760px; background-color: #181109; background-image: var(--leather); background-size: 220px; background-position: center; border: 1px solid rgba(212,255,26,0.30); border-radius: 14px; overflow: hidden; }
+        @media(max-width:600px){ .hero-leather { border-radius: 10px; } }
+        .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; pointer-events: none; }
+        .hero-leather::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0d0b08 0%, rgba(13,11,8,0.55) 45%, rgba(13,11,8,0.25) 100%); pointer-events: none; }
+        .hero-leather-inner { position: relative; z-index: 2; padding: clamp(48px,7vw,90px) clamp(20px,5vw,60px); }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-200 font-inter antialiased selection:bg-brand-yellow selection:text-brand-dark">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SP4L4BG"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 bg-brand-dark/90 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="#" class="block w-32 md:w-40">
+                <img data-asset="logoHeader" alt="Logo Bump Amortecedores" class="w-full h-auto object-contain">
+            </a>
+            <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="hidden md:flex items-center gap-2 transition-all hover:scale-[1.03] text-white px-6 py-2 rounded-sm font-oswald tracking-wide uppercase text-sm font-bold" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                Siga no Instagram
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="pt-24 md:pt-28 pb-10 px-2">
+        <div class="hero-leather">
+            <img class="hero-photo" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hero.png" alt="" aria-hidden="true">
+            <div class="hero-leather-inner text-center max-w-4xl mx-auto flex flex-col items-center">
+                <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm md:text-base mb-4 block">Domine Qualquer Terreno</span>
+                <h1 class="font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
+                    A Força Bruta Encontra o <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">Conforto Premium</span>
+                </h1>
+                <p class="text-gray-200 text-lg md:text-2xl max-w-3xl mb-10 font-medium leading-relaxed">
+                    Para quem usa a picape de verdade, o amortecedor original <span class="text-brand-yellow">nunca foi suficiente</span>.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="#orcamento" class="bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.03] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_24px_rgba(212,255,26,0.1)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.6),0_0_28px_rgba(212,255,26,0.18)]">Upgrade na sua Suspensão</a>
+                    <a href="#provas" class="bg-transparent border border-gray-500 hover:border-white hover:bg-white/5 text-white font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center">Veja na Prática</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="relative py-16 md:py-24 bg-brand-gray border-y border-white/5 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-yellow/5 via-transparent to-brand-yellow/5 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[300px] bg-brand-yellow/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+            <span class="text-brand-yellow font-oswald uppercase tracking-[0.3em] font-bold text-xs md:text-sm mb-6 block">Sob medida · Sob encomenda</span>
+            <p class="font-oswald text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase leading-tight">
+                Amortecedor feito <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">sob medida</span> pro seu veículo, seu piloto e o seu terreno.
+            </p>
+        </div>
+    </section>
+
+    <!-- Divisor topográfico sutil entre Manifesto e Provas -->
+    <div aria-hidden="true" class="relative w-full overflow-hidden bg-brand-dark py-4">
+        <svg viewBox="0 0 1200 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" class="block w-full h-3 md:h-4 opacity-[0.14]">
+            <path d="M0,12 C150,4 300,20 450,10 S750,16 900,8 S1050,14 1200,10" stroke="#D4FF1A" stroke-width="0.8" fill="none"/>
+            <path d="M0,18 C150,22 300,14 450,20 S750,12 900,18 S1050,8 1200,14" stroke="#D4FF1A" stroke-width="0.6" fill="none" opacity="0.7"/>
+        </svg>
+    </div>
+
+    <!-- PROVAS -->
+    <section id="provas" class="py-16 md:py-20 bg-brand-dark scroll-mt-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-14">
+                <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm mb-4 block">Antes e Depois</span>
+                <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">A diferença <span class="text-brand-yellow">BUMP</span> no terreno</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">A picape já é excelente de fábrica. O amortecedor BUMP, feito sob medida, deixa ela <span class="text-brand-yellow">do seu jeito</span> — com o conforto, a estabilidade e o controle que o seu terreno exige. Toque no vídeo pra assistir com som.</p>
+            </div>
+
+            <!-- Subtítulo: RAM -->
+            <div class="text-center mb-8 mt-12">
+                <h3 class="font-oswald text-2xl md:text-4xl font-bold text-white uppercase mb-2">Tanto nas <span class="text-brand-yellow">RAM</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-12">
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram1500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram1500.webp" alt="RAM 1500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 1500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                        </button>
+                    </div>
+                    <div class="vcap"><span class="vname">RAM 1500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
+                </div>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram2500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram2500.webp" alt="RAM 2500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 2500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                        </button>
+                    </div>
+                    <div class="vcap"><span class="vname">RAM 2500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
+                </div>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram3500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram3500.webp" alt="RAM 3500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 3500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                        </button>
+                    </div>
+                    <div class="vcap"><span class="vname">RAM 3500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
+                </div>
+            </div>
+
+            <!-- Subtítulo: Pickups -->
+            <div class="text-center mb-8">
+                <h3 class="font-oswald text-2xl md:text-4xl font-bold text-white uppercase mb-2">Quanto nas <span class="text-brand-yellow">Pickups</span></h3>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hiluxantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/hilux.webp" alt="Hilux" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Hilux">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                        </button>
+                    </div>
+                    <div class="vcap"><span class="vname">Hilux<span class="vbr">Toyota</span></span><span class="vtag">Antes · Depois</span></div>
+                </div>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/tritonantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/triton.webp" alt="Triton" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Triton">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                        </button>
+                    </div>
+                    <div class="vcap"><span class="vname">Triton<span class="vbr">Mitsubishi</span></span><span class="vtag">Antes · Depois</span></div>
+                </div>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/rangerantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ranger.webp" alt="Ranger" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Ranger">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                        </button>
+                    </div>
+                    <div class="vcap"><span class="vname">Ranger<span class="vbr">Ford</span></span><span class="vtag">Antes · Depois</span></div>
+                </div>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/s10antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" style="object-position:15% center" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/s10.webp" alt="S10" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo S10">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                        </button>
+                    </div>
+                    <div class="vcap"><span class="vname">S10<span class="vbr">Chevrolet</span></span><span class="vtag">Antes · Depois</span></div>
+                </div>
+            </div>
+            <p class="text-center text-sm text-gray-400 mt-8">Toque no vídeo pra assistir com som.</p>
+        </div>
+    </section>
+
+    <!-- GALERIA AMORTECEDORES -->
+    <section id="galeria-amortecedores" class="py-16 bg-brand-dark border-t border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 mb-12 text-center">
+            <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase">Nossa Linha de <span class="text-brand-yellow">Amortecedores</span></h2>
+            <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Projetados com engenharia de ponta para suportar as condições mais extremas.</p>
+        </div>
+        <div class="relative w-full flex overflow-hidden group">
+            <div class="absolute top-0 left-0 w-16 md:w-32 h-full bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-16 md:w-32 h-full bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
+            <div id="carrosselAmortecedores" class="animate-scroll flex items-center"></div>
+        </div>
+        <div class="mt-16 py-4 border-y border-white/5 bg-[#0d0b08]/50 relative w-full flex overflow-hidden">
+            <div class="absolute top-0 left-0 w-8 md:w-24 h-full bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-8 md:w-24 h-full bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
+            <div class="animate-scroll-fast flex gap-8 items-center whitespace-nowrap font-oswald text-2xl md:text-3xl font-bold text-white/60 tracking-wider">
+                <span>HILUX</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RANGER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>S10</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>TRITON</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>TITANO</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>FRONTIER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>AMAROK</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>SW4</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>TRAILBLAZER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>DAKAR</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>PAJERO SPORT</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>WRANGLER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RAM 1500</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RAM 2500</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RAM 3500</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>F150</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>F250</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>F1000</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+
+                <span>HILUX</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RANGER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>S10</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>TRITON</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>TITANO</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>FRONTIER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>AMAROK</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>SW4</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>TRAILBLAZER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>DAKAR</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>PAJERO SPORT</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>WRANGLER</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RAM 1500</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RAM 2500</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>RAM 3500</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>F150</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>F250</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+                <span>F1000</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORÇAMENTO -->
+    <section id="orcamento" class="py-24 bg-[#0d0b08] border-b border-white/5 relative overflow-hidden scroll-mt-20">
+        <div class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/4 pointer-events-none"></div>
+        <div class="max-w-3xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">Orçamento <span class="text-brand-yellow">Personalizado</span></h2>
+                <p class="text-gray-400 text-lg">Preencha os dados abaixo e descubra a solução perfeita para a sua máquina.</p>
+            </div>
+            <form id="orcamentoForm" action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" method="POST" class="bg-white/5 border border-white/10 p-6 md:p-10 rounded-lg shadow-2xl backdrop-blur-sm">
+                <!-- Campos ocultos: captura de UTMs (Meta Ads, Google Ads, bio do YouTube, etc.) -->
+                <input type="hidden" id="utm_source"   name="utm_source"   value="">
+                <input type="hidden" id="utm_medium"   name="utm_medium"   value="">
+                <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+                <input type="hidden" id="utm_content"  name="utm_content"  value="">
+                <input type="hidden" id="utm_term"     name="utm_term"     value="">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="md:col-span-2">
+                        <label for="nome" class="block text-sm font-medium text-gray-300 mb-2">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required class="w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600" placeholder="Digite seu nome">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="ddd" class="block text-sm font-medium text-gray-300 mb-2">Telefone / WhatsApp</label>
+                        <div class="flex gap-2 items-stretch">
+                            <!-- País: já preenchido (cliente não digita o 55) -->
+                            <div class="flex flex-col items-center justify-center px-3 bg-black/30 border border-white/10 rounded-sm select-none leading-none" title="Código do país — já incluído">
+                                <span class="text-lg">🇧🇷</span>
+                                <span class="text-white font-semibold text-sm mt-1">+55</span>
+                            </div>
+                            <!-- DDD -->
+                            <input type="tel" id="ddd" inputmode="numeric" autocomplete="off" maxlength="2" placeholder="DDD"
+                                class="w-16 text-center bg-black/50 border border-white/10 rounded-sm px-2 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
+                            <!-- número do celular (começa com 9) -->
+                            <input type="tel" id="celular" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="9XXXX-XXXX"
+                                class="flex-1 min-w-0 bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
+                        </div>
+                        <p class="mt-2 text-xs text-gray-400 flex items-start gap-1.5">
+                            <span aria-hidden="true">📱</span>
+                            <span>Você <strong class="text-gray-300">não precisa</strong> digitar o <strong class="text-gray-300">55</strong> — já incluímos pra você. Informe o <strong class="text-gray-300">DDD</strong> e o celular (que começa com <strong class="text-gray-300">9</strong>).</span>
+                        </p>
+                        <input type="hidden" id="telefone" name="telefone">
+                    </div>
+                </div>
+                <div class="mb-8">
+                    <label class="block text-sm font-medium text-gray-300 mb-3">Qual é a situação atual da sua suspensão?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
+                            <input type="radio" name="situacao_suspensao" value="upgrade_performance" required class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <span class="text-sm text-gray-300">Meu amortecedor está ok, mas quero upgrade de performance</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
+                            <input type="radio" name="situacao_suspensao" value="vibracao_instabilidade" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <span class="text-sm text-gray-300">Sinto vibração excessiva ou instabilidade na direção</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
+                            <input type="radio" name="situacao_suspensao" value="durabilidade" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <span class="text-sm text-gray-300">Já troquei o amortecedor antes do prazo e preciso de algo mais durável</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-black/30 border border-white/10 hover:border-brand-yellow/50 rounded-sm cursor-pointer transition-colors">
+                            <input type="radio" name="situacao_suspensao" value="carga_pesada" class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                            <span class="text-sm text-gray-300">Uso minha picape em carga pesada, agro ou estrada e a suspensão não aguenta</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label for="modelo" class="block text-sm font-medium text-gray-300 mb-2">Modelo da Picape</label>
+                        <div class="relative">
+                            <select id="modelo" name="modelo" required class="w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors appearance-none cursor-pointer">
+                                <option value="" disabled selected class="text-gray-500">Selecione o modelo...</option>
+                                <optgroup label="Modelos atendidos" class="bg-[#1a1612] text-white">
+                                    <option value="RAM" class="bg-[#1a1612] text-white">RAM</option>
+                                    <option value="Rampage" class="bg-[#1a1612] text-white">Rampage</option>
+                                    <option value="Dakota" class="bg-[#1a1612] text-white">Dakota</option>
+                                    <option value="Hilux" class="bg-[#1a1612] text-white">Hilux</option>
+                                    <option value="SW4" class="bg-[#1a1612] text-white">SW4</option>
+                                    <option value="Triton" class="bg-[#1a1612] text-white">Triton</option>
+                                    <option value="Ranger" class="bg-[#1a1612] text-white">Ranger</option>
+                                    <option value="S10" class="bg-[#1a1612] text-white">S10</option>
+                                    <option value="Frontier" class="bg-[#1a1612] text-white">Frontier</option>
+                                    <option value="Amarok" class="bg-[#1a1612] text-white">Amarok</option>
+                                    <option value="Titano" class="bg-[#1a1612] text-white">Titano</option>
+                                    <option value="Toro" class="bg-[#1a1612] text-white">Toro</option>
+                                    <option value="Silverado 1500" class="bg-[#1a1612] text-white">Silverado 1500</option>
+                                    <option value="Troller" class="bg-[#1a1612] text-white">Troller</option>
+                                    <option value="Pajero Dakar" class="bg-[#1a1612] text-white">Pajero Dakar</option>
+                                    <option value="Wrangler" class="bg-[#1a1612] text-white">Wrangler</option>
+                                    <option value="Blazer" class="bg-[#1a1612] text-white">Blazer</option>
+                                    <option value="Trailblazer" class="bg-[#1a1612] text-white">Trailblazer</option>
+                                </optgroup>
+                                <optgroup label="Outros" class="bg-[#1a1612] text-white">
+                                    <option value="Fiat Strada" class="bg-[#1a1612] text-white">Fiat Strada</option>
+                                    <option value="F150" class="bg-[#1a1612] text-white">F150</option>
+                                    <option value="F250" class="bg-[#1a1612] text-white">F250</option>
+                                    <option value="F350" class="bg-[#1a1612] text-white">F350</option>
+                                    <option value="F1000" class="bg-[#1a1612] text-white">F1000</option>
+                                    <option value="Pajero Full" class="bg-[#1a1612] text-white">Pajero Full</option>
+                                    <option value="Pajero Sport" class="bg-[#1a1612] text-white">Pajero Sport</option>
+                                    <option value="Suzuki Jimny" class="bg-[#1a1612] text-white">Suzuki Jimny</option>
+                                    <option value="Toyota Bandeirante" class="bg-[#1a1612] text-white">Toyota Bandeirante</option>
+                                    <option value="Outros" class="bg-[#1a1612] text-white">Outros</option>
+                                </optgroup>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-yellow">
+                                <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+                            </div>
+                        </div>
+                        <input type="text" id="modeloOutros" placeholder="Qual o modelo do seu veículo?" autocomplete="off" maxlength="60" style="display:none" class="mt-3 w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors placeholder-gray-600">
+                    </div>
+                    <div>
+                        <label for="ano" class="block text-sm font-medium text-gray-300 mb-2">Ano da Picape</label>
+                        <div class="relative">
+                            <select id="ano" name="ano" required class="w-full bg-black/50 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow transition-colors appearance-none cursor-pointer">
+                                <option value="" disabled selected class="text-gray-500">Selecione o ano...</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-yellow">
+                                <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-6 p-4 bg-black/30 border border-white/10 rounded-sm">
+                    <label class="flex items-start gap-3 cursor-pointer text-sm text-gray-300">
+                        <input type="checkbox" id="consentimento" name="consentimento" required class="mt-1 w-4 h-4 accent-brand-yellow flex-shrink-0 cursor-pointer">
+                        <span>
+                            Concordo com o tratamento dos meus dados pessoais (nome e telefone) pela <strong class="text-white">Bump Amortecedores LTDA</strong> para fins de contato comercial e elaboração do orçamento solicitado, conforme a <a href="politica-de-privacidade.html" target="_blank" rel="noopener" class="text-brand-yellow hover:underline">Política de Privacidade</a>. *
+                        </span>
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-brand-yellow hover:bg-yellow-600 hover:scale-[1.02] text-brand-dark font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_6px_20px_rgba(0,0,0,0.5),0_0_20px_rgba(212,255,26,0.08)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.6),0_0_24px_rgba(212,255,26,0.16)]">
+                    Quero Meu Orçamento Personalizado
+                </button>
+                <p class="text-xs text-gray-500 text-center mt-4">Seus dados estão protegidos pela LGPD. Não compartilhamos com terceiros.</p>
+                <div id="formMessage" class="hidden mt-4 p-3 rounded-sm text-white text-center font-medium transition-all"></div>
+                <!-- Botão WhatsApp exclusivo p/ leads RAM: aparece após envio quando modelo = RAM -->
+                <a id="ramWhatsappBtn" href="#" target="_blank" rel="noopener" style="display:none" class="mt-4 w-full bg-[#25D366] hover:bg-[#1ebe5d] hover:scale-[1.02] text-black font-oswald uppercase tracking-wider font-bold py-4 px-8 rounded-sm transition-all text-center shadow-[0_0_30px_rgba(37,211,102,0.25)] hover:shadow-[0_0_50px_rgba(37,211,102,0.45)] items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+                    <span>Falar com especialista RAM no WhatsApp</span>
+                </a>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark pt-16 pb-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center md:text-left mb-12">
+            <div class="flex flex-col items-center md:items-start">
+                <img data-asset="logoFooter" alt="Logo Bump" loading="lazy" class="w-32 mb-6 opacity-70 grayscale hover:grayscale-0 transition-all">
+                <p class="text-gray-500 text-sm max-w-xs mb-6">A referência definitiva em amortecedores de alta performance para picapes e utilitários.</p>
+                <a href="https://maps.app.goo.gl/?q=Av.+Ely+Corr%C3%AAa%2C+945+-+Girassol%2C+Gravata%C3%AD+-+RS%2C+94185-352" target="_blank" rel="noopener noreferrer" class="group flex items-start gap-3 text-gray-400 hover:text-brand-yellow transition-colors text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-0.5 flex-shrink-0 text-brand-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span class="leading-relaxed">Av. Ely Corrêa, 945 - Girassol<br>Gravataí - RS, 94185-352</span>
+                </a>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-oswald text-white text-xl uppercase tracking-wider mb-4 font-bold">Atendimento</h4>
+                <ul class="space-y-3 text-gray-400 text-sm">
+                    <li class="flex items-center gap-2 justify-center md:justify-start">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        Segunda a Sexta: 8h às 18h
+                    </li>
+                </ul>
+                <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="mt-6 inline-flex items-center justify-center gap-2 text-white font-inter font-semibold py-2 px-6 rounded-sm transition-all w-full md:w-auto hover:scale-[1.02]" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    Seguir no Instagram
+                </a>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-oswald text-white text-xl uppercase tracking-wider mb-4 font-bold">Acompanhe</h4>
+                <a href="https://www.instagram.com/bumpamortecedores/" target="_blank" rel="noopener" class="group flex items-center gap-3 text-gray-400 hover:text-white transition-colors mb-6">
+                    <div class="w-10 h-10 rounded-sm bg-white/5 group-hover:bg-brand-yellow group-hover:text-brand-dark flex items-center justify-center transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <span>@bumpamortecedores</span>
+                </a>
+                <h4 class="font-oswald text-white text-sm uppercase tracking-wider mb-3 font-bold">Informações Legais</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="politica-de-privacidade.html" class="text-gray-400 hover:text-brand-yellow transition-colors">Política de Privacidade</a></li>
+                    <li><a href="termos-de-uso.html" class="text-gray-400 hover:text-brand-yellow transition-colors">Termos de Uso</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 border-t border-white/5 pt-8 text-center text-xs text-gray-600 space-y-2">
+            <p class="text-gray-500">Bump Amortecedores LTDA &nbsp;·&nbsp; CNPJ 18.052.960/0001-60</p>
+            <p>© 2026 BUMP Amortecedores. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- BANNER COOKIES -->
+    <div id="cookieBanner" class="hidden fixed bottom-0 left-0 right-0 z-50 bg-brand-gray border-t-2 border-brand-yellow shadow-2xl p-4 md:p-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-4">
+            <div class="flex-1 text-sm text-gray-300">
+                <p class="font-medium text-white mb-1">🍪 Este site utiliza cookies</p>
+                <p class="text-gray-400">Utilizamos cookies essenciais para o funcionamento do site e cookies de análise para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="politica-de-privacidade.html" target="_blank" rel="noopener" class="text-brand-yellow hover:underline">Política de Privacidade</a>.</p>
+            </div>
+            <div class="flex gap-2 w-full md:w-auto flex-shrink-0">
+                <button onclick="cookieResponse('reject')" class="flex-1 md:flex-none bg-white/10 hover:bg-white/20 text-white text-sm font-semibold py-2 px-4 rounded-sm transition-all">Recusar</button>
+                <button onclick="cookieResponse('accept')" class="flex-1 md:flex-none bg-brand-yellow hover:bg-yellow-600 text-brand-dark text-sm font-bold py-2 px-6 rounded-sm transition-all">Aceitar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMAÇÃO DE TELEFONE -->
+    <div id="telConfirmModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="telConfirmTitulo">
+        <div class="legal-modal-content" style="max-width:420px; text-align:center;">
+            <h3 id="telConfirmTitulo" style="margin-top:0;">Confirme seu número</h3>
+            <p>Vamos te chamar no <strong>WhatsApp</strong> neste número. Está correto?</p>
+            <p id="telConfirmNumero" style="font-family:'Oswald',sans-serif; font-size:1.6rem; color:#fff; letter-spacing:0.04em; margin:0.5rem 0 1.25rem;"></p>
+            <div style="display:flex; gap:0.75rem; flex-direction:column;">
+                <button type="button" id="telConfirmOk" class="bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Sim, está correto</button>
+                <button type="button" id="telConfirmEdit" class="bg-transparent border border-gray-500 hover:border-white text-white font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Corrigir número</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL QUALIFICAÇÃO — picapes ano <= 2012 -->
+    <div id="yearGateModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="yearGateTitulo">
+        <div class="legal-modal-content" style="max-width:480px;">
+            <h3 id="yearGateTitulo" style="margin-top:0;">Um instante 👇</h3>
+            <p>Pra ser direto com você: a solução Bump é <strong class="text-white">premium, a partir de R$ 6 mil</strong>. Se investir esse valor pra ter a melhor suspensão do mercado na sua picape faz sentido, seguimos daqui. Se não for o momento, sem problema. Nos vemos na próxima!</p>
+            <div style="display:flex; gap:0.75rem; flex-direction:column; margin-top:1.5rem;">
+                <button type="button" id="yearGateYes" disabled class="bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">Eu quero!</button>
+                <button type="button" id="yearGateNo" disabled class="bg-transparent border border-gray-500 hover:border-white text-white font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed">Não é o momento...</button>
+            </div>
+            <p id="yearGateTimer" class="text-center text-xs text-gray-500" style="margin-top:0.9rem; margin-bottom:0;"></p>
+        </div>
+    </div>
+
+    <!-- MODAL DE ERRO (validação) -->
+    <div id="erroModal" class="legal-modal" role="alertdialog" aria-modal="true" aria-labelledby="erroModalTitulo">
+        <div class="legal-modal-content" style="max-width:420px; text-align:center;">
+            <h3 id="erroModalTitulo" style="margin-top:0;">Ops! ⚠️</h3>
+            <p id="erroModalMsg"></p>
+            <div style="margin-top:1.25rem;">
+                <button type="button" id="erroModalOk" class="w-full bg-brand-yellow hover:bg-yellow-600 text-brand-dark font-oswald uppercase tracking-wider font-bold py-3 px-6 rounded-sm transition-all">Entendi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ================================================================
+    // 🐞 DEBUG — logs só aparecem com DEBUG = true (produção fica limpa,
+    // sem expor dados de lead no console). Vire pra true para depurar.
+    // ================================================================
+    const DEBUG = false;
+    const _c = console;
+    const dbg = {
+        log:   (...a) => { if (DEBUG) _c.log(...a); },
+        error: (...a) => { if (DEBUG) _c.error(...a); },
+        warn:  (...a) => { if (DEBUG) _c.warn(...a); },
+    };
+
+    // ================================================================
+    // 🔐 SUPABASE — Backup paralelo de leads
+    // Anon key é PÚBLICA por design (protegida pelo RLS no banco)
+    // ================================================================
+    const SUPABASE_URL = 'https://ibduhunidriaostszvzn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliZHVodW5pZHJpYW9zdHN6dnpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMzIxNzUsImV4cCI6MjA5NDcwODE3NX0.PGCogeQ_fNUcXd-992liGrgwuLlFeHVPih9qaK6i4BQ';
+
+    // ================================================================
+    // WHATSAPP RAM — botão pós-envio só para leads com modelo = RAM
+    // Número em formato internacional (55 + DDD + 9 dígitos). Trocar aqui.
+    // ================================================================
+    const RAM_WHATSAPP = '5551997602026';
+    function montarLinkRamWhatsapp(data) {
+        const msg =
+            'Olá! Vim pelo site e quero amortecedores BUMP para minha RAM.\n\n' +
+            'Nome: ' + (data.nome || '-') + '\n' +
+            'Veículo: RAM ' + (data.ano || '') + '\n' +
+            'Telefone: ' + (data.telefone || '-');
+        return 'https://wa.me/' + RAM_WHATSAPP + '?text=' + encodeURIComponent(msg);
+    }
+
+    // ================================================================
+    // SÓ BANCO — vão sempre só pro Supabase, nunca pro Make (independe do ano).
+    // Hoje só a opção genérica "Outros" (veículo não listado → revisão manual).
+    // ================================================================
+    const MODELOS_SOMENTE_BANCO = [
+        'Fiat Strada',
+        'Saveiro',
+        'Frontier',
+        'Rampage',
+        'Outros'
+    ];
+
+    // Modelos atendidos só a partir de um ano. Abaixo do ano → só banco (sem Make).
+    //  - Dakota: 2025+
+    //  - Linha "Outros" (F150/250/350/1000, Pajeros, Jimny, Bandeirante): 2022+
+    const ANO_MINIMO_ATENDIDO = {
+        'Dakota': 2025,
+        'F150': 2022,
+        'F250': 2022,
+        'F350': 2022,
+        'F1000': 2022,
+        'Pajero Full': 2022,
+        'Pajero Sport': 2022,
+        'Suzuki Jimny': 2022,
+        'Toyota Bandeirante': 2022
+    };
+
+    // ================================================================
+    // ⚙️ PARÂMETROS DE NEGÓCIO / UI (evita magic numbers espalhados)
+    // ================================================================
+    const ANO_CORTE_QUALIFICACAO = 2012; // picapes <= este ano abrem o popup de qualificação
+    const TIMER_QUALIFICACAO_S   = 10;   // segundos até liberar os botões do popup
+    const MSG_AUTO_HIDE_MS       = 6000; // tempo até esconder a mensagem de status
+    const ANO_MIN = 1960, ANO_MAX = 2026; // range do <select> de ano
+
+    // ================================================================
+    // ☎️ VALIDAÇÃO DE TELEFONE
+    // Problema: muita gente digita o código do país (55) junto e/ou erra
+    // o DDD, gerando "número errado" no funil. As funções abaixo limpam e
+    // validam antes de salvar/enviar o lead.
+    // ================================================================
+
+    // DDDs válidos no Brasil (Anatel). Atenção: 55 É um DDD real (região de
+    // Santa Maria/RS), por isso não dá pra simplesmente bloquear o 55 — a
+    // remoção do código do país é feita por tamanho (ver removerCodigoPais).
+    const DDDS_VALIDOS = new Set([
+        11,12,13,14,15,16,17,18,19,
+        21,22,24,27,28,
+        31,32,33,34,35,37,38,
+        41,42,43,44,45,46,47,48,49,
+        51,53,54,55,
+        61,62,63,64,65,66,67,68,69,
+        71,73,74,75,77,79,
+        81,82,83,84,85,86,87,88,89,
+        91,92,93,94,95,96,97,98,99
+    ]);
+
+    // Número BR tem 10 (fixo) ou 11 (celular) dígitos. Se vier 12-13 dígitos
+    // começando com 55, é o código do país colado junto → remove os 2 primeiros.
+    function removerCodigoPais(digits) {
+        if (digits.length > 11 && digits.startsWith('55')) {
+            return digits.slice(2);
+        }
+        return digits;
+    }
+
+    // Analisa DDD (#ddd) + número (#celular) e devolve { ok, telefone, erro }.
+    //  - 8 dígitos no número → força o 9 na frente (vira 9XXXXXXXX).
+    //  - 9 dígitos sem começar com 9 → erro pedindo que comece com 9.
+    //  - DDD precisa ter 2 dígitos e estar na lista da Anatel.
+    function analisarTelefone() {
+        const ddd = (document.getElementById('ddd')?.value || '').replace(/\D/g, '');
+        let num = (document.getElementById('celular')?.value || '').replace(/\D/g, '');
+        if (num.length === 8) num = '9' + num; // força o 9
+        if (ddd.length !== 2 || !DDDS_VALIDOS.has(parseInt(ddd, 10))) {
+            return { ok: false, erro: 'Confira o DDD: informe 2 dígitos válidos.' };
+        }
+        if (num.length !== 9 || num[0] !== '9') {
+            return { ok: false, erro: 'O número do celular deve começar com 9 e ter mais 8 dígitos.' };
+        }
+        return { ok: true, telefone: `(${ddd}) ${num.slice(0, 5)}-${num.slice(5)}` };
+    }
+
+    // ================================================================
+    // 🗂️ ASSETS — hospedados no Cloudflare R2 (egress grátis).
+    //    Pra trocar pra um custom domain depois (ex.: media.bumpamortecedores.com.br),
+    //    mexe SÓ na constante R2_BASE abaixo.
+    // ================================================================
+    const R2_BASE = 'https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev';
+    const ASSETS = {
+        // === LOGO E HERO ===
+        logoHeader:    `${R2_BASE}/amortecedores/logoenome.png`,
+        logoFooter:    `${R2_BASE}/amortecedores/logoenome.png`,
+        heroImage:     `${R2_BASE}/amortecedores/hero.png`,
+
+        // === RAMs (3 cards) ===
+        ram1500: {
+            image: `${R2_BASE}/banco_web_800/ram1500.webp`,
+            video: `${R2_BASE}/amortecedores/ram1500antesedepois.mp4`
+        },
+        ram2500: {
+            image: `${R2_BASE}/banco_web_800/ram2500.webp`,
+            video: `${R2_BASE}/amortecedores/ram2500antesedepois.mp4`
+        },
+        ram3500: {
+            image: `${R2_BASE}/banco_web_800/ram3500.webp`,
+            video: `${R2_BASE}/amortecedores/ram3500antesedepois.mp4`
+        },
+
+        // === PICKUPS (4 cards) ===
+        hilux: {
+            image: `${R2_BASE}/banco_web_800/hilux.webp`,
+            video: `${R2_BASE}/amortecedores/hiluxantesedepois.mp4`
+        },
+        triton: {
+            image: `${R2_BASE}/banco_web_800/triton.webp`,
+            video: `${R2_BASE}/amortecedores/tritonantesedepois.mp4`
+        },
+        ranger: {
+            image: `${R2_BASE}/banco_web_800/ranger.webp`,
+            video: `${R2_BASE}/amortecedores/rangerantesedepois.mp4`
+        },
+        s10: {
+            image: `${R2_BASE}/banco_web_800/s10.webp`,
+            video: `${R2_BASE}/amortecedores/s10antesedepois.mp4`
+        },
+
+        // === AMORTECEDORES (carrossel) ===
+        amortecedores: [
+            `${R2_BASE}/amortecedores/amortecedorbypass.png`,
+            `${R2_BASE}/amortecedores/amortecedorcorpoinoxbase.png`,
+            `${R2_BASE}/amortecedores/amortecedordedirecaocatalogo.png`,
+            `${R2_BASE}/amortecedores/amortecedordedirecaopromocional.png`,
+            `${R2_BASE}/amortecedores/amortecedordianteirocorpoliso.png`,
+            `${R2_BASE}/amortecedores/amortecedorinoxcabe%C3%A7aking.png`,
+            `${R2_BASE}/amortecedores/amortecedorpremium.png`,
+            `${R2_BASE}/amortecedores/amortecedorpremiumallblack.png`,
+            `${R2_BASE}/amortecedores/amortecedortraseirocommangueira.png`,
+            `${R2_BASE}/amortecedores/amortecedortraseirofixo.png`,
+            `${R2_BASE}/amortecedores/coilover.png`,
+            `${R2_BASE}/amortecedores/tiposdemangueira.png`,
+        ],
+    };
+    // ================================================================
+
+    function cookieResponse(action) {
+        try {
+            localStorage.setItem('bump_cookie_consent', action);
+            localStorage.setItem('bump_cookie_consent_date', new Date().toISOString());
+        } catch { /* localStorage indisponível (modo privado/bloqueado) — segue sem persistir */ }
+        document.getElementById('cookieBanner').classList.add('hidden');
+    }
+    function checkCookieBanner() {
+        try {
+            const consent = localStorage.getItem('bump_cookie_consent');
+            if (!consent) document.getElementById('cookieBanner').classList.remove('hidden');
+        } catch {
+            document.getElementById('cookieBanner').classList.remove('hidden');
+        }
+    }
+
+    // ================================================================
+    // 🎯 CAPTURA DE UTMs — lê parâmetros da URL (Meta Ads, Google Ads,
+    // link da bio do YouTube/Instagram etc.) e injeta nos hidden fields
+    // do formulário. Roda assim que o DOM termina de montar.
+    // ================================================================
+    function capturarUTMs() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        utms.forEach(utm => {
+            if (urlParams.has(utm)) {
+                const inputField = document.getElementById(utm);
+                if (inputField) {
+                    inputField.value = urlParams.get(utm);
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        checkCookieBanner();
+        capturarUTMs();
+
+        const getAsset = (path) => path.split('.').reduce((obj, key) => obj?.[key], ASSETS);
+        document.querySelectorAll('[data-asset]').forEach(el => {
+            const url = getAsset(el.dataset.asset);
+            if (!url) return;
+            if (el.tagName === 'IMG') el.src = url;
+            else if (el.tagName === 'VIDEO') { el.src = url; el.load(); }
+        });
+
+        const carrossel = document.getElementById('carrosselAmortecedores');
+        if (carrossel && Array.isArray(ASSETS.amortecedores)) {
+            const buildImg = (url, i) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = `Amortecedor Bump ${i + 1}`;
+                img.loading = 'lazy';
+                img.className = 'h-48 md:h-64 w-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300 mr-12 md:mr-20 flex-shrink-0';
+                return img;
+            };
+            ASSETS.amortecedores.forEach((url, i) => carrossel.appendChild(buildImg(url, i)));
+            ASSETS.amortecedores.forEach((url, i) => carrossel.appendChild(buildImg(url, i)));
+        }
+
+        const anoSelect = document.getElementById('ano');
+        if (anoSelect) {
+            for (let ano = ANO_MAX; ano >= ANO_MIN; ano--) {
+                const opt = document.createElement('option');
+                opt.value = ano;
+                opt.textContent = ano;
+                opt.className = 'bg-[#1a1612] text-white';
+                anoSelect.appendChild(opt);
+            }
+        }
+
+        // Campo "Outros": aparece ao selecionar a opção Outros, pra digitar o veículo
+        const modeloSelect = document.getElementById('modelo');
+        const modeloOutrosInput = document.getElementById('modeloOutros');
+        if (modeloSelect && modeloOutrosInput) {
+            modeloSelect.addEventListener('change', () => {
+                if (modeloSelect.value === 'Outros') {
+                    modeloOutrosInput.style.display = 'block';
+                    modeloOutrosInput.required = true;
+                    modeloOutrosInput.focus();
+                } else {
+                    modeloOutrosInput.style.display = 'none';
+                    modeloOutrosInput.required = false;
+                    modeloOutrosInput.value = '';
+                }
+            });
+        }
+
+        // Antes e Depois — clique pra tocar com som; um toca por vez.
+        (function () {
+            const provas = document.getElementById('provas');
+            if (!provas) return;
+            const medias = Array.prototype.slice.call(provas.querySelectorAll('.vmedia'));
+            const parar = (m) => {
+                const v = m.querySelector('video');
+                v.pause();
+                try { v.currentTime = 0; } catch (e) {}
+                m.classList.remove('playing');
+            };
+            const pararTodos = (exceto) => medias.forEach(m => { if (m !== exceto) parar(m); });
+            const tocar = (m) => {
+                const v = m.querySelector('video'), btn = m.querySelector('.vsound');
+                pararTodos(m);
+                v.muted = false;
+                if (btn) btn.classList.remove('muted');
+                m.classList.add('playing');
+                const p = v.play();
+                if (p && p.catch) p.catch(() => { v.muted = true; if (btn) btn.classList.add('muted'); v.play().catch(() => {}); });
+            };
+            medias.forEach(m => {
+                const v = m.querySelector('video'), btn = m.querySelector('.vsound');
+                m.addEventListener('click', (e) => {
+                    if (btn && btn.contains(e.target)) return;
+                    if (v.paused) tocar(m); else parar(m);
+                });
+                if (btn) btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (v.paused) { tocar(m); return; }
+                    v.muted = !v.muted;
+                    btn.classList.toggle('muted', v.muted);
+                });
+            });
+        })();
+
+        // ── Telefone em partes: país (+55 fixo) | DDD | número do celular ──
+        // O cliente digita DDD + número. Se o número vier com 8 dígitos, o 9 é
+        // forçado na frente (no envio). O hidden #telefone vira (DD) 9XXXX-XXXX.
+        const dddInput = document.getElementById('ddd');
+        const celInput = document.getElementById('celular');
+        const telHidden = document.getElementById('telefone');
+        if (dddInput && celInput && telHidden) {
+            // Formata o número (até 9 dígitos) com traço antes dos 4 últimos.
+            const formatCel = (digits) => {
+                digits = digits.slice(0, 9);
+                if (digits.length > 5) return digits.slice(0, digits.length - 4) + '-' + digits.slice(-4);
+                return digits;
+            };
+            const montarTelefone = () => {
+                const r = analisarTelefone();
+                telHidden.value = r.ok ? r.telefone : '';
+            };
+            // Número completo colado → distribui sozinho, removendo só o 55 (mantém o 9).
+            const distribuir = (raw) => {
+                const d = removerCodigoPais(raw.replace(/\D/g, ''));
+                if (d.length < 10) return false;
+                dddInput.value = d.slice(0, 2);
+                celInput.value = formatCel(d.slice(2, 11));
+                montarTelefone();
+                return true;
+            };
+
+            dddInput.addEventListener('input', () => {
+                dddInput.value = dddInput.value.replace(/\D/g, '').slice(0, 2);
+                montarTelefone();
+                if (dddInput.value.length === 2) celInput.focus();
+            });
+            dddInput.addEventListener('keypress', (e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
+
+            celInput.addEventListener('input', () => {
+                celInput.value = formatCel(celInput.value.replace(/\D/g, ''));
+                montarTelefone();
+            });
+            celInput.addEventListener('keypress', (e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); });
+            // Ao sair do campo: se digitou 8 dígitos, mostra o 9 forçado na frente.
+            celInput.addEventListener('blur', () => {
+                const d = celInput.value.replace(/\D/g, '');
+                if (d.length === 8) { celInput.value = formatCel('9' + d); montarTelefone(); }
+            });
+
+            const onPaste = (e) => {
+                const txt = (e.clipboardData || window.clipboardData).getData('text') || '';
+                if (distribuir(txt)) e.preventDefault();
+            };
+            dddInput.addEventListener('paste', onPaste);
+            celInput.addEventListener('paste', onPaste);
+        }
+
+        const form = document.getElementById('orcamentoForm');
+        const formMessage = document.getElementById('formMessage');
+        if (form) {
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            // Modal de confirmação do telefone (rede de segurança contra número errado)
+            const telModal = document.getElementById('telConfirmModal');
+            const telConfirmNumero = document.getElementById('telConfirmNumero');
+            const telConfirmOk = document.getElementById('telConfirmOk');
+            const telConfirmEdit = document.getElementById('telConfirmEdit');
+            const fecharTelModal = () => telModal && telModal.classList.remove('open');
+            if (telConfirmEdit) telConfirmEdit.addEventListener('click', () => {
+                fecharTelModal();
+                document.getElementById('celular').focus();
+            });
+            if (telModal) telModal.addEventListener('click', (e) => { if (e.target === telModal) fecharTelModal(); });
+            if (telConfirmOk) telConfirmOk.addEventListener('click', () => { fecharTelModal(); prosseguirAposConfirmacao(); });
+
+            // ── Popup de erro (validação) ──
+            const erroModal = document.getElementById('erroModal');
+            const erroModalMsg = document.getElementById('erroModalMsg');
+            const erroModalOk = document.getElementById('erroModalOk');
+            let erroFocoId = null;
+            const fecharErroModal = () => {
+                if (erroModal) erroModal.classList.remove('open');
+                if (erroFocoId) document.getElementById(erroFocoId)?.focus();
+            };
+            function mostrarErro(msg, focoId) {
+                erroFocoId = focoId || null;
+                if (!erroModal) { alert(msg); return; } // fallback
+                erroModalMsg.textContent = msg;
+                erroModal.classList.add('open');
+            }
+            if (erroModalOk) erroModalOk.addEventListener('click', fecharErroModal);
+            if (erroModal) erroModal.addEventListener('click', (e) => { if (e.target === erroModal) fecharErroModal(); });
+
+            // ── Popup de qualificação para picapes de ano <= 2012 ──
+            const yearModal = document.getElementById('yearGateModal');
+            const yearYes = document.getElementById('yearGateYes');
+            const yearNo = document.getElementById('yearGateNo');
+            const yearTimer = document.getElementById('yearGateTimer');
+            const fecharYearModal = () => yearModal && yearModal.classList.remove('open');
+
+            // Após confirmar o telefone: picape <= 2012 (exceto RAM) abre a
+            // qualificação; senão, segue direto pro envio com a regra normal.
+            function prosseguirAposConfirmacao() {
+                const ano = parseInt((document.getElementById('ano')?.value || ''), 10);
+                const modelo = document.getElementById('modelo')?.value;
+                if (yearModal && modelo !== 'RAM' && ano && ano <= ANO_CORTE_QUALIFICACAO) {
+                    abrirYearGate();
+                } else {
+                    enviarLead();
+                }
+            }
+
+            // Timer de 10s: os botões só liberam depois da contagem (a pessoa lê a mensagem).
+            function abrirYearGate() {
+                yearYes.disabled = true;
+                yearNo.disabled = true;
+                let restante = TIMER_QUALIFICACAO_S;
+                const pintar = () => { if (yearTimer) yearTimer.textContent = `Aguarde ${restante}s para escolher...`; };
+                pintar();
+                yearModal.classList.add('open');
+                const intervalo = setInterval(() => {
+                    restante--;
+                    if (restante > 0) { pintar(); return; }
+                    clearInterval(intervalo);
+                    yearYes.disabled = false;
+                    yearNo.disabled = false;
+                    if (yearTimer) yearTimer.textContent = 'E aí, faz sentido pra você?';
+                }, 1000);
+            }
+            if (yearYes) yearYes.addEventListener('click', () => { fecharYearModal(); enviarLead('make'); });
+            if (yearNo)  yearNo.addEventListener('click',  () => { fecharYearModal(); enviarLead('banco'); });
+
+            async function enviarLead(rotaForcada) {
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = 'Enviando...';
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+                formMessage.classList.add('hidden');
+                const ramBtn = document.getElementById('ramWhatsappBtn');
+                if (ramBtn) ramBtn.style.display = 'none';
+
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                data.timestamp = new Date().toISOString();
+                data.origem = 'Landing Page BUMP';
+                data.consentimento_lgpd = true;
+                data.consentimento_data = new Date().toISOString();
+
+                // "Outros": o que a pessoa digitou é o que vai pro banco no campo modelo.
+                // O roteamento continua usando data.modelo (= "Outros") → só banco.
+                const modeloDigitado = (document.getElementById('modeloOutros')?.value || '').trim();
+                const modeloParaSalvar = (data.modelo === 'Outros' && modeloDigitado)
+                    ? modeloDigitado
+                    : data.modelo;
+
+                try {
+                    // Roteamento base (regra normal de modelo/ano).
+                    let enviarMake = !MODELOS_SOMENTE_BANCO.includes(data.modelo);
+                    // Regra de ano: modelo atendido só a partir de um ano (ex.: Dakota 2025+).
+                    const anoMin = ANO_MINIMO_ATENDIDO[data.modelo];
+                    if (anoMin && parseInt(data.ano, 10) < anoMin) {
+                        enviarMake = false;
+                    }
+                    // Popup de qualificação (picapes <= 2012): só pode REBAIXAR pra banco.
+                    //   "Não é o momento" (rotaForcada='banco') → força só Supabase.
+                    //   "Eu quero" (rotaForcada='make') mantém a regra normal — modelos
+                    //   só-banco e abaixo do ano mínimo continuam só no banco.
+                    if (rotaForcada === 'banco') {
+                        enviarMake = false;
+                    }
+                    dbg.log('[BUMP FORM] Enviando dados:', data);
+                    dbg.log('[BUMP FORM] Modelo (select):', data.modelo, '| Salvo no banco:', modeloParaSalvar, '| Ano:', data.ano, '| Qualificação <=2012:', rotaForcada || '(n/a)', '| Vai pro Make?', enviarMake);
+                    dbg.log('[BUMP FORM] UTMs:', {
+                        source: data.utm_source || '(vazio)',
+                        medium: data.utm_medium || '(vazio)',
+                        campaign: data.utm_campaign || '(vazio)',
+                        content: data.utm_content || '(vazio)',
+                        term: data.utm_term || '(vazio)'
+                    });
+
+                    // ============================================================
+                    // Supabase SEMPRE roda (todo lead fica no banco).
+                    // Make só para "Modelos atendidos" — categoria "Outros" NÃO vai pro funil.
+                    // ============================================================
+                    const supabasePayload = {
+                        nome: data.nome,
+                        telefone: data.telefone,
+                        modelo: modeloParaSalvar,
+                        ano: data.ano,
+                        situacao_suspensao: data.situacao_suspensao,
+                        consentimento_lgpd: data.consentimento_lgpd,
+                        consentimento_data: data.consentimento_data,
+                        origem: data.origem,
+                        // UTMs (null quando o lead chegou direto, sem campanha)
+                        utm_source:   data.utm_source   || null,
+                        utm_medium:   data.utm_medium   || null,
+                        utm_campaign: data.utm_campaign || null,
+                        utm_content:  data.utm_content  || null,
+                        utm_term:     data.utm_term     || null,
+                        status_processamento: 'pendente'
+                    };
+
+                    const tarefas = [
+                        // Supabase REST API (sempre)
+                        fetch(`${SUPABASE_URL}/rest/v1/leads_bump`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'apikey': SUPABASE_ANON_KEY,
+                                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                                'Prefer': 'return=minimal'
+                            },
+                            body: JSON.stringify(supabasePayload)
+                        })
+                    ];
+                    if (enviarMake) {
+                        // Make webhook (text/plain evita preflight CORS)
+                        // UTMs já vão dentro do `data` (vieram do FormData via hidden fields)
+                        tarefas.push(fetch(form.action, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                            body: JSON.stringify(data)
+                        }));
+                    }
+
+                    const resultados = await Promise.allSettled(tarefas);
+                    const supabaseResult = resultados[0];
+                    const makeResult = enviarMake ? resultados[1] : null;
+
+                    const supabaseOk = supabaseResult.status === 'fulfilled' && supabaseResult.value.ok;
+                    const makeOk = makeResult ? (makeResult.status === 'fulfilled' && makeResult.value.ok) : false;
+
+                    dbg.log('[BUMP FORM] Supabase status:', supabaseResult.status, supabaseOk ? '✅' : '❌');
+                    if (supabaseResult.status === 'fulfilled') {
+                        dbg.log('[BUMP FORM] Supabase HTTP:', supabaseResult.value.status);
+                        if (!supabaseOk) {
+                            const errText = await supabaseResult.value.text();
+                            dbg.error('[BUMP FORM] Supabase erro:', errText);
+                        }
+                    } else {
+                        dbg.error('[BUMP FORM] Supabase falhou:', supabaseResult.reason);
+                    }
+                    if (enviarMake) {
+                        dbg.log('[BUMP FORM] Make status:', makeResult.status, makeOk ? '✅' : '❌');
+                        if (makeResult.status === 'fulfilled') {
+                            dbg.log('[BUMP FORM] Make HTTP:', makeResult.value.status);
+                        } else {
+                            dbg.error('[BUMP FORM] Make falhou:', makeResult.reason);
+                        }
+                    } else {
+                        dbg.log('[BUMP FORM] Make: pulado (categoria Outros — só banco)');
+                    }
+
+                    // Sucesso:
+                    //  - modelos atendidos: basta Make OU Supabase ter funcionado
+                    //  - categoria Outros: precisa do Supabase (único destino)
+                    const sucesso = enviarMake ? (makeOk || supabaseOk) : supabaseOk;
+                    if (!sucesso) {
+                        throw new Error('Falha ao salvar o lead');
+                    }
+
+                    formMessage.textContent = 'Informações enviadas com sucesso! Em breve entraremos em contato.';
+                    formMessage.classList.remove('hidden', 'bg-red-500');
+                    formMessage.classList.add('bg-green-600');
+
+                    form.reset();
+                    // re-esconde o campo "Outros" após limpar o formulário
+                    const moInput = document.getElementById('modeloOutros');
+                    if (moInput) { moInput.style.display = 'none'; moInput.required = false; moInput.value = ''; }
+                    // re-popula os UTMs no form resetado (form.reset() limpa hidden fields também)
+                    capturarUTMs();
+                } catch (error) {
+                    dbg.error('[BUMP FORM] Erro completo:', error);
+                    dbg.error('[BUMP FORM] Mensagem:', error.message);
+                    formMessage.textContent = 'Erro ao enviar. Tente novamente ou entre em contato pelo Instagram.';
+                    formMessage.classList.remove('hidden', 'bg-green-600');
+                    formMessage.classList.add('bg-red-500');
+                } finally {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                    setTimeout(() => formMessage.classList.add('hidden'), MSG_AUTO_HIDE_MS);
+
+                    // Lead RAM: revela o botão de WhatsApp com a mensagem pré-preenchida.
+                    // Fica no finally pra garantir que aparece mesmo se Make/Supabase falharem.
+                    if (data.modelo === 'RAM' && ramBtn) {
+                        ramBtn.href = montarLinkRamWhatsapp(data);
+                        ramBtn.style.display = 'flex';
+                        dbg.log('[BUMP FORM] Botão WhatsApp RAM exibido →', ramBtn.href);
+                    }
+                }
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const consentimento = document.getElementById('consentimento');
+                if (!consentimento.checked) {
+                    mostrarErro('Você precisa aceitar a Política de Privacidade para continuar.', 'consentimento');
+                    return;
+                }
+                const telInput = document.getElementById('telefone');
+                const tel = analisarTelefone();
+                if (!tel.ok) {
+                    const dddV = document.getElementById('ddd').value.replace(/\D/g, '');
+                    mostrarErro(tel.erro, dddV.length === 2 ? 'celular' : 'ddd');
+                    return;
+                }
+                telInput.value = tel.telefone; // garante o hidden com o 9 forçado
+                // Passou na validação → confirma o número com a pessoa antes de enviar.
+                formMessage.classList.add('hidden');
+                telConfirmNumero.textContent = '🇧🇷 +55 ' + tel.telefone;
+                if (telModal) telModal.classList.add('open');
+                else prosseguirAposConfirmacao();
+            });
+        }
+    });
+    </script>
+
+</body>
+</html>

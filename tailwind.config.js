@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 // Espelha a config que antes ficava inline no index.html (cores/fontes da marca).
 module.exports = {
-  content: ['./index.html', './index-couro.html'],
+  content: ['./index.html'],
   theme: {
     extend: {
       fontFamily: {
