@@ -8,3 +8,6 @@ package.json
 package-lock.json
 tailwind.config.js
 src
+
+# backup do design escuro anterior (não servir)
+index-site-catalogo.html

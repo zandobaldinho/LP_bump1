@@ -66,7 +66,7 @@
     <!-- Fontes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS compilado e purgado (gerado via `npm run build:css`).
          Config de cores/fontes da marca em tailwind.config.js -->
@@ -154,7 +154,26 @@
         .vsound .ic-off { display: none; }
         .vsound.muted .ic-on { display: none; }
         .vsound.muted .ic-off { display: block; }
+        /* Cards de vídeo (Antes e Depois) em couro — legenda separada (estilo prints) */
+        .show-leather { max-width: 1760px; margin: 0 auto; }
+        .vcard { background-color:#181109; background-image:var(--leather); background-size:220px; background-position:center; border:1px solid rgba(212,255,26,.30); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+        .vcard:hover { border-color:rgba(212,255,26,.6); transform:translate(-2px,-2px); box-shadow:5px 5px 0 rgba(212,255,26,.22); }
+        .vcard .vmedia { position:relative; display:block; cursor:pointer; background:#0d0c0b; }
+        .vcard video { display:block; width:100%; aspect-ratio:9/16; object-fit:cover; }
+        .vcard .vcover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; transition:opacity .3s ease; }
+        .vcard .vplay { position:absolute; inset:0; z-index:2; display:flex; align-items:center; justify-content:center; pointer-events:none; background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.5)); transition:opacity .2s ease; }
+        .vcard .vplay svg { width:58px; height:58px; color:#fff; filter:drop-shadow(0 4px 14px rgba(0,0,0,.6)); transition:.2s; }
+        .vcard .vmedia:hover .vplay svg { color:var(--yellow); transform:scale(1.08); }
+        .vcard .vsound { position:absolute; top:12px; right:12px; z-index:3; width:42px; height:42px; border:0; border-radius:50%; background:rgba(0,0,0,.55); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.2s; }
+        .vcard .vsound:hover { background:var(--yellow); color:#000; }
+        .vcard .vsound svg { width:19px; height:19px; }
+        .vcap { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-top:1px solid rgba(212,255,26,.22); }
+        .vcap .vname { font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; text-transform:uppercase; color:#fff; line-height:1; }
+        .vcap .vname .vbr { display:block; font-size:11px; font-weight:600; color:var(--yellow); letter-spacing:.06em; margin-top:6px; }
+        .vcap .vtag { font-family:'Oswald',sans-serif; font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; background:var(--yellow); color:#000; padding:6px 10px; border-radius:6px; white-space:nowrap; }
+        @media(max-width:760px){ .vcap{padding:12px 12px} .vcap .vname{font-size:17px} }
         /* ===== SISTEMA COURO (adaptação gradual do visual) ===== */
+        :root { --yellow:#D4FF1A; --yellow-deep:#b8e000; --ink:#f4ead2; --cream:#f4ead2; --mute:#c7b288; --dim:#a3906a; --bg:#cdba90; --bg2:#e7dcc1; --bg3:#dccaa2; --wood:#241a0f; --line:rgba(212,255,26,.22); --line-2:rgba(212,255,26,.42); --br-green:#2a8a3f; }
         :root { --leather: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20fill%3D%27%23181109%27%2F%3E%3Cfilter%20id%3D%27lg%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.7%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.17%200%200%200%200%200.14%200%200%200%200%200.09%200%200%200%200.6%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23lg%29%27%20opacity%3D%270.55%27%2F%3E%3C%2Fsvg%3E"); }
         /* HERO dentro de um painel de couro com foto de fundo (sem costura) */
         .hero-leather { position: relative; margin: 0 auto; max-width: 1760px; background-color: #181109; background-image: var(--leather); background-size: 220px; background-position: center; border: 1px solid rgba(212,255,26,0.30); border-radius: 14px; overflow: hidden; }
@@ -162,9 +181,19 @@
         .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; pointer-events: none; }
         .hero-leather::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0d0b08 0%, rgba(13,11,8,0.55) 45%, rgba(13,11,8,0.25) 100%); pointer-events: none; }
         .hero-leather-inner { position: relative; z-index: 2; padding: clamp(48px,7vw,90px) clamp(20px,5vw,60px); }
+        /* ===== COURO: página bege + painéis de couro escuro ===== */
+        body { background-color:#c7b487; background-image:radial-gradient(150% 120% at 16% -5%,rgba(255,250,235,.5),rgba(255,250,235,0) 52%),radial-gradient(150% 130% at 100% 105%,rgba(116,84,42,.3),rgba(116,84,42,0) 55%); background-attachment:fixed; color:#2a2014; }
+        .couro-panel { position:relative; max-width:1180px; margin:0 auto; background-color:#181109; background-image:var(--leather); background-size:220px; background-position:center; border:1px solid rgba(212,255,26,0.30); border-radius:14px; padding:clamp(30px,4vw,54px) clamp(18px,4vw,44px); }
+        @media(max-width:600px){ .couro-panel { border-radius:10px; padding:26px 16px; } }
+        /* Títulos no display do site (Zilla Slab) */
+        .display { font-family:'Zilla Slab', serif !important; letter-spacing:-0.01em; }
+        /* Botão Instagram na identidade couro (substitui o degradê rosa) */
+        .couro-ig { background-color:#181109; background-image:var(--leather); background-size:220px; background-position:center; color:var(--yellow); border:1px solid rgba(212,255,26,0.5); }
+        .couro-ig:hover { background-image:none; background-color:var(--brand-yellow,#D4FF1A); color:#0d0b08; border-color:#D4FF1A; }
+        .couro-ig svg { color:currentColor; }
     </style>
 </head>
-<body class="bg-brand-dark text-gray-200 font-inter antialiased selection:bg-brand-yellow selection:text-brand-dark">
+<body class="font-inter antialiased selection:bg-brand-yellow selection:text-brand-dark">
     <div class="grain-overlay" aria-hidden="true"></div>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SP4L4BG"
@@ -176,7 +205,7 @@
             <a href="#" class="block w-32 md:w-40">
                 <img data-asset="logoHeader" alt="Logo Bump Amortecedores" class="w-full h-auto object-contain">
             </a>
-            <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="hidden md:flex items-center gap-2 transition-all hover:scale-[1.03] text-white px-6 py-2 rounded-sm font-oswald tracking-wide uppercase text-sm font-bold" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+            <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="couro-ig hidden md:flex items-center gap-2 transition-all hover:scale-[1.03] px-6 py-2 rounded-sm font-oswald tracking-wide uppercase text-sm font-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -193,8 +222,8 @@
             <img class="hero-photo" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hero.png" alt="" aria-hidden="true">
             <div class="hero-leather-inner text-center max-w-4xl mx-auto flex flex-col items-center">
                 <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm md:text-base mb-4 block">Domine Qualquer Terreno</span>
-                <h1 class="font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
-                    A Força Bruta Encontra o <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">Conforto Premium</span>
+                <h1 class="display font-oswald text-5xl md:text-7xl font-bold text-white uppercase leading-tight mb-6">
+                    A Força Bruta Encontra o <span class="text-brand-yellow">Conforto Premium</span>
                 </h1>
                 <p class="text-gray-200 text-lg md:text-2xl max-w-3xl mb-10 font-medium leading-relaxed">
                     Para quem usa a picape de verdade, o amortecedor original <span class="text-brand-yellow">nunca foi suficiente</span>.
@@ -207,32 +236,21 @@
         </div>
     </section>
 
-    <!-- MANIFESTO -->
-    <section class="relative py-16 md:py-24 bg-brand-gray border-y border-white/5 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-brand-yellow/5 via-transparent to-brand-yellow/5 pointer-events-none"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[300px] bg-brand-yellow/10 rounded-full blur-[120px] pointer-events-none"></div>
-        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
-            <span class="text-brand-yellow font-oswald uppercase tracking-[0.3em] font-bold text-xs md:text-sm mb-6 block">Sob medida · Sob encomenda</span>
-            <p class="font-oswald text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase leading-tight">
-                Amortecedor feito <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-orange-500">sob medida</span> pro seu veículo, seu piloto e o seu terreno.
+    <!-- ENGENHARIA -->
+    <section id="tecnologia" class="relative py-10 md:py-14 px-2 overflow-hidden scroll-mt-20">
+        <div class="couro-panel text-center" style="overflow:hidden">
+            <span class="text-brand-yellow font-oswald uppercase tracking-[0.3em] font-bold text-xs md:text-sm mb-5 block">02 · Engenharia</span>
+            <h2 class="display font-oswald text-4xl md:text-6xl font-bold text-white uppercase leading-tight mb-6">
+                Sob medida. <span class="text-brand-yellow">Sob encomenda.</span>
+            </h2>
+            <p class="text-gray-300 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+                A BUMP não vende amortecedor de prateleira. Cada equipamento é construído conforme a altura do veículo, a mão do piloto e o terreno. <span class="text-brand-yellow font-semibold">Fluido, pressurização e curso</span> são acerto da nossa engenharia pra encarar as nossas estradas, não acaso.
             </p>
-        </div>
-    </section>
-
-    <!-- Divisor topográfico sutil entre Manifesto e Provas -->
-    <div aria-hidden="true" class="relative w-full overflow-hidden bg-brand-dark py-4">
-        <svg viewBox="0 0 1200 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" class="block w-full h-3 md:h-4 opacity-[0.14]">
-            <path d="M0,12 C150,4 300,20 450,10 S750,16 900,8 S1050,14 1200,10" stroke="#D4FF1A" stroke-width="0.8" fill="none"/>
-            <path d="M0,18 C150,22 300,14 450,20 S750,12 900,18 S1050,8 1200,14" stroke="#D4FF1A" stroke-width="0.6" fill="none" opacity="0.7"/>
-        </svg>
-    </div>
-
-    <!-- PROVAS -->
-    <section id="provas" class="py-20 bg-brand-dark scroll-mt-20">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-14">
+            <!-- separador interno: Engenharia ↓ Antes e Depois (mesmo painel) -->
+            <div class="mt-12 mb-12 mx-auto max-w-3xl" style="border-top:1px solid rgba(212,255,26,0.18)"></div>
+            <div id="provas" class="text-center mb-14 scroll-mt-20">
                 <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm mb-4 block">Antes e Depois</span>
-                <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">A diferença <span class="text-brand-yellow">BUMP</span> no terreno</h2>
+                <h2 class="display font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">A diferença <span class="text-brand-yellow">BUMP</span> no terreno</h2>
                 <p class="text-gray-400 max-w-2xl mx-auto">A picape já é excelente de fábrica. O amortecedor BUMP, feito sob medida, deixa ela <span class="text-brand-yellow">do seu jeito</span> — com o conforto, a estabilidade e o controle que o seu terreno exige. Toque no vídeo pra assistir com som.</p>
             </div>
 
@@ -241,57 +259,42 @@
                 <h3 class="font-oswald text-2xl md:text-4xl font-bold text-white uppercase mb-2">Tanto nas <span class="text-brand-yellow">RAM</span></h3>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-4xl mx-auto mb-16">
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram1500.webp" alt="RAM 1500" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram1500antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo RAM 1500">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-12">
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram1500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram1500.webp" alt="RAM 1500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 1500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">RAM 1500</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">RAM 1500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram2500.webp" alt="RAM 2500" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram2500antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo RAM 2500">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram2500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram2500.webp" alt="RAM 2500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 2500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">RAM 2500</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">RAM 2500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram3500.webp" alt="RAM 3500" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram3500antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo RAM 3500">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram3500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram3500.webp" alt="RAM 3500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 3500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">RAM 3500</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">RAM 3500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
             </div>
 
@@ -300,83 +303,65 @@
                 <h3 class="font-oswald text-2xl md:text-4xl font-bold text-white uppercase mb-2">Quanto nas <span class="text-brand-yellow">Pickups</span></h3>
             </div>
 
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/hilux.webp" alt="Hilux" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hiluxantesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo Hilux">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hiluxantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/hilux.webp" alt="Hilux" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Hilux">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">Hilux</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">Hilux<span class="vbr">Toyota</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/triton.webp" alt="Triton" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/tritonantesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo Triton">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/tritonantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/triton.webp" alt="Triton" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Triton">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">Triton</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">Triton<span class="vbr">Mitsubishi</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ranger.webp" alt="Ranger" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/rangerantesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo Ranger">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/rangerantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ranger.webp" alt="Ranger" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Ranger">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">Ranger</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">Ranger<span class="vbr">Ford</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover object-[15%_center] z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/s10.webp" alt="S10" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/s10antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo S10">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/s10antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" style="object-position:15% center" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/s10.webp" alt="S10" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo S10">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">S10</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">S10<span class="vbr">Chevrolet</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
             </div>
+            <p class="text-center text-sm text-gray-400 mt-8">Toque no vídeo pra assistir com som.</p>
         </div>
     </section>
 
     <!-- GALERIA AMORTECEDORES -->
-    <section id="galeria-amortecedores" class="py-16 bg-brand-dark border-t border-white/5 overflow-hidden">
+    <section id="galeria-amortecedores" class="py-10 md:py-14 px-2 overflow-hidden">
+        <div class="couro-panel" style="overflow:hidden">
         <div class="max-w-7xl mx-auto px-4 mb-12 text-center">
-            <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase">Nossa Linha de <span class="text-brand-yellow">Amortecedores</span></h2>
+            <h2 class="display font-oswald text-3xl md:text-5xl font-bold text-white uppercase">Nossa Linha de <span class="text-brand-yellow">Amortecedores</span></h2>
             <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Projetados com engenharia de ponta para suportar as condições mais extremas.</p>
         </div>
         <div class="relative w-full flex overflow-hidden group">
@@ -427,17 +412,17 @@
                 <span>F1000</span> <span class="text-brand-yellow text-lg md:text-xl">•</span>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- ORÇAMENTO -->
-    <section id="orcamento" class="py-24 bg-[#0d0b08] border-b border-white/5 relative overflow-hidden scroll-mt-20">
-        <div class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/4 pointer-events-none"></div>
-        <div class="max-w-3xl mx-auto px-4 relative z-10">
+    <section id="orcamento" class="py-10 md:py-14 px-2 relative overflow-hidden scroll-mt-20">
+        <div class="couro-panel" style="max-width:760px;overflow:hidden">
             <div class="text-center mb-12">
-                <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">Orçamento <span class="text-brand-yellow">Personalizado</span></h2>
+                <h2 class="display font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">Orçamento <span class="text-brand-yellow">Personalizado</span></h2>
                 <p class="text-gray-400 text-lg">Preencha os dados abaixo e descubra a solução perfeita para a sua máquina.</p>
             </div>
-            <form id="orcamentoForm" action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" method="POST" class="bg-white/5 border border-white/10 p-6 md:p-10 rounded-lg shadow-2xl backdrop-blur-sm">
+            <form id="orcamentoForm" action="https://hook.us2.make.com/7vzigahmcq6aw1plu4fxurxcwzkxh8km" method="POST" class="bg-black/20 border border-white/10 p-6 md:p-8 rounded-lg">
                 <!-- Campos ocultos: captura de UTMs (Meta Ads, Google Ads, bio do YouTube, etc.) -->
                 <input type="hidden" id="utm_source"   name="utm_source"   value="">
                 <input type="hidden" id="utm_medium"   name="utm_medium"   value="">
@@ -574,7 +559,8 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-brand-dark pt-16 pb-8 border-t border-white/5">
+    <footer class="pt-10 pb-10 px-2">
+        <div class="couro-panel">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center md:text-left mb-12">
             <div class="flex flex-col items-center md:items-start">
                 <img data-asset="logoFooter" alt="Logo Bump" loading="lazy" class="w-32 mb-6 opacity-70 grayscale hover:grayscale-0 transition-all">
@@ -595,7 +581,7 @@
                         Segunda a Sexta: 8h às 18h
                     </li>
                 </ul>
-                <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="mt-6 inline-flex items-center justify-center gap-2 text-white font-inter font-semibold py-2 px-6 rounded-sm transition-all w-full md:w-auto hover:scale-[1.02]" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                <a href="https://www.instagram.com/bumpamortecedores" target="_blank" rel="noopener" class="couro-ig mt-6 inline-flex items-center justify-center gap-2 font-inter font-semibold py-2 px-6 rounded-sm transition-all w-full md:w-auto hover:scale-[1.02]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -626,6 +612,7 @@
         <div class="max-w-7xl mx-auto px-4 border-t border-white/5 pt-8 text-center text-xs text-gray-600 space-y-2">
             <p class="text-gray-500">Bump Amortecedores LTDA &nbsp;·&nbsp; CNPJ 18.052.960/0001-60</p>
             <p>© 2026 BUMP Amortecedores. Todos os direitos reservados.</p>
+        </div>
         </div>
     </footer>
 
