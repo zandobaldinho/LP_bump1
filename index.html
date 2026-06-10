@@ -154,6 +154,24 @@
         .vsound .ic-off { display: none; }
         .vsound.muted .ic-on { display: none; }
         .vsound.muted .ic-off { display: block; }
+        /* Cards de vídeo (Antes e Depois) em couro — legenda separada (estilo prints) */
+        .show-leather { max-width: 1760px; margin: 0 auto; }
+        .vcard { background-color:#181109; background-image:var(--leather); background-size:220px; background-position:center; border:1px solid rgba(212,255,26,.30); border-radius:14px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+        .vcard:hover { border-color:rgba(212,255,26,.6); transform:translate(-2px,-2px); box-shadow:5px 5px 0 rgba(212,255,26,.22); }
+        .vcard .vmedia { position:relative; display:block; cursor:pointer; background:#0d0c0b; }
+        .vcard video { display:block; width:100%; aspect-ratio:9/16; object-fit:cover; }
+        .vcard .vcover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; transition:opacity .3s ease; }
+        .vcard .vplay { position:absolute; inset:0; z-index:2; display:flex; align-items:center; justify-content:center; pointer-events:none; background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.5)); transition:opacity .2s ease; }
+        .vcard .vplay svg { width:58px; height:58px; color:#fff; filter:drop-shadow(0 4px 14px rgba(0,0,0,.6)); transition:.2s; }
+        .vcard .vmedia:hover .vplay svg { color:var(--yellow); transform:scale(1.08); }
+        .vcard .vsound { position:absolute; top:12px; right:12px; z-index:3; width:42px; height:42px; border:0; border-radius:50%; background:rgba(0,0,0,.55); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.2s; }
+        .vcard .vsound:hover { background:var(--yellow); color:#000; }
+        .vcard .vsound svg { width:19px; height:19px; }
+        .vcap { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-top:1px solid rgba(212,255,26,.22); }
+        .vcap .vname { font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; text-transform:uppercase; color:#fff; line-height:1; }
+        .vcap .vname .vbr { display:block; font-size:11px; font-weight:600; color:var(--yellow); letter-spacing:.06em; margin-top:6px; }
+        .vcap .vtag { font-family:'Oswald',sans-serif; font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; background:var(--yellow); color:#000; padding:6px 10px; border-radius:6px; white-space:nowrap; }
+        @media(max-width:760px){ .vcap{padding:12px 12px} .vcap .vname{font-size:17px} }
         /* ===== SISTEMA COURO (adaptação gradual do visual) ===== */
         :root { --leather: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20fill%3D%27%23181109%27%2F%3E%3Cfilter%20id%3D%27lg%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.7%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.17%200%200%200%200%200.14%200%200%200%200%200.09%200%200%200%200.6%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23lg%29%27%20opacity%3D%270.55%27%2F%3E%3C%2Fsvg%3E"); }
         /* HERO dentro de um painel de couro com foto de fundo (sem costura) */
@@ -228,8 +246,8 @@
     </div>
 
     <!-- PROVAS -->
-    <section id="provas" class="py-20 bg-brand-dark scroll-mt-20">
-        <div class="max-w-6xl mx-auto px-4">
+    <section id="provas" class="py-16 md:py-20 bg-brand-dark scroll-mt-20">
+        <div class="show-leather px-2">
             <div class="text-center mb-14">
                 <span class="text-brand-yellow font-oswald uppercase tracking-[0.2em] font-bold text-sm mb-4 block">Antes e Depois</span>
                 <h2 class="font-oswald text-3xl md:text-5xl font-bold text-white uppercase mb-4">A diferença <span class="text-brand-yellow">BUMP</span> no terreno</h2>
@@ -241,57 +259,42 @@
                 <h3 class="font-oswald text-2xl md:text-4xl font-bold text-white uppercase mb-2">Tanto nas <span class="text-brand-yellow">RAM</span></h3>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-4xl mx-auto mb-16">
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram1500.webp" alt="RAM 1500" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram1500antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo RAM 1500">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 mb-12">
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram1500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram1500.webp" alt="RAM 1500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 1500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">RAM 1500</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">RAM 1500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram2500.webp" alt="RAM 2500" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram2500antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo RAM 2500">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram2500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram2500.webp" alt="RAM 2500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 2500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">RAM 2500</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">RAM 2500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram3500.webp" alt="RAM 3500" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram3500antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo RAM 3500">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/ram3500antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ram3500.webp" alt="RAM 3500" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo RAM 3500">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">RAM 3500</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">RAM 3500<span class="vbr">RAM</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
             </div>
 
@@ -300,76 +303,57 @@
                 <h3 class="font-oswald text-2xl md:text-4xl font-bold text-white uppercase mb-2">Quanto nas <span class="text-brand-yellow">Pickups</span></h3>
             </div>
 
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/hilux.webp" alt="Hilux" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hiluxantesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo Hilux">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hiluxantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/hilux.webp" alt="Hilux" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Hilux">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">Hilux</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">Hilux<span class="vbr">Toyota</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/triton.webp" alt="Triton" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/tritonantesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo Triton">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/tritonantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/triton.webp" alt="Triton" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Triton">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">Triton</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">Triton<span class="vbr">Mitsubishi</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ranger.webp" alt="Ranger" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/rangerantesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo Ranger">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/rangerantesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/ranger.webp" alt="Ranger" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo Ranger">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">Ranger</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">Ranger<span class="vbr">Ford</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
-                <div class="relative w-full aspect-[9/16] bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                    <div class="vmedia absolute inset-0 cursor-pointer">
-                        <img class="vcover absolute inset-0 w-full h-full object-cover object-[15%_center] z-10" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/s10.webp" alt="S10" loading="lazy">
-                        <video class="absolute inset-0 w-full h-full object-cover z-0" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/s10antesedepois.mp4" loop playsinline preload="metadata"></video>
-                        <span class="vplay absolute inset-0 z-20 flex items-center justify-center pointer-events-none bg-gradient-to-b from-black/10 to-black/50">
-                            <svg class="w-16 h-16 text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </span>
-                        <button type="button" class="vsound absolute top-3 right-3 z-40 w-10 h-10 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-brand-yellow hover:text-brand-dark transition-colors" aria-label="Som do vídeo S10">
-                            <svg class="ic-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                            <svg class="ic-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+                <div class="vcard">
+                    <div class="vmedia">
+                        <video src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/s10antesedepois.mp4" loop playsinline preload="metadata"></video>
+                        <img class="vcover" style="object-position:15% center" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/banco_web_800/s10.webp" alt="S10" loading="lazy">
+                        <span class="vplay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                        <button type="button" class="vsound" aria-label="Som do vídeo S10">
+                            <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
                         </button>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-30 pointer-events-none flex items-center justify-between gap-2">
-                        <h4 class="font-oswald text-lg md:text-xl font-bold text-white uppercase tracking-wide">S10</h4>
-                        <span class="font-oswald text-[11px] font-bold uppercase tracking-wide bg-brand-yellow text-brand-dark px-2 py-1 rounded">Antes · Depois</span>
-                    </div>
+                    <div class="vcap"><span class="vname">S10<span class="vbr">Chevrolet</span></span><span class="vtag">Antes · Depois</span></div>
                 </div>
             </div>
+            <p class="text-center text-sm text-gray-400 mt-8">Toque no vídeo pra assistir com som.</p>
         </div>
     </section>
 
