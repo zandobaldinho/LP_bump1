@@ -157,7 +157,8 @@
         /* ===== SISTEMA COURO (adaptação gradual do visual) ===== */
         :root { --leather: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20fill%3D%27%23181109%27%2F%3E%3Cfilter%20id%3D%27lg%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.7%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%200.17%200%200%200%200%200.14%200%200%200%200%200.09%200%200%200%200.6%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23lg%29%27%20opacity%3D%270.55%27%2F%3E%3C%2Fsvg%3E"); }
         /* HERO dentro de um painel de couro com foto de fundo (sem costura) */
-        .hero-leather { position: relative; margin: 0 auto; max-width: 1180px; background-color: #181109; background-image: var(--leather); background-size: 220px; background-position: center; border: 1px solid rgba(212,255,26,0.42); border-radius: 16px; overflow: hidden; }
+        .hero-leather { position: relative; margin: 0 auto; max-width: 1760px; background-color: #181109; background-image: var(--leather); background-size: 220px; background-position: center; border: 1px solid rgba(212,255,26,0.30); border-radius: 14px; overflow: hidden; }
+        @media(max-width:600px){ .hero-leather { border-radius: 10px; } }
         .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; pointer-events: none; }
         .hero-leather::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0d0b08 0%, rgba(13,11,8,0.55) 45%, rgba(13,11,8,0.25) 100%); pointer-events: none; }
         .hero-leather-inner { position: relative; z-index: 2; padding: clamp(48px,7vw,90px) clamp(20px,5vw,60px); }
@@ -187,7 +188,7 @@
     </header>
 
     <!-- HERO -->
-    <section class="pt-28 md:pt-32 pb-10 px-4">
+    <section class="pt-24 md:pt-28 pb-10 px-2">
         <div class="hero-leather">
             <img class="hero-photo" src="https://pub-8f0b05c2503f42609136a4e1e55a9242.r2.dev/amortecedores/hero.png" alt="" aria-hidden="true">
             <div class="hero-leather-inner text-center max-w-4xl mx-auto flex flex-col items-center">
